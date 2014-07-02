@@ -11,51 +11,35 @@ require 'request.php';
 */
 final class Core
 {
-	/**
-	* Loads configuration file and creates constants from it.
-	*/
-	private static function initConfig()
-	{
-		$config_str 	= file_get_contents("app/config.json");
-		$config 	= json_decode($config_str,true);
+    /**
+    * Loads configuration file and creates constants from it.
+    */
+    private static function initConfig()
+    {
+        $config_str = file_get_contents("app/config.json");
+        $config     = json_decode($config_str,true);
 
-		foreach ($config as $key => $value)
-		{
-			// TODO : recursion
-			define($key, $value);
-		}
-	}
+        foreach ($config as $key => $value)
+        {
+            
+            define($key, $value);                                               // TODO : recursion
+        }
+    }
 
-	/**
-	* Main entry point of the application.
-	*/
-	public static function Start()
-	{
-
-		// get configuration data
-		self::initConfig();
-
-		// init database
-		DB::start();
-
-		// init auth
-		Session::start();
-
-		
+    /**
+    * Main entry point of the application.
+    */
+    public static function Start()
+    {
+        self::initConfig();                                                     // get configuration data
+        DB::start();                                                            // init database
+        Session::start();                                                       // init session
 
 
-		// do routing
-		Request::route();
+        Request::route();                                                       // handle request
 
-
-
-
-
-		// close database
-		DB::end();
-
-		// close session
-		// Session::end();
-	}
-
+        
+        DB::end();                                                              // close database
+        // Session::end();                                                      // close session
+    }
 }

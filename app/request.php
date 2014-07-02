@@ -8,11 +8,11 @@ require 'controller.php';
 */
 final class Request
 {
-	/**
-	* Stylizes the requested URI to the uniform format.
-	* 
-	* @return formatted uri
-	*/
+    /**
+    * Stylizes the requested URI to the uniform format.
+    * 
+    * @return formatted uri
+    */
     private static function getURI()
     {
         $uri = $_SERVER['REQUEST_URI'];                                         // get URI
