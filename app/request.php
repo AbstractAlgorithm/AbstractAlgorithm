@@ -44,7 +44,7 @@ final class Request
     private static function activateController($uri)
     {
         $name       = self::toCamelCase($uri);
-        $classname	= $name . 'Controller';                                  	// generate class name
+        $classname	= $name . 'Controller';										// generate class name
         $filename   = CTRL_DIR . $name  . '.php';                             	// generate filename to open
 
         @require $filename;
