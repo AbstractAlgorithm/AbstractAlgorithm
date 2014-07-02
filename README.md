@@ -3,4 +3,4 @@ AbstractAlgorithm
 
 abstract-algorithm.com website
 
-Just first commit. :]
+Something else.
