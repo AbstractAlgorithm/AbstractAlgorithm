@@ -41,10 +41,9 @@ class Template
     */
     public function set($field, $val)
     {
-        if(is_callable($val))
-            $this->vars[(string)$field] = (string)$val();
-        else
-            $this->vars[(string)$field] = $val;
+        $this->vars[(string)$field] = is_callable($val)
+                                        ? (string)$val()
+                                        : $val;
 
         return $this;
     }
@@ -68,7 +67,7 @@ class Template
     */
     private function parse()
     {
-        $this->text = Toxic::buildAndExecute($this->text, $this->vars);
+        $this->text = Toxic::BuildAndExecute($this->text, $this->vars);
         return $this;
     }
 
@@ -80,8 +79,8 @@ class Template
     */
     public function __call($name, $arguments)
     {        
-        if(substr($name, 0,3)=='set')                                            // SET<field>
-            $this->set(strtolower( substr($name, 3) ), $arguments[0]);
+        if(substr($name, 0,3)=='set')                                           // SET<field>
+            $this->set(strtolower( substr($name,3) ), $arguments[0]);
         else                                                                    // <field>
             $this->set($name, $arguments[0]);
 
