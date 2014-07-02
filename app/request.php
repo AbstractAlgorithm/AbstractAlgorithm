@@ -2,9 +2,17 @@
 
 require 'controller.php';
 
+/**
+* Class that handles the request and decides what is next to be executed.<br>
+* It takes careof the URL format and parameters.
+*/
 final class Request
 {
-
+	/**
+	* Stylizes the requested URI to the uniform format.
+	* 
+	* @return formatted uri
+	*/
     private static function getURI()
     {
         $uri = $_SERVER['REQUEST_URI'];                                         // get URI
@@ -18,6 +26,12 @@ final class Request
         return $uri;
     }
 
+    /**
+	* Parses the URL, stripping the GET parameters and returning clean version of the URL.
+	*
+	* @param uri 	URL to parse
+	* @return 		clean version of the URL
+    */
     private static function parseGET($uri)
     {
         preg_match('/^\/([^\/]+)/', $uri, $match_stripped);                     // get the filename
@@ -31,6 +45,12 @@ final class Request
         return $stripped;
     }
 
+    /**
+    * Converts this-is_link to ThisIsLink camel-case format.
+    *
+    * @param uri 	unformatted version of the URL
+    * @return 		camel-case version
+    */
     private static function toCamelCase($uri)
     {
         $name = '';
@@ -41,6 +61,12 @@ final class Request
         return $name;
     }
 
+    /**
+    * Requests for the controller's file and executes it.
+    *
+    * @param uri 	controller to be requested
+    * @see 			Controller
+    */
     private static function activateController($uri)
     {
         $name       = self::toCamelCase($uri);
@@ -51,7 +77,10 @@ final class Request
         @(new $classname())->run();                                             // execute controller
     }
 
-    public static function route()
+    /**
+    * Main function for handling requests. Parses the URL and executes controller.
+    */
+    public static function Route()
     {    
         $uri = self::getURI();                                                  // get path
         $uri = self::parseGET($uri);                                            // fill $_GET with params and strip them off uri
@@ -62,6 +91,11 @@ final class Request
         }
     }
 
+    /**
+    * It will redirect user to specified page immediately.
+    *
+    * @param address 	address wo which to redirect
+    */
     public static function GotoAddress($address)
     {
         header('Location: '.$address);
