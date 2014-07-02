@@ -25,7 +25,6 @@ final class DB
                 die();
             }
         }
-
     }
 
     /**
@@ -43,23 +42,20 @@ final class DB
     * @param q  query to execute
     * @return   array that holds information
     */
-    public static function query($q)                                            
+    public static function Query($q)                                            
     {
-        return (self::$connection!=null)
-                ? mysqli_query(self::$connection, $q)
-                : array();
-    }
+        if (self::$connection!=null)
+            $res = mysqli_query(self::$connection, $q);
+        else
+            return null;
 
-    /**
-    * Itterate function.
-    * 
-    * @param res    query to itterate though
-    * @return       array
-    */
-    public static function GetNext($res)
-    {
-        return ($res && count($res)>0)
-                ? mysqli_fetch_array($res)
-                : array();
+        $res_array = array();
+        if(gettype($res)!='boolean')
+            while($val = mysqli_fetch_array($res))
+                $res_array[] = $val;
+        else
+            return $res;
+
+        return $res_array;
     }
 }

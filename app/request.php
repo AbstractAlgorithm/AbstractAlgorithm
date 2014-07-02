@@ -46,7 +46,7 @@ final class Request
     }
 
     /**
-    * Converts this-is_link to ThisIsLink camel-case format.
+    * Converts this-IS_liNk to ThisIsLink camel-case format.
     *
     * @param uri 	unformatted version of the URL
     * @return 		camel-case version
