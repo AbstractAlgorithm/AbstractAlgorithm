@@ -32,14 +32,14 @@ final class Core
     public static function Start()
     {
         self::initConfig();                                                     // get configuration data
-        DB::start();                                                            // init database
-        Session::start();                                                       // init session
+        DB::Start();                                                            // init database
+        Session::Start();                                                       // init session
 
 
-        Request::route();                                                       // handle request
+        Request::Route();                                                       // handle request
 
         
-        DB::end();                                                              // close database
+        DB::End();                                                              // close database
         // Session::end();                                                      // close session
     }
 }
