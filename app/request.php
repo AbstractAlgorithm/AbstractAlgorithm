@@ -27,10 +27,10 @@ final class Request
     }
 
     /**
-	* Parses the URL, stripping the GET parameters and returning clean version of the URL.
-	*
-	* @param uri 	URL to parse
-	* @return 		clean version of the URL
+    * Parses the URL, stripping the GET parameters and returning clean version of the URL.
+    *
+    * @param uri 	URL to parse
+    * @return 		clean version of the URL
     */
     private static function parseGET($uri)
     {
