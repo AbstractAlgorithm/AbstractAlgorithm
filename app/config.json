@@ -2,12 +2,12 @@
 	"BASE_DIR": 		"../",
 	"SYSTEM_DIR": 		"/",
 
-	"MODEL_DIR": 		"../models/",
-	"VIEW_DIR": 		"../templates/",
-	"CTRL_DIR": 		"../controllers/",
+	"MODEL_DIR": 		"models/",
+	"VIEW_DIR": 		"templates/",
+	"CTRL_DIR": 		"controllers/",
 
-	"MEDIA_DIR": 		"../media/",
-	"CSS_DIR": 			"../media/css/",
-	"IMG_DIR": 			"../media/images/",
-	"FONT_DIR": 		"../media/fonts/"
+	"MEDIA_DIR": 		"media/",
+	"CSS_DIR": 			"media/css/",
+	"IMG_DIR": 			"media/images/",
+	"FONT_DIR": 		"media/fonts/"
 }
