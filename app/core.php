@@ -21,7 +21,6 @@ final class Core
 
         foreach ($config as $key => $value)
         {
-            
             define($key, $value);                                               // TODO : recursion
         }
     }

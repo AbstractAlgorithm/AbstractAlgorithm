@@ -42,7 +42,7 @@ final class DB
     * @param q  query to execute
     * @return   array that holds information
     */
-    public static function Query($q)                                            
+    public static function Query($q)
     {
         if (self::$connection!=null)
             $res = mysqli_query(self::$connection, $q);
