@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+
+		<meta name="description" content="#block description#Abstract Algorithm - blog and portfolio of Dragan Okanović, web developer and VFX programmer.#endblock#" >
+		<meta name="author" content="Okanovic Dragan" >
+		<meta name="keywords" content="#block keywords#abstract, algorithm, blog, web, gpu, vfx, okanovic, dragan#endblock#">
+		<meta property="og:title" content="Abstract Algorithm | {title}"/>
+		<meta property="og:image" content="http://abstract-algorithm.com/resources_aa/logo_big.png"/>
+		<meta property="og:site_name" content="Abstract Algorithm | {title}"/>
+
+		<title>{title} | Abstract Algorithm</title>
+
+		<link rel="shortcut icon" href="../media/favicon.png" type="image/x-icon">
+		<link rel="icon" href="../media/favicon.png" type="image/x-icon">
+		<link rel="stylesheet" href="#block stylesheet#../media/style.css#endblock#">
+	</head>
+	
+	<body>
+		<div id="wrapper">
+			# block content ## endblock #
+		</div>
+
+		# block script ## endblock #
+	</body>
+</html>

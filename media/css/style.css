@@ -1,0 +1,347 @@
+@font-face {
+	font-family: "Helvetica Light";
+	src:url('fonts/Helvetica-Light.ttf');
+}
+
+@font-face {
+	font-family: "Play";
+	src:url('fonts/Play.ttf');
+}
+
+/*
+----------------------------------------------------------------------
+----------------------------------------------------------------------
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	color: #888;
+	font-family: "Helvetica Light";
+	/*background: rgba(0,0,0,0.05);*/
+	/*border: 1px solid red !important;*/
+}
+
+body {
+	font-family: "Helvetica Light";
+	font-size: 14px;
+	line-height: 22px;
+	font-color: #494949;
+}
+
+#wrapper {
+	width: 960px;
+	margin: 0 auto;
+	display: table;
+	/*border-spacing: 20px 30px;*/
+}
+
+/*-------------------------------------------*/
+
+.header {
+	height: 100px;
+}
+
+h1 {
+	font-weight: 100;
+	font-size: 36px;
+	font-family: "Play";
+	display: inline-block;
+	/*background: transparent url('logo.png') no-repeat;
+	background-size: 40px;
+	line-height: 40px;
+	padding-left: 50px;*/
+}
+
+.blocky {
+	display: block;
+}
+
+div#contact {
+	margin: 7px 0 0 0;
+	vertical-align: top;
+	float: right;
+}
+
+div#contact a {
+	width: 16px;
+	height: 16px;
+	padding: 0 0 0 15px;
+	color: transparent;
+	display: inline;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-size: 16px;
+	background-position: 0 0;
+}
+
+#skype_icon { background-image: url('skype_icon2.png'); }
+#linkedin_icon { background-image: url('li_icon2.png'); }
+#stackoverflow_icon { background-image: url('so_icon2.png'); }
+
+table#info {
+	font-family: "Helvetica Light" !important;
+	clear: both;
+	border: 1px solid #e0e0e0;
+	border-width: 1px 0;
+	width: 100%;
+	margin-top: 20px;
+}
+
+#info * {
+	font-family: "Helvetica Light";
+	color: #888;
+}
+
+#info a {
+	color: #0089AF;
+}
+
+table#info td {
+	padding-top: 10px;
+	text-align: left;
+	line-height: 25px;
+}
+table#info td:nth-child(2n+0) {
+	text-align: right;
+}
+
+.righty {
+	text-align: right;	
+}
+
+#number {
+	font-family: "Helvetica Light";
+	font-size: 14px;
+	line-height: 22px;
+	font-color: #494949;
+}
+
+span.toright {
+	float: right;
+}
+
+nav {
+	text-align: center;
+	margin: 0 auto;
+	display: block;
+}
+
+nav a, nav a:visited, nav a:active {
+	padding:  0 12px 0 7px;
+	margin: 0;
+	border-spacing: 0;
+	/*float: left;*/
+	display: inline-block;
+	text-transform: lowercase;
+	border-right: 1px solid #e0e0e0;
+}
+
+nav a:last-child {
+	border-right: none;
+}
+
+nav a:hover {
+	text-decoration: underline;
+}
+
+/*-------------------------------------------*/
+
+div.item {
+	display: table-row;
+}
+
+#logo, h2, div.details {
+	display: table-cell;
+}
+
+#logo {
+	
+	min-width: 100px;
+	min-height: 100px;
+	background: transparent url('logo.png') no-repeat;
+	background-position: center 55px;
+	background-position: center top;
+	/*background-color: rgba(255,0,0,0.05);*/
+}
+
+header a {
+	/*color: #54CCB1;*/
+	color: #0089AF;
+	text-decoration: none;
+}
+
+h2 {
+	padding-right: 20px !important;
+}
+
+h2,
+table tr th {
+	font-family: "Play";
+	font-weight: 100;
+	text-align: right;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #0089AF; /*#54CCB1;*/
+	width: 250px;
+}
+
+p {
+	text-align: justify;
+	margin: 0 0 20px 0;
+}
+p:last-child {
+	margin: 0;
+}
+
+ul {
+	margin: 0;
+	margin-top: -5px;
+	list-style: none;
+}
+ul li:before {
+	content: "+ ";
+}
+
+div.details>* {
+	margin-bottom: 15px;
+}
+div.details>*:last-child {
+	margin-bottom: 10px;
+}
+
+span {
+	color: #282828;
+	font-family: "Play";
+	display: block;
+}
+
+table {
+	border: none;
+	width: 100%;
+	margin: 40px 0;
+	cursor: pointer;
+	border-collapse: collapse;
+	/*background-color: red;*/
+}
+
+table tr {
+	transition: background-color 0.4s linear;
+	border: none;
+	margin: none;
+}
+
+table tr:nth-child(2n+0) {
+	background-color: #f6f6f6;
+
+}
+
+table tr:hover {
+	background-color: #eaeaea;
+}
+
+table tr td {
+	padding: 3px 15px;
+	text-align: center;
+	border: none;
+	margin: 0;
+}
+
+table tr td a {
+	text-decoration: none;
+	display: block;
+	width: 100%;
+}
+
+table tr th {
+	background-color: #fff;
+	padding-bottom: 14px;
+	text-align: center;
+}
+
+a.button,
+input,
+/*input[type=text],*/
+textarea {
+
+	background-color: white;
+	
+	outline-color: transparent;
+	outline-style: none;
+
+	box-sizing: border-box;
+	padding: 5px 10px;
+	line-height: 20px;
+
+	color: #c0c0c0;
+	transition: color 0.5s linear;
+	
+	border-width: 1px 1px 1px 6px;
+	border-style: solid;
+	border-color: #dadada;
+	transition: border-color 0.5s linear;
+
+	box-shadow: inset 0 3px 7px rgba(0,0,0,0.1);
+}
+
+input:hover,
+textarea:hover,
+a.button:hover {
+	border-color: #a0a0a0;
+	color: #888;
+}
+
+input:not([type=submit]),
+textarea {
+	width: 100%;
+}
+
+a.button,
+input[type=submit],
+button {
+	height: 30px;
+	box-sizing: border-box;
+	display: inline;
+	font-size: 14px;
+	margin: 0 5px 0 0;
+	padding: 5px 10px;
+	text-decoration: none;
+	color: #494949;
+	cursor: pointer;
+	background-image: linear-gradient(white, #f0f0f0);
+	border-width: 1px;
+	line-height: 14px;
+	box-shadow: none;
+}
+
+div.split {
+	width: 312px;
+	float: left;
+	margin-right: 12px;
+	height: 80px;
+}
+
+div.split:last-child {
+	margin-right: 0;
+}
+
+textarea[name=edit_text] {
+	resize: vertical;
+	height: 300px;
+}
+textarea[name=edit_summary] {
+	resize: vertical;
+	height: 200px;
+}
+
+label {
+	font-family: "Play";
+	font-weight: 100;
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 14px;
+	color: #0089AF;
+	margin: 0 0 5px 0;
+	display: inline-block;
+}
+

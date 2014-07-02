@@ -1,0 +1,22 @@
+<h1>List of all posts</h1>
+
+			<table id="listofall">
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Date</th>
+					<th>Summary</th>
+					<th>Comments</th>
+				</tr>
+			# foreach post in posts #
+				<tr>
+					<td>{post.id}</td>
+					<td><a href="../edit/?name={post.link_title}">{post.title}</a></td>
+					<td>{post.formatTime()}</td>
+					<td>{post.getSummary()}</td>
+					<td>{post.getCommentsNum()}</td>
+				</tr>
+			# endforeach #
+			</table>
+
+			<hr>

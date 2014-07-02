@@ -1,0 +1,10 @@
+<h1>{post.title}</h1>
+<small>{post.formatTime()}</small>
+
+<div class="content">
+	{post.getText()}
+</div>
+
+<div class="comments">
+	It has {post.getCommentsNum()} comments.
+</div>

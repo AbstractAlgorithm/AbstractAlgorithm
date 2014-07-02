@@ -1,0 +1,13 @@
+<ul>
+# foreach s in studenti #
+	<li>{s.ime} ima {s.godina} godina i # if !s.jeOdrastao() #ni# endif #je odrastao
+	#if s.seZoveDragan() # i jebeno je lud!!#else#.#endif#
+	</li>
+# endforeach #
+</ul>
+
+# if test #
+Test!
+# else #
+Kurac!
+# endif #

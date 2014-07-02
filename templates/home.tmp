@@ -1,0 +1,12 @@
+# foreach post in posts #
+
+			<div class="item">
+				<h2>
+					<a href="/post/?title={post.link_title}">{post.title}</a><br>
+					<small>{post.formatTime()}</small>
+				</h2>
+				<div class="details">
+					{post.getSummary()}
+				</div>
+			</div>
+# endforeach #
