@@ -54,97 +54,15 @@ class ASTNode
         $this->type         = 'TEXT';
     }
 
-    private function getValue()
-    {
-        $exp = $this->expression;
-
-        $negate = false;        
-        if($exp[0]=='!')
-        {
-            $negate = true;
-            $exp = substr($exp, 1);
-        }
-
-        $fields = explode('.', $exp);
-        $result = $this->locals[ $fields[0] ];
-
-        for($i=1, $n=count($fields); $i<$n; $i++)
-        {
-            if( strpos($fields[$i], '()') !== false )                           // so it's a method
-            {
-                $method_name = str_replace('()', '', $fields[$i]);
-                $result = $result->{$method_name}();
-            }
-            else                                                                // so it's a property
-            {
-                if( isset( $result->{$fields[$i]}) )                            // property
-                    $result = $result->{$fields[$i]};
-                else                                                            // array key
-                    $result = $result[ $fields[$i] ];
-            }
-        }
-        echo get_class($result);
-
-        // return $result;
-
-        return $negate ? !$results : $result;
-    }
-
-    /**
-    * Function that executes the command.
+    /*
+    * ------------------------------------------------------------------------------------------------------------------
+    * ------------------- CREATING TREE --------------------------------------------------------------------------------
+    * ------------------------------------------------------------------------------------------------------------------
     *
-    * @return resulting string (html)
+    * Functions used for parsing and creating the AST structure.<br>
+    * Functions include add, parseExp, BuildAST.
+    *
     */
-    public function exe()
-    {
-        $text_result = '';
-        $exe_children = true;
-
-        switch($this->type)
-        {
-            case 'TEXT':                                                        // TEXT NODE
-                $text_result = $this->expression;
-                break;
-
-            case 'VAR':                                                         // VAR NODE
-                $text_result = $this->getValue();
-                break;
-
-            case 'IF':                                                          // IF NODE
-                $exe_children = false;
-                if ($this->getValue())
-                    $text_result = $this->children[0]->exe();
-                else
-                    $text_result = $this->children[1]->exe();
-
-                break;
-
-            case 'FOR':                                                         // FOREACH NODE
-                break;
-
-            case 'REGION':                                                      // REGION NODE
-                if (isset($this->locals[$this->expression]))
-                {
-                    $text_result .= $this->getValue();
-                    $exe_children = false;
-                }
-                break;
-        }
-
-        if ($exe_children)
-            foreach ($this->children as $kid)                                   // execute children
-            {
-                $kid->locals = $this->locals;
-                $text_result .= $kid->exe();
-            }
-
-        return (string)$text_result;
-    }
-
-    
-    // -------------------------------------------------------
-    // ------------------- CREATING TREE ---------------------
-    // -------------------------------------------------------
 
     /**
     * Binds child and parent node.
@@ -158,7 +76,8 @@ class ASTNode
     }
 
     /**
-    * Parses the expression and determines what type is it. It builds dependacy tree.
+    * Parses the expression and determines what type is it.<br>
+    * It builds dependacy tree.<br>
     * This is main parsing function.
     * 
     * @param exp expression to be parsed
@@ -272,7 +191,8 @@ class ASTNode
 
     /**
     * Builds Abstract Syntax Tree from text and init variables.<br>
-    * It parses the input text and builds simplified ASTree that will be later used to execute the page code.
+    * It parses the input text and builds simplified ASTree that will be<br>
+    * later used to execute the page code.
     * <br>
     * Supports:
     * <ul>
@@ -310,18 +230,145 @@ class ASTNode
             self::parseExp($expr);
         }
 
-        echo '-----------------------<br>';                                     // ---- DEBUGGING
-        echo $root->show();                                                     // ---- DEBUGGING
-        echo '-----------------------<br>';                                     // ---- DEBUGGING
+        // echo '-----------------------<br>';                                     // ---- DEBUGGING
+        // echo $root->show();                                                     // ---- DEBUGGING
+        // echo '-----------------------<br>';                                     // ---- DEBUGGING
 
         return $root;
     }
 
-    
+    /*
+    * ------------------------------------------------------------------------------------------------------------------
+    * ---------------------- EXECUTION ---------------------------------------------------------------------------------
+    * ------------------------------------------------------------------------------------------------------------------
+    *
+    * Functions used for executing instructions.<br>
+    * Functions include add, parseExp, BuildAST.
+    *
+    */
+
     /**
+    * Evaluates the expression/variable and calculates the result.<br>
+    * It supports access to methods via '.method_name()', properties and key values via '.member'.
+    *
+    * @return result of calculated variable
+    */
+    private function getValue()
+    {
+        $exp = $this->expression;
+
+        $negate = false;        
+        if($exp[0]=='!')
+        {
+            $negate = true;
+            $exp = substr($exp, 1);
+        }
+
+        $fields = explode('.', $exp);
+        $result = $this->locals[ $fields[0] ];
+
+        for($i=1, $n=count($fields); $i<$n; $i++)
+        {
+            if( strpos($fields[$i], '()') !== false )                           // so it's a method
+            {
+                $method_name = str_replace('()', '', $fields[$i]);
+                $result = $result->{$method_name}();
+            }
+            else                                                                // so it's a property
+            {
+                if( isset( $result->{$fields[$i]}) )                            // property
+                    $result = $result->{$fields[$i]};
+                else                                                            // array key
+                    $result = $result[ $fields[$i] ];
+            }
+        }
+
+        if (gettype($result)=='boolean')                                        // TODO : not just booleans
+            $result ^= $negate;
+
+        return $result;
+    }
+
+    /**
+    * Function that executes the command.
+    *
+    * @return resulting string (html)
+    */
+    public function exe()
+    {
+        $text_result = '';
+        $exe_children = true;
+
+        switch($this->type)
+        {
+            case 'TEXT':                                                        // TEXT NODE
+                $text_result        .= $this->expression;
+                $text_result        .= $this->exeChildren();
+            break;
+
+            case 'VAR':                                                         // VAR NODE
+                $text_result        = $this->getValue();
+            break;
+
+            case 'IF':                                                          // IF NODE
+                if ($this->getValue())
+                    $text_result    = $this->children[0]->exe();
+                else
+                    $text_result    = $this->children[1]->exe();
+            break;
+
+            case 'FOR':                                                         // FOREACH NODE
+                $boom               = explode('|', $this->expression);
+                $item_name          = $boom[0];
+                $this->expression   = $boom[1];
+                $collection         = $this->getValue();
+
+                foreach ($collection as $item)
+                {
+                    $this->locals[$item_name] = $item;
+                    $text_result .= $this->exeChildren();
+                }
+            break;
+
+            case 'REGION':                                                      // REGION NODE
+                if (isset($this->locals[$this->expression]))
+                {
+                    $text_result    = $this->getValue();
+                    $exe_children   = false;
+                }
+                else
+                    $text_result    = $this->exeChildren();
+            break;
+        }
+
+        return (string)$text_result;
+    }
+
+    /**
+    * Function that executes the children of the node.
+    *
+    * @return calculated string
+    */
+    private function exeChildren()
+    {
+        $res = '';
+        foreach ($this->children as $kid)                                       // execute children
+        {
+            $kid->locals = $this->locals;
+            $res .= $kid->exe();
+        }
+        return $res;
+    }
+    
+    /*
+    * ------------------------------------------------------------------------------------------------------------------
+    * --------------------- DEBUGGING ----------------------------------------------------------------------------------
+    * ------------------------------------------------------------------------------------------------------------------
+    *
     * Functions used in debugging. They print AST like hierarchy, so I can see<br>
     * dependancies and relations amongst nodes. Quite fancy.<br>
     * Use it as 'echo $root->show();'
+    *
     */
     private static function reqShow($obj, $lvl)
     {
@@ -339,5 +386,4 @@ class ASTNode
     {
         return '<pre>'.self::reqShow($this, 1).'</pre>';
     }
-
 }

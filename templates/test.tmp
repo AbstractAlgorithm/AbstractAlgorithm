@@ -1,2 +1,8 @@
 {pita}
-[if !dojaja]good[else]bad[end]
+[if !dojaja]nije do jaja[else]do jaja je[end]
+<br>[region ime]Dragan[end][if king] je kraljina[end].
+<ul>
+[foreach broj in brojevi]
+<li>{broj}</li>
+[end]
+</ul>
