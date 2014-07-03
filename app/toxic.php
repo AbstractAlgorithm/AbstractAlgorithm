@@ -243,7 +243,7 @@ class ASTNode
     * ------------------------------------------------------------------------------------------------------------------
     *
     * Functions used for executing instructions.<br>
-    * Functions include add, parseExp, BuildAST.
+    * Functions include getValue, exe and exeChildren.
     *
     */
 
