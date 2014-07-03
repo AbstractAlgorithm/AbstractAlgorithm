@@ -65,7 +65,10 @@ class Template
     */
     private function parse()
     {
-        $this->text = Toxic::Execute($this->text, $this->vars);
+        foreach (Core::$config as $key => $value)                               // add environment variables
+            $this->vars['CONFIG_'.$key] = $value;
+
+        $this->text = Toxic::Execute($this->text, $this->vars);                 // parse and execute
 
         return $this;
     }

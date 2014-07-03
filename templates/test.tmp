@@ -6,3 +6,5 @@
 <li>{broj}</li>
 [end]
 </ul>
+
+Ovo je {CONFIG_WEBSITE} sajt.
