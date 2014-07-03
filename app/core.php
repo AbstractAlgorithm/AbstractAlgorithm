@@ -38,6 +38,9 @@ final class Core
             $new_config[$key] = $hehe;
 
             define($key, $hehe);
+
+            if (preg_match('/^LVL_/i', $key))
+                Session::$levels[$key] = $hehe;
         }
     }
 

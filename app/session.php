@@ -7,46 +7,82 @@
 */
 class Session
 {
+    /*
+    * Variable that holds permission list.
+    */
+    public static $levels = array();
+
+    /**
+    * Starts the session and initializes it with default parameters:<br>
+    * no mail, no password, no username, lowest permissions
+    */
     public static function Start()
     {
         session_start();
+        $_SESSION['auth_data'] = array();
+        $_SESSION['auth_data']['username'] = null;
+        $_SESSION['auth_data']['password'] = null;
+        $_SESSION['auth_data']['email'] = null;
+        $_SESSION['auth_data']['level'] = 'LVL_VISITOR'; 
     }
 
-    public static function end()
+    /**
+    * Destroys the session and resets all the session data.
+    */
+    public static function End()
     {
-
-        if(isset($_SESSION['auth_data']))
-            unset($_SESSION['auth_data']);
-        
+        $_SESSION['auth_data']['username'] = null;
+        $_SESSION['auth_data']['password'] = null;
+        $_SESSION['auth_data']['email'] = null;
+        $_SESSION['auth_data']['level'] = 'LVL_VISITOR'; 
         session_destroy();
     }
 
-    public static function login($email, $password)
+    /**
+    * Tries to login user with given credentials.<br>
+    * It updates session data if succeded.
+    *
+    * @param email      email fo login with
+    * @param password   password to login with
+    */
+    public static function Login($email, $password)
     {
-        $mysql_query_string = 'SELECT id, username, email, password FROM users WHERE email=\''.$email.'\' AND password=\''.sha1($password).'\'';
-        $result = mysqli_query( $db_connection, $mysql_query_string );
+        $query =   'SELECT id, username, email, password 
+                    FROM users 
+                    WHERE email=\''.$email.'\' 
+                    AND password=\''.sha1($password).'\'';
+
+        $result = mysqli_query( $db_connection, $query );
         if($result)
         {    
-            $_SESSION['auth_data'] = array();
             $_SESSION['auth_data']['username'] = $result[0]['username'];
             $_SESSION['auth_data']['password'] = $password;
             $_SESSION['auth_data']['email'] = $email;
+            $_SESSION['auth_data']['level'] = 'LVL_VISITOR';                    // TODO : calc permissions
         }
     }
 
-    public static function getUserData()
+    /**
+    * Tests if the current user has enough credentials to access the page.
+    *
+    * @param uri    page url that is to be tested
+    * @return       result if user has the permission
+    */
+    public static function HasAccess($uri)
     {
-        $data = $_SESSION['auth_data'];
-        return $data;
+        $has_no_access_to = self::$levels[$_SESSION['auth_data']['level']];
+        if (preg_match('/'.$uri.'/i', $has_no_access_to))
+            return false;    
+        return true;
     }
 
-    public static function HasAccess()
+    /**
+    * Returns current session data.
+    *
+    * @return current session data
+    */
+    public static function GetData()
     {
-        return true;                                                            // TODO : check config
+        return $_SESSION['auth_data'];
     }
-
-    public static function hasAdminAccess() {
-        return $_SESSION['admin'];
-    }
-
 }

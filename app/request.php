@@ -87,8 +87,11 @@ final class Request
 
         if (Session::HasAccess($uri))
         {
-            self::activateController($uri);
+            echo 'ima pristup<br>';
+            // self::activateController($uri);
         }
+        else
+            echo 'nema pristup<br>';
     }
 
     /**
