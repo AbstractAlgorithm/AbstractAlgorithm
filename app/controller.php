@@ -13,11 +13,11 @@ abstract class Controller
     public abstract function Run();
 
     /**
-    * The body of the controller logic.
+    * Function to be executed when the user has been denied access to the page.
     */
     public function Denied()
     {
-        Request::GotoAddress( '/' );
+        Request::GotoAddress('/');
     }
 
     /**
@@ -25,12 +25,18 @@ abstract class Controller
     *
     * @return classname
     */
-    public static function GetName() { return get_called_class(); }
+    public static function GetName()
+    {
+        return get_called_class();
+    }
 
     /**
     * Wrapper function to run other funtions (anonymus).
     *
     * @return results of the called anonymus function (if any)
     */
-    public function Exe($f) { return $f(); }
+    public function Exe($f)
+    {
+        return $f();
+    }
 }
