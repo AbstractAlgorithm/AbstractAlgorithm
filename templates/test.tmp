@@ -1,15 +1,1 @@
-<p>{student.ime} ima {student.godina} godina.</p>
-<p>{student.pozdrav()}</p>
-
-<p>{student.ime} # if !student.jeOdrastao() #ni# endif #je odrastao.</p>
-
-# if student.jeOdrastao() #
-<p>On ima cak {student.godina} godina.<br>
-Ime: {student.ime}.</p>
-# else #
-<p>On je tek dete.</p>
-# endif #
-
-# if prom #1# else #2# endif #
-
-<p>-- Kraj --</p>
+[region dupe]<p>dada</p>[foreach skola in skole]{skola.ime}:[foreach student in skola.ucenici()]{student.ime}, [end]<p>prc</p>[region hehe][end]<p>hehe</p>

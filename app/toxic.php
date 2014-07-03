@@ -10,18 +10,31 @@ class ASTNode
     public $children;
     public $parent;
     public $locals;
-    public $exeChildren;
+    public $type;
 
+    public static $current;
+    public static $node_idx;
+    public static $data;
+
+    /**
+    * Constructor for the AST node.
+    * <ul>
+    *   <li>expression  - parsed version to be executed
+    *   <li>children    - ast nodes in hierarchy
+    *   <li>parent      - parent of the node
+    *   <li>locals      - variables in "scope"
+    *   <li>type        - node's type (TEXT, VAR, IF, IFE, IFN, IFNE, FOR, REGION)
+    */
     private function __construct($e)
     {    
         $this->expression   = $e;
         $this->children     = array();
         $this->parent       = null;
         $this->locals       = array();
-        $this->exeChildren  = true;
+        $this->type         = 'TEXT';
     }
 
-    public function execute()
+    public function Execute()
     {
         $res = '';
 
@@ -167,74 +180,138 @@ class ASTNode
     // ------------------- CREATING TREE ---------------------
     // -------------------------------------------------------
 
-    private function add($kid) {
-        $this->children[] = $kid;
-        $kid->parent = $this;
+    /**
+    * Binds child and parent node.
+    *
+    * @param child child node to be added
+    */
+    private function add($child)
+    {
+        $child->parent = $this;
+        $this->children[] = $child;
     }
 
-    public static function buildAndExecute($text, $vars) {
+    private static function parseExp($exp)
+    {
+
+        if ($exp[0] == '{')                                                     // VAR NODE
+        {
+            $exp    = preg_replace('/\s*/', '', $exp);                          // remove all white spaces
+            $exp    = str_replace('{', '', $exp);                               // strip front curly bracket
+            $exp    = str_replace('}', '', $exp);                               // strip back curly bracket
+            
+            $new_node = new ASTNode($exp);
+            $new_node->type = 'VAR';
+            self::$current->add($new_node);
+        }
+        else if ($exp[0] == '[')                                                // COMMAND NODE
+        {
+            $exp = str_replace('[', '', $exp);                                  // strup angle brackets
+            $exp = str_replace(']', '', $exp);
+
+            if ( strpos($exp,'region') !== false )                              // -- region ?
+            {
+                $exp = preg_replace('/\s+|region/', '', $exp);                  // leave just region name
+
+                $new_node = new ASTNode($exp);
+                $new_node->type = 'REGION';
+                self::$current->add($new_node);
+
+            }
+
+            else if ( strpos($exp,'if') !== false )                             // -- if ?
+            {
+
+                $type = 'IF';
+            }
+
+            else if ( strpos($exp,'foreach') !== false )                        // -- foreach ?
+            {
+                $exp = preg_replace('/\s+in\s+/', '|', $exp);
+                $exp = preg_replace('/\s+|foreach/', '', $exp);
+
+                $new_node = new ASTNode($exp);
+                $new_node->type = 'FOR';
+                self::$current->add($new_node);
+
+                self::$current = $new_node;
+                self::$node_idx++;
+                $exp = self::$data[ self::$node_idx ];
+                while ( !preg_match('/\s*end\s*/', $exp))
+                {
+                    self::parseExp( $exp );
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                }
+                self::$current = self::$current->parent;
+            }
+        }
+        else                                                                    // TEXT NODE
+        {
+            $new_node = new ASTNode($exp);
+            $new_node->type = 'TEXT';
+            self::$current->add($new_node);
+        }
+
+        echo $new_node->type . ':-'.htmlspecialchars($new_node->expression).'<br>';
+    }
+
+    /**
+    * Builds Abstract Syntax Tree from text and init variables.<br>
+    * It parses the input text and builds simplified ASTree that will be later used to execute the page code.
+    * <br>
+    * Supports:
+    * <ul>
+    *     <li>if / ifelse</li>
+    *     <li>foreach</li>
+    *     <li>region</li>
+    * </ul>
+    *
+    * @param text   text to parse
+    * @param vars   initial "local scope" variables
+    * @return       root of the AST
+    * @see          Template
+    * 
+    */
+    public static function BuildAST($text, $vars)
+    {
+        $regex_split    = '\[[^\]]*\]'  . '|'                                   // matches [...]
+                        . '\{[^\}]*\}'  . '|'                                   // matches {...}
+                        . '[^\{\[]*';                                           // matches everything else
+
+        preg_match_all ('/'.$regex_split.'/', $text,  $matches);                // split text into code and text nodes
+        self::$data = $matches[0];
+        self::$node_idx = 0;
+        $node_count = count(self::$data);
 
 
 
         $root = new ASTNode('');
         $root->locals = $vars;
+        self::$current = $root;
 
-        $current = $root;
-
-        // create abstract syntax tree strcture
-        self::buildTree($current, $text);
-
-        // echo $root->show();
-        return $root->execute();
-        
-    }
-
-    private static function buildTree($current, $text) {
-        // regular expressions used for parsing
-        $reg_expression = '\#[^#]*#';
-        $reg_variable = '\{[^\}]*\}';
-        $reg_rest = '[^\{#]*';
-
-        $reg_toChild = '/' .
-        join('|', array('#\s*if'     ,
-                        '#\s*foreach',
-                        '#\s*else'   ,
-                        '#\s*block'  ))
-        . '/i';
-
-        $reg_fromChild = '/#\s*end/i';
-
-        // split into text nodes
-        preg_match_all('/'.$reg_expression.'|'.$reg_variable.'|'.$reg_rest.'/', $text, $matches);
-        $data = $matches[0];
-
-        // build tree strcture
-        foreach ($data as $key => $e) {
-            
-            if( preg_match($reg_toChild, $e) ) {
-                $kid = new ASTNode($e);
-                $current->add($kid);
-                $current = $kid;
-                continue;
-            }
-            if( preg_match($reg_fromChild, $e) ) {
-                while( !preg_match('/\bforeach\b|\bblock\b|\bif\b/', $current->expression))
-                    $current = $current->parent;
-                $current = $current->parent;
-                continue;
-            }
-            $kid = new ASTNode($e);
-            $current->add($kid);
+        for ( ; self::$node_idx<$node_count; self::$node_idx++ )
+        {
+            $expr = self::$data[ self::$node_idx ];
+            self::parseExp($expr);
         }
+
+        echo '-----------------------<br>';
+        echo $root->show();
+        echo '-----------------------<br>';
+
+        return $root;
     }
 
     // -------------------------------------------------------
     // --------------------- DEBUGGING -----------------------
     // -------------------------------------------------------
 
-    private static function reqShow($obj, $lvl) {
+    private static function reqShow($obj, $lvl)
+    {
         $res = htmlspecialchars($obj->expression);
-        foreach ($obj->children as $key => $kid) {
+        foreach ($obj->children as $key => $kid)
+        {
             $res .= "\n";
             for($i=0; $i<$lvl; $res .= "   ", $i++);
             $res .= "|   ".self::reqShow($kid, $lvl+1);
@@ -243,7 +320,8 @@ class ASTNode
     }
 
 
-    private function show() {
+    private function show()
+    {
         return '<pre>'.self::reqShow($this, 1).'</pre>';
     }
 

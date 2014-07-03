@@ -29,7 +29,7 @@ class Template
     private function __construct($filename)
     {
         $this->vars = array();
-        $this->text = file_get_contents("templates/$filename.tmp");
+        $this->text = file_get_contents(VIEW_DIR . $filename.'.tmp');
     }
 
     /**
@@ -67,7 +67,9 @@ class Template
     */
     private function parse()
     {
-        $this->text = Toxic::BuildAndExecute($this->text, $this->vars);
+        $ASTree     = Toxic::BuildAST($this->text, $this->vars);
+        //$this->text = Toxic::Execute($ASTree);
+
         return $this;
     }
 
