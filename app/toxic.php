@@ -191,6 +191,12 @@ class ASTNode
         $this->children[] = $child;
     }
 
+    /**
+    * Parses the expression and determines what type is it. It builds dependacy tree.
+    * This is main parsing function.
+    * 
+    * @param exp expression to be parsed
+    */
     private static function parseExp($exp)
     {
 
@@ -209,9 +215,9 @@ class ASTNode
             $exp = str_replace('[', '', $exp);                                  // strup angle brackets
             $exp = str_replace(']', '', $exp);
 
-            if ( strpos($exp,'region') !== false )                              // -- region ?
+            if ( preg_match('/\s*region/i', $exp) )                             // -- region ?
             {
-                $exp = preg_replace('/\s+|region/', '', $exp);                  // leave just region name
+                $exp = preg_replace('/\s+|region/i', '', $exp);                 // leave just region name
 
                 $new_node = new ASTNode($exp);                                  // create node
                 $new_node->type = 'REGION';
@@ -219,13 +225,34 @@ class ASTNode
 
             }
 
-            else if ( strpos($exp,'if') !== false )                             // -- if ?
+            else if ( preg_match('/\s*foreach/i', $exp) )                       // -- foreach ?
             {
-                $exp = preg_replace('/\s+|if/', '', $exp);                      // strip everything
+                $exp = preg_replace('/\s+in\s+/i', '|', $exp);                  // converts "foreach bla in blas"
+                $exp = preg_replace('/\s+|foreach/i', '', $exp);                // to "bla|blas"
 
                 $new_node = new ASTNode($exp);                                  // create node
-                $if_branch      = new ASTNode('');
-                $else_branch    = new ASTNode('');
+                $new_node->type = 'FOR';
+                self::$current->add($new_node);
+
+                self::$current = $new_node;                                     // add children
+                self::$node_idx++;
+                $exp = self::$data[ self::$node_idx ];
+                while ( !preg_match('/\bend\b/i', $exp))
+                {
+                    self::parseExp( $exp );                                     // parse children
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                }
+                self::$current = self::$current->parent;                        // return to original parent
+            }
+
+            else if ( preg_match('/\s*if/i', $exp) )                            // -- if ?
+            {
+                $exp = preg_replace('/\s+|if/i', '', $exp);                     // strip everything
+
+                $new_node = new ASTNode($exp);                                  // create node
+                $if_branch      = new ASTNode('');                              // 'true' branch
+                $else_branch    = new ASTNode('');                              // 'false' branch
                 $new_node->add($if_branch);
                 $new_node->add($else_branch);
                 $new_node->type = 'IF';
@@ -235,48 +262,27 @@ class ASTNode
 
                 self::$node_idx++;
                 $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\bend\b|\belse\b/', $exp))
+                while ( !preg_match('/\bend\b|\belse\b/i', $exp))               // parse 'true' branch
                 {
                     self::parseExp( $exp );                                     // parse children
                     self::$node_idx++;
                     $exp = self::$data[ self::$node_idx ];
                 }
 
-                if (preg_match('/\belse\b/', $exp))
+                if (preg_match('/\belse\b/i', $exp))                            // parse 'false' branch
                 {
                     self::$current = $else_branch;
                     self::$node_idx++;
                     $exp = self::$data[ self::$node_idx ];
-                    while ( !preg_match('/\bend\b/', $exp))
+                    while ( !preg_match('/\bend\b/i', $exp))
                     {
-                        self::parseExp( $exp );                                     // parse children
+                        self::parseExp( $exp );                                 // parse children
                         self::$node_idx++;
                         $exp = self::$data[ self::$node_idx ];
                     }
                 }
 
-                self::$current = $new_node->parent;
-            }
-
-            else if ( strpos($exp,'foreach') !== false )                        // -- foreach ?
-            {
-                $exp = preg_replace('/\s+in\s+/', '|', $exp);                   // converts "foreach bla in blas"
-                $exp = preg_replace('/\s+|foreach/', '', $exp);                 // to "bla|blas"
-
-                $new_node = new ASTNode($exp);                                  // create node
-                $new_node->type = 'FOR';
-                self::$current->add($new_node);
-
-                self::$current = $new_node;                                     // add children
-                self::$node_idx++;
-                $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\bend\b/', $exp))
-                {
-                    self::parseExp( $exp );                                     // parse children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                }
-                self::$current = self::$current->parent;                        // return to original parent
+                self::$current = $new_node->parent;                             // revert
             }
         }
         else                                                                    // TEXT NODE
@@ -285,8 +291,6 @@ class ASTNode
             $new_node->type = 'TEXT';
             self::$current->add($new_node);
         }
-
-        echo $new_node->type . ':-'.htmlspecialchars($new_node->expression).'<br>';
     }
 
     /**
@@ -319,27 +323,29 @@ class ASTNode
 
 
 
-        $root = new ASTNode('');
+        $root = new ASTNode('');                                                // create root
         $root->locals = $vars;
         self::$current = $root;
 
-        for ( ; self::$node_idx<$node_count; self::$node_idx++ )
+        for ( ; self::$node_idx<$node_count; self::$node_idx++ )                // parse structure
         {
             $expr = self::$data[ self::$node_idx ];
             self::parseExp($expr);
         }
 
-        echo '-----------------------<br>';
-        echo $root->show();
-        echo '-----------------------<br>';
+        echo '-----------------------<br>';                                     // ---- DEBUGGING
+        echo $root->show();                                                     // ---- DEBUGGING
+        echo '-----------------------<br>';                                     // ---- DEBUGGING
 
         return $root;
     }
 
-    // -------------------------------------------------------
-    // --------------------- DEBUGGING -----------------------
-    // -------------------------------------------------------
-
+    
+    /**
+    * Functions used in debugging. They print AST like hierarchy, so I can see<br>
+    * dependancies and relations amongst nodes. Quite fancy.<br>
+    * Use it as 'echo $root->show();'
+    */
     private static function reqShow($obj, $lvl)
     {
         $res = htmlspecialchars($obj->expression);
@@ -351,7 +357,6 @@ class ASTNode
         }
         return $res;
     }
-
 
     private function show()
     {

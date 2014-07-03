@@ -83,7 +83,7 @@ final class Request
     public static function Route()
     {    
         $uri = self::getURI();                                                  // get path
-        $uri = self::parseGET($uri);                                            // fill $_GET with params and strip them off uri
+        $uri = self::parseGET($uri);                                            // fill $_GET with params and strip them
 
         if (Session::HasAccess($uri))
         {
