@@ -23,7 +23,7 @@ class ASTNode
     *   <li>children    - ast nodes in hierarchy
     *   <li>parent      - parent of the node
     *   <li>locals      - variables in "scope"
-    *   <li>type        - node's type (TEXT, VAR, IF, IFE, IFN, IFNE, FOR, REGION)
+    *   <li>type        - node's type (TEXT, VAR, IF, FOR, REGION)
     */
     private function __construct($e)
     {    
@@ -200,7 +200,7 @@ class ASTNode
             $exp    = str_replace('{', '', $exp);                               // strip front curly bracket
             $exp    = str_replace('}', '', $exp);                               // strip back curly bracket
             
-            $new_node = new ASTNode($exp);
+            $new_node = new ASTNode($exp);                                      // create node
             $new_node->type = 'VAR';
             self::$current->add($new_node);
         }
@@ -213,7 +213,7 @@ class ASTNode
             {
                 $exp = preg_replace('/\s+|region/', '', $exp);                  // leave just region name
 
-                $new_node = new ASTNode($exp);
+                $new_node = new ASTNode($exp);                                  // create node
                 $new_node->type = 'REGION';
                 self::$current->add($new_node);
 
@@ -221,34 +221,67 @@ class ASTNode
 
             else if ( strpos($exp,'if') !== false )                             // -- if ?
             {
+                $exp = preg_replace('/\s+|if/', '', $exp);                      // strip everything
 
-                $type = 'IF';
+                $new_node = new ASTNode($exp);                                  // create node
+                $if_branch      = new ASTNode('');
+                $else_branch    = new ASTNode('');
+                $new_node->add($if_branch);
+                $new_node->add($else_branch);
+                $new_node->type = 'IF';
+                self::$current->add($new_node);
+
+                self::$current = $if_branch;
+
+                self::$node_idx++;
+                $exp = self::$data[ self::$node_idx ];
+                while ( !preg_match('/\bend\b|\belse\b/', $exp))
+                {
+                    self::parseExp( $exp );                                     // parse children
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                }
+
+                if (preg_match('/\belse\b/', $exp))
+                {
+                    self::$current = $else_branch;
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                    while ( !preg_match('/\bend\b/', $exp))
+                    {
+                        self::parseExp( $exp );                                     // parse children
+                        self::$node_idx++;
+                        $exp = self::$data[ self::$node_idx ];
+                    }
+                }
+
+                self::$current = $new_node->parent;
             }
 
             else if ( strpos($exp,'foreach') !== false )                        // -- foreach ?
             {
-                $exp = preg_replace('/\s+in\s+/', '|', $exp);
-                $exp = preg_replace('/\s+|foreach/', '', $exp);
+                $exp = preg_replace('/\s+in\s+/', '|', $exp);                   // converts "foreach bla in blas"
+                $exp = preg_replace('/\s+|foreach/', '', $exp);                 // to "bla|blas"
 
-                $new_node = new ASTNode($exp);
+                $new_node = new ASTNode($exp);                                  // create node
                 $new_node->type = 'FOR';
                 self::$current->add($new_node);
 
-                self::$current = $new_node;
+                self::$current = $new_node;                                     // add children
                 self::$node_idx++;
                 $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\s*end\s*/', $exp))
+                while ( !preg_match('/\bend\b/', $exp))
                 {
-                    self::parseExp( $exp );
+                    self::parseExp( $exp );                                     // parse children
                     self::$node_idx++;
                     $exp = self::$data[ self::$node_idx ];
                 }
-                self::$current = self::$current->parent;
+                self::$current = self::$current->parent;                        // return to original parent
             }
         }
         else                                                                    // TEXT NODE
         {
-            $new_node = new ASTNode($exp);
+            $new_node = new ASTNode($exp);                                      // create node
             $new_node->type = 'TEXT';
             self::$current->add($new_node);
         }
@@ -314,7 +347,7 @@ class ASTNode
         {
             $res .= "\n";
             for($i=0; $i<$lvl; $res .= "   ", $i++);
-            $res .= "|   ".self::reqShow($kid, $lvl+1);
+            $res .= "| ".self::reqShow($kid, $lvl+1);
         }
         return $res;
     }
