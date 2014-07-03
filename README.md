@@ -10,7 +10,13 @@ It's quite simple. I just wrote what I needed to have. Lightweight, easy to unde
 
 
 ## Toxic
-Supports `if` branching, `foreach` loop, `region`s of code and `{variables}`.
+Supports:
+ - `if`, `if/else` branching
+ - `foreach` loop
+ - `region`s of code
+ - `{var_name.property.method()}` style of variables
+
+Code blocks are in between `[]`, and variables are inbetween `{}`.
 
 ### Example
 
