@@ -1,5 +1,8 @@
 {
-    "SYSTEM_DIR":           "/",
+    "WEBSITE":              "http://abstract-algorithm.com",
+    "TITLE":                "Abstract Algorithm",
+    "AUTHOR":               "Dragan Okanovic",
+    "ADMIN_MAIL":           "dragan.okan [at] gmail.com",
 
     "MODEL_DIR":            "models",
     "VIEW_DIR":             "templates",
@@ -11,7 +14,7 @@
     "FONT_DIR":             "MEDIA_DIR/fonts",
 
     "NO_ACCESS_ADMIN":      [],
-    "NO_ACCESS_USER":       ["dashboard", "posts", "edit", "users"],
+    "NO_ACCESS_USER":       ["dashboard", "posts", "edit", "users", "list"],
     "NO_ACCESS_VISITOR":    ["profile"],
 
     "LVL_ADMIN":            [],

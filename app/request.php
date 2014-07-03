@@ -74,7 +74,16 @@ final class Request
         $filename   = CTRL_DIR.'/'.$name .'.php';                             	// generate filename to open
 
         @require $filename;
-        @(new $classname())->run();                                             // execute controller
+        if (Session::HasAccess($uri))
+        {
+            echo 'ima';
+            @(new $classname())->Run();                                         // execute controller
+        }
+        else
+        {
+            echo 'nema';
+            @(new $classname())->Denied();
+        }
     }
 
     /**
@@ -85,13 +94,7 @@ final class Request
         $uri = self::getURI();                                                  // get path
         $uri = self::parseGET($uri);                                            // fill $_GET with params and strip them
 
-        if (Session::HasAccess($uri))
-        {
-            echo 'ima pristup<br>';
-            // self::activateController($uri);
-        }
-        else
-            echo 'nema pristup<br>';
+        self::activateController($uri);
     }
 
     /**
@@ -102,6 +105,7 @@ final class Request
     public static function GotoAddress($address)
     {
         header('Location: '.$address);
+        die();
     }
 
 }

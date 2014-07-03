@@ -11,6 +11,8 @@ require 'request.php';
 */
 final class Core
 {
+    public static $config = array();
+    
     /**
     * Loads configuration file and creates constants from it.
     */
@@ -38,6 +40,7 @@ final class Core
             $new_config[$key] = $hehe;
 
             define($key, $hehe);
+            self::$config[$key] = $hehe;
 
             if (preg_match('/^LVL_/i', $key))
                 Session::$levels[$key] = $hehe;

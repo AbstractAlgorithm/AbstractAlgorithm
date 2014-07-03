@@ -13,6 +13,14 @@ abstract class Controller
     public abstract function Run();
 
     /**
+    * The body of the controller logic.
+    */
+    public function Denied()
+    {
+        Request::GotoAddress( '/' );
+    }
+
+    /**
     * Wrapper function to retrieve the class name.
     *
     * @return classname
