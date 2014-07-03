@@ -71,7 +71,7 @@ final class Request
     {
         $name       = self::toCamelCase($uri);
         $classname  = $name.'Controller';                                       // generate class name
-        $filename   = CTRL_DIR . $name  . '.php';                             	// generate filename to open
+        $filename   = CTRL_DIR.'/'.$name .'.php';                             	// generate filename to open
 
         @require $filename;
         @(new $classname())->run();                                             // execute controller

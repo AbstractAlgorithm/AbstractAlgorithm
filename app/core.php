@@ -18,10 +18,26 @@ final class Core
     {
         $config_str = file_get_contents("app/config.json");
         $config     = json_decode($config_str,true);
+        $new_config = array();
 
         foreach ($config as $key => $value)
         {
-            define($key, $value);                                               // TODO : recursion
+            if (gettype($value)=='array')
+                $new_config[$key] = join('|',$value);
+            else
+                $new_config[$key] = $value;
+
+            $hehe = $new_config[$key];
+            if (gettype($hehe)=='array')
+                foreach ($new_config[$key] as $item)
+                    foreach ($new_config as $key_new => $value_new)
+                        $hehe = str_replace($key_new, $value_new, $hehe);
+            else
+                foreach ($new_config as $key_new => $value_new)
+                    $hehe = str_replace($key_new, $value_new, $hehe);
+            $new_config[$key] = $hehe;
+
+            define($key, $hehe);
         }
     }
 

@@ -27,7 +27,7 @@ class Template
     private function __construct($filename)
     {
         $this->vars = array();
-        $this->text = file_get_contents(VIEW_DIR . $filename.'.tmp');
+        $this->text = file_get_contents(VIEW_DIR.'/'.$filename.'.tmp');
     }
 
     /**
