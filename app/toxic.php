@@ -1,6 +1,26 @@
 <?php
 
 /**
+* Wrapper class for ASTNode. It hides all the details and allows just one action.
+*/
+final class Toxic
+{
+    /**
+    * Wrapper function for ASTNode build&execute functions.
+    *
+    * @param text   input text to beparsed
+    * @param vars   "local" variables
+    * @return       result of evaluated code
+    * @see          ASTNode
+    */
+    public static function Execute($text, $vars)
+    {
+        $tree = ASTNode::BuildAST($text, $vars);
+        return $tree->exe();
+    }
+}
+
+/**
 * Class that parses and executes the templating code. It's based upon AST node<br>
 * creation. It's overly complex, overly stupid and overly long, but it does the job. :D
 */
@@ -34,145 +54,91 @@ class ASTNode
         $this->type         = 'TEXT';
     }
 
-    public function Execute()
+    private function getValue()
     {
-        $res = '';
+        $exp = $this->expression;
 
-        if($this->expression!='') {    
-
-            $firstChar = $this->expression[0];
-            if($firstChar=='#') {
-
-                // strip hashtags
-                $ex = preg_replace('/\s*#\s*/', '', $this->expression);
-
-    // IF
-                if( substr($ex, 0, 2)=='if' ) {
-
-                    foreach ($this->children as $kid)
-                        $kid->exeChildren = true;
-                    $this->exeChildren = true;
-
-                    // onda se izvrsava if
-                    if( self::testIf($this) ) {
-                        foreach ($this->children as $kid) {
-                            if( preg_match('/\belse\b/i', $kid->expression) ) {
-                                // $kid->expression = '';
-                                $kid->exeChildren = false;
-                                break;
-                            }
-                        }
-                    }
-                    // izvrsava se else grana
-                    else {
-                        $this->exeChildren = false;
-                        foreach ($this->children as $kid) {
-                            if( preg_match('/\belse\b/', $kid->expression) ) {
-                                $res .= $kid->execute();
-                                break;
-                            }
-                        }
-                    }
-                    
-                }
-
-    // BLOCK
-                else if( substr($ex, 0, 5)=='block' ) {
-                    $blk = self::testBlock($this);
-                    if($blk!=null) {
-                        $res .= $blk;
-                        $this->exeChildren = false;
-                    }
-                }
-
-    // FOREACH
-                else if( substr($ex, 0, 7)=='foreach' ) {
-                    // TODO : foreach
-                    preg_match('/foreach\s+(\w+)\s+in\s+([^\s]+)\s*/', $ex, $matches);
-                    $this->exeChildren = false;
-                    $prom = self::getValue($matches[2], $this->locals);
-                    $localName = $matches[1];
-
-                    foreach ($prom as $value) {
-                        $this->locals[$localName] = $value;
-                        foreach ($this->children as $kid) {
-                            
-                            $kid->locals = $this->locals;
-                            $res .= $kid->execute();
-                        }    
-                    }
-                    unset($this->locals[$localName]);
-                }
-
-            }
-
-    // VARIABLE
-            else if($firstChar=='{') {
-                $ex = str_replace('{', '', $this->expression);    // strip curly braces
-                $ex = str_replace('}', '', $ex);    // strip curly braces
-                $res .= self::getValue($ex, $this->locals);
-            }
-    // HTML
-            else
-                // this is some html
-                $res .= $this->expression;
+        $negate = false;        
+        if($exp[0]=='!')
+        {
+            $negate = true;
+            $exp = substr($exp, 1);
         }
 
+        $fields = explode('.', $exp);
+        $result = $this->locals[ $fields[0] ];
 
-        // go though all children | TODO : child locals, merge
-        if($this->exeChildren)
-            foreach ($this->children as $kid) {
-                $kid->locals = $this->locals;
-                $res .= $kid->execute();
+        for($i=1, $n=count($fields); $i<$n; $i++)
+        {
+            if( strpos($fields[$i], '()') !== false )                           // so it's a method
+            {
+                $method_name = str_replace('()', '', $fields[$i]);
+                $result = $result->{$method_name}();
             }
+            else                                                                // so it's a property
+            {
+                if( isset( $result->{$fields[$i]}) )                            // property
+                    $result = $result->{$fields[$i]};
+                else                                                            // array key
+                    $result = $result[ $fields[$i] ];
+            }
+        }
+        echo get_class($result);
 
-        return $res;
+        // return $result;
+
+        return $negate ? !$results : $result;
     }
 
-    // used for testing if clause
-    private static function testIf($astnode) {
+    /**
+    * Function that executes the command.
+    *
+    * @return resulting string (html)
+    */
+    public function exe()
+    {
+        $text_result = '';
+        $exe_children = true;
 
-        preg_match('/if\s+([^\s]+)\s*/', $astnode->expression, $var);
-        if($var[1][0]=='!')
-            return !(self::getValue( substr($var[1],1), $astnode->locals ));
-        else
-            return self::getValue($var[1], $astnode->locals);
-    }
+        switch($this->type)
+        {
+            case 'TEXT':                                                        // TEXT NODE
+                $text_result = $this->expression;
+                break;
 
-    // used for determing whether to use default block content or not
-    private static function testBlock($astnode) {
+            case 'VAR':                                                         // VAR NODE
+                $text_result = $this->getValue();
+                break;
 
-        preg_match('/block\s+(\w+)\s*/', $astnode->expression, $var);
-        if(isset($astnode->locals[$var[1]]))
-            return self::getValue($var[1], $astnode->locals);
-        else
-            return null;
-    }
-
-    // used to retreive the value of an object
-    private static function getValue($str_var, $locals) {
-
-        // explode variable name
-        $names = explode('.', $str_var);
-
-        // object to be returned
-        $current_obj = $locals[$names[0]];
-
-        // iterate over the properties/fields
-        for($i=1, $n=count($names); $i<$n; $i++) {
-
-            $part = strlen($names[$i])>=2 ? substr($names[$i], strlen($names[$i])-2) : $names[$i];
-
-            if( $part =='()' )         // METHOD
-                $current_obj = $current_obj->{substr($names[$i], 0,strlen($names[$i])-2)}();
-            else {                     // PROPERTY
-                if( isset( $current_obj->{$names[$i]}) )
-                    $current_obj = $current_obj->{$names[$i]};
+            case 'IF':                                                          // IF NODE
+                $exe_children = false;
+                if ($this->getValue())
+                    $text_result = $this->children[0]->exe();
                 else
-                    $current_obj = $current_obj[ $names[$i] ];
-            }
+                    $text_result = $this->children[1]->exe();
+
+                break;
+
+            case 'FOR':                                                         // FOREACH NODE
+                break;
+
+            case 'REGION':                                                      // REGION NODE
+                if (isset($this->locals[$this->expression]))
+                {
+                    $text_result .= $this->getValue();
+                    $exe_children = false;
+                }
+                break;
         }
-        return $current_obj;
+
+        if ($exe_children)
+            foreach ($this->children as $kid)                                   // execute children
+            {
+                $kid->locals = $this->locals;
+                $text_result .= $kid->exe();
+            }
+
+        return (string)$text_result;
     }
 
     
@@ -223,6 +189,17 @@ class ASTNode
                 $new_node->type = 'REGION';
                 self::$current->add($new_node);
 
+                self::$current = $new_node;                                     // add children
+                self::$node_idx++;
+                $exp = self::$data[ self::$node_idx ];
+                while ( !preg_match('/\bend\b/i', $exp))
+                {
+                    self::parseExp( $exp );                                     // parse children
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                }
+                self::$current =  $new_node->parent;
+
             }
 
             else if ( preg_match('/\s*foreach/i', $exp) )                       // -- foreach ?
@@ -243,7 +220,7 @@ class ASTNode
                     self::$node_idx++;
                     $exp = self::$data[ self::$node_idx ];
                 }
-                self::$current = self::$current->parent;                        // return to original parent
+                self::$current =  $new_node->parent;                            // return to original parent
             }
 
             else if ( preg_match('/\s*if/i', $exp) )                            // -- if ?

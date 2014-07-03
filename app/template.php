@@ -2,8 +2,6 @@
 
 require 'toxic.php';
 
-use ASTNode as Toxic;
-
 /**
 * "View" of the framework. Responsible for generating and rendering the content.
 */
@@ -41,8 +39,8 @@ class Template
     */
     public function set($field, $val)
     {
-        $this->vars[(string)$field] = is_callable($val)
-                                        ? (string)$val()
+        $this->vars[$field] = is_callable($val)
+                                        ? (string)($val())
                                         : $val;
 
         return $this;
@@ -67,8 +65,7 @@ class Template
     */
     private function parse()
     {
-        $ASTree     = Toxic::BuildAST($this->text, $this->vars);
-        //$this->text = Toxic::Execute($ASTree);
+        $this->text = Toxic::Execute($this->text, $this->vars);
 
         return $this;
     }

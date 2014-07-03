@@ -1,1 +1,2 @@
-[region dupe]<p>dada</p>[foreach skola in skole]{skola.ime}:[foreach student in skola.ucenici()]{student.ime}, [end]<p>prc</p>[region hehe][end][if dobro]<p>hehe</p>[else]<p>kmaa kmaa kmaaaa</p>[end]prdez
+{pita}
+[if !dojaja]good[else]bad[end]
