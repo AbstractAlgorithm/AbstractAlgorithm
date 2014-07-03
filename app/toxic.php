@@ -1,5 +1,9 @@
 <?php
 
+/**
+* Class that parses and executes the templating code. It's based upon AST node<br>
+* creation. It's overly complex, overly stupid and overly long, but it does the job. :)
+*/
 class ASTNode
 {
     public $expression;
