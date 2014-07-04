@@ -76,12 +76,10 @@ final class Request
         @require $filename;
         if (Session::HasAccess($uri))
         {
-            echo 'ima';
             @(new $classname())->Run();                                         // execute controller
         }
         else
         {
-            echo 'nema';
             @(new $classname())->Denied();
         }
     }
