@@ -1,0 +1,64 @@
+<div id="dashboard">
+    <div id="post_dash">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Comments</th>
+                <th>Date</th>
+            </tr>
+        </table>
+        <table id="post_list">
+            [foreach post in posts]
+            <tr>
+                <td>{post.id}</td>
+                <td>{post.name}</td>
+                <td>{post.numComments()}</td>
+                <td>{post.date}</td>
+            </tr>
+            [end]
+        </table>
+    </div>
+
+    <div>
+        <div id="comment_dash">
+            <table>
+                <tr>
+                    <th>Post</th>
+                    <th>Author</th>
+                    <th>Comment</th>
+                    <th>Date</th>
+                </tr>
+                [foreach comment in comments]
+                <tr class="comm_[if !comment.approved]not_[end]approved">
+                    <td>{comment.post}</td>
+                    <td>{comment.author}</td>
+                    <td>{comment.text}</td>
+                    <td>{comment.formatDate()}</td>
+                </tr>
+                [end]
+            </table>
+        </div>
+
+        <div id="user_dash">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Comments</th>
+                    <th>Rank</th>
+                </tr>
+            </table>
+            <table id="user_list">
+                [foreach user in users]
+                <tr>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.numComments()}</td>
+                    <td>{user.rank()}</td>
+                </tr>
+                [end]
+            </table>
+        </div>
+    </div>
+</div>

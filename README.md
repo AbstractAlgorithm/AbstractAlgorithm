@@ -10,25 +10,26 @@ It's quite simple. I just wrote what I needed to have. Lightweight, easy to unde
 
 
 ## Toxic
-Supports:
- - `if`, `if/else` branching
+Features:
+
+ - `if`, `if/else` branching (with optional `!`)
  - `foreach` loop
  - `region`s of code
  - `{var_name.property.method()}` style of variables
 
-Code blocks are in between `[]`, and variables are inbetween `{}`.
+Code blocks are inbetween `[]`, and variables are inbetween `{}`.
 
 ### Example
 
 #### Template (sample.tmp):
 
 ```html
-<h1>{title}</h1>
+<h1>{post.title}</h1>
 
 <div>
-    {content}
+    {post.content}
 
-    [if favorited]
+    [if post.favorited]
         This page has been favorited.
     [end]
 
@@ -38,7 +39,7 @@ Code blocks are in between `[]`, and variables are inbetween `{}`.
         This page has {numComments} comments.
 
         <ul>
-        [foreach comm in comments]
+        [foreach comm in post.comments]
             <li>{comm.getAuthor()} said: {comm.body_text}</li>
         [end]
         </ul>
@@ -47,7 +48,7 @@ Code blocks are in between `[]`, and variables are inbetween `{}`.
 
 <footer>
     Author: [region author]Dragan Okanovic[end]
-    Date: [region date]??/??/????[end]
+    Date: [region post.date]??/??/????[end]
 </footer>
 ```
 
@@ -58,22 +59,17 @@ class SampleController extends Controller {
 
     public function run()
     {
+        # code logic ...
         $post = Post::getByName('sample');
 
+        #load template
         Template::load('sample')
 
-        ->title( $post->title )
-
-        ->content( $post->content )
-
-        ->comments( $post->comments )
-
+        # fillin data
+        ->post( $post )
         ->hasComments( count($post->comments)>0 )
 
-        ->favorited( $post->fav )
-
-        ->date( $post->datetime )
-
+        # generate html
         ->render();
     }
 }
@@ -94,9 +90,7 @@ class SampleController extends Controller {
         <ul>
             <li>The God said: This is very good!</li>
             <li>The Programmer said: Naah, it's just 'okay'.</li>
-        </ul>
-
-        
+        </ul> 
 </div>
 
 <footer>
