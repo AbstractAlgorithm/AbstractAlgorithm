@@ -12,14 +12,14 @@ It's quite simple. I just wrote what I needed to have. Lightweight, easy to unde
 ## Toxic
 Features:
 
- - `if`, `if/else` branching (with optional `!`)
+ - `if/else` branching (with optional `!`)
  - `foreach` loop
  - `region`s of code
  - `{var_name.property.method()}` style of variables
 
 ### Example
 
-#### Template (sample.tmp):
+##### Template (sample.tmp):
 
 ```html
 <h1>{post.title}</h1>
@@ -46,11 +46,11 @@ Features:
 
 <footer>
     Author: [region author]Dragan Okanovic[end]
-    Date: [region post.date]??/??/????[end]
+    Date: [region post.date]1/1/1980[end]
 </footer>
 ```
 
-#### Controller code:
+##### Controller code:
 
 ```php
 class SampleController extends Controller {
@@ -60,10 +60,10 @@ class SampleController extends Controller {
         # code logic ...
         $post = Post::getByName('sample');
 
-        #load template
+        # load template
         Template::load('sample')
 
-        # fillin data
+        # fill-in data
         ->post( $post )
         ->hasComments( count($post->comments)>0 )
 
@@ -73,7 +73,7 @@ class SampleController extends Controller {
 }
 ```
 
-#### Result:
+##### Result:
 
 ```html
 <h1>Sample post</h1>
@@ -124,13 +124,13 @@ class Post
 
 ```html
 <h1>{myPost.title}</h1>
-<small>Date created: {myPost.getTime()} | Category: [myPost.config.table]</small>
+<small>Date created: {myPost.getTime()} | Category: {myPost.config.table}</small>
 
 ```
 
 ##### If
 
-It must have exactly one mathicng `[end]` tag, whether it has `[else]` branch of not/
+It must have exactly one mathicng `[end]` tag, whether it has `[else]` branch of not.
 
  - `[if condition] ... [end]`
  - `[if !notCondition] ... [end]`
@@ -156,8 +156,7 @@ If the variable named like the region is set, then that value is used, otherwise
 [end]
 ```
 
-There's no template-wise inheritance.
-Regions will be replacedreplaced with something like:
+There's no template-wise inheritance. Regions will be replaced soon with something like:
 
 ```html
 [if !content]
