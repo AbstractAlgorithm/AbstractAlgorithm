@@ -3,9 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 
-		<meta name="description" content="#block description#Abstract Algorithm - blog and portfolio of Dragan Okanović, web developer and VFX programmer.#endblock#" >
+		<meta name="description" content="[region description]Abstract Algorithm - blog and portfolio of Dragan Okanović, web developer and VFX programmer.[end]" >
 		<meta name="author" content="Okanovic Dragan" >
-		<meta name="keywords" content="#block keywords#abstract, algorithm, blog, web, gpu, vfx, okanovic, dragan#endblock#">
+		<meta name="keywords" content="abstract, algorithm, blog, web, gpu, vfx, okanovic, dragan">
 		<meta property="og:title" content="Abstract Algorithm | {title}"/>
 		<meta property="og:image" content="http://abstract-algorithm.com/resources_aa/logo_big.png"/>
 		<meta property="og:site_name" content="Abstract Algorithm | {title}"/>
@@ -14,14 +14,14 @@
 
 		<link rel="shortcut icon" href="../media/favicon.png" type="image/x-icon">
 		<link rel="icon" href="../media/favicon.png" type="image/x-icon">
-		<link rel="stylesheet" href="#block stylesheet#../media/style.css#endblock#">
+		<link rel="stylesheet" href="{CONFIG_CSS_DIR}/[region css]style.css[end]">
 	</head>
 	
 	<body>
 		<div id="wrapper">
-			# block content ## endblock #
+			[region content][end]
 		</div>
 
-		# block script ## endblock #
+		[region script][end]
 	</body>
 </html>
