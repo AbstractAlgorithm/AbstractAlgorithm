@@ -5,12 +5,23 @@
 * Class that is responsible for taking care about user creditentials and permissions.
 * Alternative name - 'Auth'.
 */
-class Session
+final class Session
 {
     /*
     * Variable that holds permission list.
     */
-    public static $levels = array();
+    private static $levels = array();
+
+    /**
+    * Setter for the Session::$levels that will be used for checking permission.
+    *
+    * @param key    name of the level
+    * @param value  pages with no access to
+    */
+    public static function AddLevel($key, $value)
+    {
+        self::$levels[$key] = $value;
+    }
 
     /**
     * Starts the session and initializes it with default parameters:<br>

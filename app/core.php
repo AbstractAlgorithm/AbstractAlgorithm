@@ -24,26 +24,27 @@ final class Core
 
         foreach ($config as $key => $value)
         {
-            if (gettype($value)=='array')
+            if (gettype($value)=='array')                                       // expand var to full size (prev config)
                 $new_config[$key] = join('|',$value);
             else
                 $new_config[$key] = $value;
 
-            $hehe = $new_config[$key];
-            if (gettype($hehe)=='array')
+            $expanded = $new_config[$key];
+            if (gettype($expanded)=='array')
                 foreach ($new_config[$key] as $item)
-                    foreach ($new_config as $key_new => $value_new)
-                        $hehe = str_replace($key_new, $value_new, $hehe);
+                    foreach ($new_config as $key_ => $value_)
+                        $expanded = str_replace($key_, $value_, $expanded);
             else
-                foreach ($new_config as $key_new => $value_new)
-                    $hehe = str_replace($key_new, $value_new, $hehe);
-            $new_config[$key] = $hehe;
+                foreach ($new_config as $key_ => $value_)
+                    $expanded = str_replace($key_, $value_, $expanded);
+            $new_config[$key] = $expanded;
 
-            define($key, $hehe);
-            self::$config[$key] = $hehe;
+            define($key, $expanded);                                            // define to be globally accessible
 
-            if (preg_match('/^LVL_/i', $key))
-                Session::$levels[$key] = $hehe;
+            if (preg_match('/^LVL_/i', $key))                                   // add to Session::levels config
+                Session::AddLevel($key, $expanded);
+            else                                                                // add to Core::config data
+                self::$config[$key] = $expanded;
         }
     }
 

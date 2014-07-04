@@ -24,17 +24,17 @@ final class Toxic
 * Class that parses and executes the templating code. It's based upon AST node<br>
 * creation. It's overly complex, overly stupid and overly long, but it does the job. :D
 */
-class ASTNode
+final class ASTNode
 {
-    public $expression;
-    public $children;
-    public $parent;
-    public $locals;
-    public $type;
+    private $expression;
+    private $children;
+    private $parent;
+    private $locals;
+    private $type;
 
-    public static $current;
-    public static $node_idx;
-    public static $data;
+    private static $current;
+    private static $node_idx;
+    private static $data;
 
     /**
     * Constructor for the AST node.
