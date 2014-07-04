@@ -17,8 +17,6 @@ Features:
  - `region`s of code
  - `{var_name.property.method()}` style of variables
 
-Code blocks are inbetween `[]`, and variables are inbetween `{}`.
-
 ### Example
 
 #### Template (sample.tmp):
@@ -97,4 +95,72 @@ class SampleController extends Controller {
     Author: Dragan Okanovic
     Date: Friday, July 4th, 2014
 </footer>
+```
+
+### Usage
+
+Instructions are written inside the `[]` and variables are inside the `{}`.
+
+##### Variables
+
+You can access simple variables, class variables or arrays.
+
+ - array key: `myArray.key`
+ - property: `myClassVar.property_name`
+ - method: `myClassVar.method()`
+
+Methods don't support arguments currently.
+
+Example:
+
+```php
+class Post
+{
+    public $title = 'Title';
+    public $config = array( 'table' => 'post' );
+    public function getTime() { ... }    
+}
+```
+
+```html
+<h1>{myPost.title}</h1>
+<small>Date created: {myPost.getTime()} | Category: [myPost.config.table]</small>
+
+```
+
+##### If
+
+It must have exactly one mathicng `[end]` tag, whether it has `[else]` branch of not/
+
+ - `[if condition] ... [end]`
+ - `[if !notCondition] ... [end]`
+ - `[if condition] ... [else] ... [end]`
+
+##### Foreach
+
+Well, pretty self-explainatory.
+
+```html
+[foreach post in post.getRecent()]
+    {post.show()}
+[end]
+```
+
+##### Regions
+
+If the variable named like the region is set, then that value is used, otherwise default stays.
+
+```html
+[region content]
+    This text will remain as is, if not overwritten by a variable named 'content'.
+[end]
+```
+
+There's no template-wise inheritance.
+Regions will be replacedreplaced with something like:
+
+```html
+[if !content]
+    ...
+[end]
 ```
