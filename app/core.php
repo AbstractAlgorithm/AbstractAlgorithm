@@ -24,19 +24,11 @@ final class Core
 
         foreach ($config as $key => $value)
         {
-            if (gettype($value)=='array')                                       // expand var to full size (prev config)
-                $new_config[$key] = join('|',$value);
-            else
-                $new_config[$key] = $value;
+            $expanded = gettype($value)=='array' ? join('|',$value) : $value;   // concatenate to one string
 
-            $expanded = $new_config[$key];
-            if (gettype($expanded)=='array')
-                foreach ($new_config[$key] as $item)
-                    foreach ($new_config as $key_ => $value_)
-                        $expanded = str_replace($key_, $value_, $expanded);
-            else
-                foreach ($new_config as $key_ => $value_)
-                    $expanded = str_replace($key_, $value_, $expanded);
+            foreach ($new_config as $key_ => $value_)                           // use previously defined config
+                $expanded = str_replace($key_, $value_, $expanded);
+
             $new_config[$key] = $expanded;
 
             define($key, $expanded);                                            // define to be globally accessible
@@ -62,6 +54,6 @@ final class Core
 
         
         DB::End();                                                              // close database
-        // Session::end();                                                      // close session
+        // Session::End();                                                      // close session
     }
 }
