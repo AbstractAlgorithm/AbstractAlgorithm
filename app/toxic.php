@@ -264,7 +264,14 @@ final class ASTNode
             $exp = substr($exp, 1);
         }
 
-        $fields = explode('.', $exp);
+        $fields_n_modif     = explode('|', $exp);                               // split expression to fields and modifs
+
+        $exp                = $fields_n_modif[0];                               // calc fields
+        $fields             = explode('.', $exp);
+
+        $modif_exp          = $fields_n_modif[1];                               // calc modifiers
+        $modifs             = explode(',', $modif_exp);
+
         $result = $this->locals[ $fields[0] ];
 
         for($i=1, $n=count($fields); $i<$n; $i++)
@@ -282,6 +289,9 @@ final class ASTNode
                     $result = $result[ $fields[$i] ];
             }
         }
+
+        foreach ($modifs as $modifier)                                          // apply modifiers
+            $result = call_user_func($modifier, $result);
 
         if (gettype($result)=='boolean')                                        // TODO : not just booleans
             $result ^= $negate;

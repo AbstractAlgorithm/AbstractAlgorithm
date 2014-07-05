@@ -7,4 +7,9 @@
 [end]
 </ul>
 
-Ovo je {CONFIG_WEBSITE} sajt.
+Ovo je {CONFIG_WEBSITE|strtoupper} sajt.
+<br><br>
+
+"{nekitekst|strtolower,strlen}"
+<br><br>
+"{malohtml|htmlspecialchars}"

@@ -17,6 +17,10 @@ class IndexController extends Controller {
 
         ->brojevi($proba)
 
+        ->nekitekst('mwahaHaHha')
+
+        ->malohtml('<p>jebe mater</p>')
+
         ->render();
     }
 }
