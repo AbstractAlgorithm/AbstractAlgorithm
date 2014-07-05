@@ -308,13 +308,13 @@ final class ASTNode
         }
 
         foreach ($modifs as $modifier)                                          // apply modifiers...................(2)
-            $result = call_user_func($modifier, $result);
+                $result = call_user_func($modifier, $result);
 
         if (gettype($result)=='boolean')                                        // negate results....................(3)
-            $result ^= $negate;
+                $result ^= $negate;
 
         return $result;
-    }
+    } 
 
     /**
     * Function that executes the command.
@@ -337,16 +337,19 @@ final class ASTNode
             break;
 
             case 'IF':                                                          // IF NODE
-                $text_result        = $this->getValue()
-                                    ? $this->children[0]->exe()                 // 'true' branch
-                                    : $this->children[1]->exe();                // 'false' branch
+                $branch             = $this->getValue() ? 0 : 1;
+                $this->children[$branch]->locals = $this->locals;
+                $text_result .= $this->children[$branch]->exe();
+                                    
             break;
 
             case 'FOR':                                                         // FOREACH NODE
+                $preserve           = $this->expression;                        // preserve expression for restoration
                 $boom               = explode('|', $this->expression);
                 $item_name          = $boom[0];
                 $this->expression   = $boom[1];
                 $collection         = $this->getValue();
+                $this->expression   = $preserve;
 
                 foreach ($collection as $item)
                 {

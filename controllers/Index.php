@@ -13,6 +13,40 @@ class Tekst
     }
 }
 
+class Blogpost
+{
+    public $tekst;
+    public $naslov;
+    public $komentari;
+    public function __construct($na, $te)
+    {
+        $this->naslov = $na;
+        $this->tekst = $te;
+        $this->komentari = array();
+    }
+
+    public function addComm($co)
+    {
+        $this->komentari[] = $co;
+    }
+
+    public function hasComms()
+    {
+        if(count($this->komentari)>0)
+            return true;
+        return false;
+
+    }
+
+    public static function emmpty($a)
+    {
+        if(count($a)==0)
+            return true;
+        return false;
+    }
+
+}
+
 class IndexController extends Controller {
 
     public function run()
@@ -39,13 +73,32 @@ class IndexController extends Controller {
 
         // ->render();
 
+        $post1 = new Blogpost("Prvi", "Ovo je prvi post.");
+        $post1->addComm("Kul prvi post.");
+        $post1->addComm("Stvarno do jaja.");
+
+        $post2 = new Blogpost("2nd post", "Ovo je drugi post.");
+        $post2->addComm("Losiji tekst");
+        $post2->addComm("slabo");
+        $post2->addComm("bedno");
+
+        $post3 = new Blogpost("Treca sreca", "Lorem ipusm dolor sit amet.");
+        $blogpostovi = array();
+        $blogpostovi[] = $post1;
+        $blogpostovi[] = $post2;
+        $blogpostovi[] = $post3;
+
         Template::load('basic')
+
+        ->title("Blog")
 
         ->content
         (
             Template::load('test2')
 
             ->tekstic('superman')
+
+            ->postovi($blogpostovi)
 
             ->get()
         )

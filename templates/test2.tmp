@@ -1,1 +1,22 @@
-Ovo je sadrzaj '{tekstic|strtoupper}'.
+
+
+<h1>Postovi</h1>
+
+[foreach post in postovi]
+
+    <h3>{post.naslov}</h3>
+
+
+
+    [if !post.komentari|Blogpost::emmpty]
+        Ovaj tekst ima {post.komentari|count} komentara.
+        <ul>
+            [foreach kom in post.komentari]
+            <li>{kom}</li>
+            [end]
+        </ul>
+    [else]
+        Ovaj tekst nema komentara.
+    [end]
+
+[end]

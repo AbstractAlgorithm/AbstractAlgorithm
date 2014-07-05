@@ -40,8 +40,8 @@ class Template
     public function set($field, $val)
     {
         $this->vars[$field] = is_callable($val)
-                                        ? (string)($val())
-                                        : $val;
+                                ? (string)($val())
+                                : $val;
 
         return $this;
     }
@@ -65,8 +65,8 @@ class Template
     */
     private function parse()
     {
-        foreach (Core::$config as $key => $value)                               // add environment variables
-            $this->vars['CONFIG_'.$key] = $value;
+        // foreach (Core::$config as $key => $value)                               // add environment variables
+        //     $this->vars['CONFIG_'.$key] = $value;
 
         $this->text = Toxic::Execute($this->text, $this->vars);                 // parse and execute
 
