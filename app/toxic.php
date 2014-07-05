@@ -40,10 +40,10 @@ final class ASTNode
     * Constructor for the AST node.
     * <ul>
     *   <li>expression  - parsed version to be executed</li>
-    *   <li>children    - ast nodes in hierarchy/li>
-    *   <li>parent      - parent of the node/li>
-    *   <li>locals      - variables in "scope"/li>
-    *   <li>type        - node's type (TEXT, VAR, IF, FOR, REGION)/li>
+    *   <li>children    - ast nodes in hierarchy</li>
+    *   <li>parent      - parent of the node</li>
+    *   <li>locals      - variables in "scope"</li>
+    *   <li>type        - node's type (TEXT, VAR, IF, FOR, REGION)</li>
     * </ul>
     */
     private function __construct($e)
@@ -255,7 +255,7 @@ final class ASTNode
         $exp = $this->expression;
 
         $negate = false;        
-        if($exp[0]=='!')
+        if ($exp[0]=='!')
         {
             $negate = true;
             $exp = substr($exp, 1);
@@ -272,14 +272,14 @@ final class ASTNode
         $modifs                     = explode(',', $modif_exp);
 
         $first_field = $fields[0];
-        if (!isset($this->locals[ $first_field ]))
+        if (!isset($this->locals[$first_field]))
             eval("\$result = $first_field;");
         else
             $result         = $this->locals[ $first_field ];                    // starting object
 
-        for($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
+        for ($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
-            if( strpos($fields[$i], '(') === false )                            // so it's a property/key
+            if (strpos($fields[$i], '(')===false)                            // so it's a property/key
                 $result             = isset( $result->{$fields[$i]})
                                     ? $result->{$fields[$i]}                    // property
                                     : $result[$fields[$i]];                     // array key
@@ -399,7 +399,7 @@ final class ASTNode
         foreach ($obj->children as $key => $kid)
         {
             $res .= "\n";
-            for($i=0; $i<$lvl; $res .= "   ", $i++);
+            for ($i=0; $i<$lvl; $res .= "   ", $i++);
             $res .= "| ".self::reqShow($kid, $lvl+1);
         }
         return $res;
