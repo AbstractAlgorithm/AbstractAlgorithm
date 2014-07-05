@@ -278,7 +278,14 @@ final class ASTNode
 
         for($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
-            if( strpos($fields[$i], '(') !== false )                            // so it's a method
+            if( strpos($fields[$i], '(') === false )                            // so it's a property
+            {
+                if( isset( $result->{$fields[$i]}) )                            // property
+                    $result = $result->{$fields[$i]};
+                else                                                            // array key
+                    $result = $result[ $fields[$i] ];
+            }
+            else                                                                // so it's a method
             {
                 $split_method       = explode('(', $fields[$i]);
                 $method_name        = $split_method[0];                         // got method name as a string
@@ -297,13 +304,6 @@ final class ASTNode
                             array($result, $method_name),
                             $method_args
                         );
-            }
-            else                                                                // so it's a property
-            {
-                if( isset( $result->{$fields[$i]}) )                            // property
-                    $result = $result->{$fields[$i]};
-                else                                                            // array key
-                    $result = $result[ $fields[$i] ];
             }
         }
 
