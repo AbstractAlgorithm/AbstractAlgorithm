@@ -81,7 +81,7 @@ You can access simple variables, class variables and their properties or arrays.
 {var.prop}              # $var->prop
 {var.key}               # $var['key']
 {var.method()}          # $var->method()
-{var|modif1,modif2}     # modif1( modif2($var) )
+{var|modif1,modif2}     # modif2( modif1($var) )
 ```
 
 Modifiers are global or static functions.<br>
