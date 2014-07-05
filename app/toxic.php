@@ -146,11 +146,11 @@ final class ASTNode
             {
                 $exp = preg_replace('/\s+|if/i', '', $exp);                     // strip everything
 
-                $new_node = new ASTNode($exp);                                  // create node
+                $new_node       = new ASTNode($exp);                                  // create node
                 $if_branch      = new ASTNode('');                              // 'true' branch
                 $else_branch    = new ASTNode('');                              // 'false' branch
-                $new_node->add($if_branch);
-                $new_node->add($else_branch);
+                $new_node       ->add($if_branch);
+                $new_node       ->add($else_branch);
                 $new_node->type = 'IF';
                 self::$current->add($new_node);
 
