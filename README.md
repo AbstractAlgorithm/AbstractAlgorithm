@@ -111,7 +111,7 @@ class Post
 # modifiers
 {post.title|strtolower,ucfirst}   # ucfirst( strtolower( $post->title ) )
 
-[foreach p in 10|Post::recent]    # use of modifier to call static method with parameter (it's a trick :D)
+[foreach p in 10|Post::recent]    # use of modifier to call static method with param (it's a trick :D)
 ...
 [end]
 
@@ -119,7 +119,7 @@ class Post
 Post has {post.comments|count} comms.
 [end]
 
-There's total of {Post::all()|count} posts.
+There is a total of {Post::all()|count} posts.
 
 {post|var_dump}                   # good for debugging :D
 
