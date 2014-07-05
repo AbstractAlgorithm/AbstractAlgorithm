@@ -269,17 +269,34 @@ final class ASTNode
         $exp                = $fields_n_modif[0];                               // calc fields
         $fields             = explode('.', $exp);
 
-        $modif_exp          = $fields_n_modif[1];                               // calc modifiers
+        $modif_exp          = isset($fields_n_modif[1])                         // calc modifiers
+                            ? $fields_n_modif[1]
+                            : array();
         $modifs             = explode(',', $modif_exp);
 
-        $result = $this->locals[ $fields[0] ];
+        $result             = $this->locals[ $fields[0] ];                      // starting object
 
-        for($i=1, $n=count($fields); $i<$n; $i++)
+        for($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
-            if( strpos($fields[$i], '()') !== false )                           // so it's a method
+            if( strpos($fields[$i], '(') !== false )                            // so it's a method
             {
-                $method_name = str_replace('()', '', $fields[$i]);
-                $result = $result->{$method_name}();
+                $split_method       = explode('(', $fields[$i]);
+                $method_name        = $split_method[0];                         // got method name
+                $method_args_str    = str_replace(')', '', $split_method[1]);   // got parameters
+
+                $method_args_str = explode(',', $method_args_str);              // get parameters in their real form
+                $method_args = array();
+                foreach ($method_args_str as $arg_str)
+                {
+                    eval("\$val = $arg_str;");
+                    $method_args[] = $val;
+                }
+
+                $result = call_user_func_array
+                        (
+                            array($result, $method_name),
+                            $method_args
+                        );
             }
             else                                                                // so it's a property
             {
@@ -290,10 +307,10 @@ final class ASTNode
             }
         }
 
-        foreach ($modifs as $modifier)                                          // apply modifiers
+        foreach ($modifs as $modifier)                                          // apply modifiers...................(2)
             $result = call_user_func($modifier, $result);
 
-        if (gettype($result)=='boolean')                                        // TODO : not just booleans
+        if (gettype($result)=='boolean')                                        // negate results....................(3)
             $result ^= $negate;
 
         return $result;
