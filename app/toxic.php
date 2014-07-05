@@ -261,15 +261,15 @@ final class ASTNode
             $exp = substr($exp, 1);
         }
 
-        $fields_n_modif     = explode('|', $exp);                               // split expression to fields and modifs
+        $fields_n_modif             = explode('|', $exp);                       // split expression to fields and modifs
 
-        $exp                = $fields_n_modif[0];                               // calc fields
-        $fields             = explode('.', $exp);
+        $exp                        = $fields_n_modif[0];                       // calc fields
+        $fields                     = explode('.', $exp);
 
-        $modif_exp          = isset($fields_n_modif[1])                         // calc modifiers
-                            ? $fields_n_modif[1]
-                            : '';
-        $modifs             = explode(',', $modif_exp);
+        $modif_exp                  = isset($fields_n_modif[1])                 // calc modifiers
+                                    ? $fields_n_modif[1]
+                                    : '';
+        $modifs                     = explode(',', $modif_exp);
 
         $first_field = $fields[0];
         if (!isset($this->locals[ $first_field ]))
@@ -279,10 +279,10 @@ final class ASTNode
 
         for($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
-            if( strpos($fields[$i], '(') === false )                            // so it's a property
-                $result = isset( $result->{$fields[$i]})
-                        ? $result->{$fields[$i]}                                // property
-                        : $result[$fields[$i]];                                 // array key
+            if( strpos($fields[$i], '(') === false )                            // so it's a property/key
+                $result             = isset( $result->{$fields[$i]})
+                                    ? $result->{$fields[$i]}                    // property
+                                    : $result[$fields[$i]];                     // array key
             else                                                                // so it's a method
             {
                 $split_method       = explode('(', $fields[$i]);
