@@ -17,27 +17,41 @@ class IndexController extends Controller {
 
     public function run()
     {
-        $ttt = new Tekst("123456789");
+        // $ttt = new Tekst("123456789");
 
-        $proba = array(1,2,4,8,16,32);
+        // $proba = array(1,2,4,8,16,32);
 
-        Template::load('test')
+        // Template::load('test')
 
-        ->pita('pie')
+        // ->pita('pie')
 
-        ->dojaja(false)
+        // ->dojaja(false)
 
-        ->king(true)
+        // ->king(true)
 
-        ->brojevi($proba)
+        // ->brojevi($proba)
 
-        ->nekitekst('mwahaHaHha')
+        // ->nekitekst('mwahaHaHha')
 
-        ->malohtml('<p>jebe mater</p>')
+        // ->malohtml('<p>jebe mater</p>')
 
-        ->mojtekst($ttt)
+        // ->mojtekst($ttt)
+
+        // ->render();
+
+        Template::load('basic')
+
+        ->content
+        (
+            Template::load('test2')
+
+            ->tekstic('superman')
+
+            ->get()
+        )
 
         ->render();
+
     }
 
     public static function kapitalizuj($str)

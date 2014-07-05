@@ -17,6 +17,8 @@ final class Request
     {
         $uri = $_SERVER['REQUEST_URI'];                                         // get URI
 
+        $uri = str_replace('../', '', $uri);                                    // security reasons
+
         if (substr($uri, strlen($uri)-1,1)=='/')                                // strip ending '/'
             $uri = substr($uri, 0, strlen($uri)-1);
 

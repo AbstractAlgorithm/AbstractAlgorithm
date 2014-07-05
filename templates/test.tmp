@@ -17,3 +17,8 @@ Ovo je {CONFIG_WEBSITE|strtoupper} sajt.
 "{nekitekst|IndexController::kapitalizuj}"
 <br><br>
 "{mojtekst.deo(4,'JEBEMATER!!!',true)|strtolower}"
+<br><br><br>
+
+&#91; post as &#93;<br>
+&#91; template hehe &#93;<br>
+&#91; partof basic@content &#93;<br>
