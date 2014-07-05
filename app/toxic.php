@@ -123,7 +123,7 @@ final class ASTNode
 
             else if ( preg_match('/\s*foreach/i', $exp) )                       // -- foreach ?
             {
-                $exp = preg_replace('/\s+in\s+/i', '|', $exp);                  // converts "foreach bla in blas"
+                $exp = preg_replace('/\s+in\s+/i', '^', $exp);                  // converts "foreach bla in blas"
                 $exp = preg_replace('/\s+|foreach/i', '', $exp);                // to "bla|blas"
 
                 $new_node = new ASTNode($exp);                                  // create node
@@ -230,10 +230,6 @@ final class ASTNode
             self::parseExp($expr);
         }
 
-        // echo '-----------------------<br>';                                     // ---- DEBUGGING
-        // echo $root->show();                                                     // ---- DEBUGGING
-        // echo '-----------------------<br>';                                     // ---- DEBUGGING
-
         return $root;
     }
 
@@ -274,7 +270,11 @@ final class ASTNode
                             : array();
         $modifs             = explode(',', $modif_exp);
 
-        $result             = $this->locals[ $fields[0] ];                      // starting object
+        $first_field = $fields[0];
+        if (!isset($this->locals[ $first_field ]))
+            eval("\$result = $first_field;");
+        else
+            $result         = $this->locals[ $first_field ];                    // starting object
 
         for($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
@@ -289,7 +289,7 @@ final class ASTNode
             {
                 $split_method       = explode('(', $fields[$i]);
                 $method_name        = $split_method[0];                         // got method name as a string
-                $method_args_str    = str_replace(')', '', $split_method[1]);   // got parameters list as a string
+                $method_args_str    = str_replace(')','', $split_method[1]);    // got parameters list as a string
 
                 $method_args_str = explode(',', $method_args_str);              // get parameters in their real form
                 $method_args = array();                                         // ..
@@ -308,9 +308,11 @@ final class ASTNode
         }
 
         foreach ($modifs as $modifier)                                          // apply modifiers...................(2)
-                $result = call_user_func($modifier, $result);
+            $result = $modifier!='empty'
+                    ? call_user_func($modifier, $result)
+                    : (count($result)==0);
 
-        if (gettype($result)=='boolean')                                        // negate results....................(3)
+        if (gettype($result)=='boolean')                                        // invert results....................(3)
                 $result ^= $negate;
 
         return $result;
@@ -339,13 +341,12 @@ final class ASTNode
             case 'IF':                                                          // IF NODE
                 $branch             = $this->getValue() ? 0 : 1;
                 $this->children[$branch]->locals = $this->locals;
-                $text_result .= $this->children[$branch]->exe();
-                                    
+                $text_result .= $this->children[$branch]->exe();                         
             break;
 
             case 'FOR':                                                         // FOREACH NODE
                 $preserve           = $this->expression;                        // preserve expression for restoration
-                $boom               = explode('|', $this->expression);
+                $boom               = explode('^', $this->expression);
                 $item_name          = $boom[0];
                 $this->expression   = $boom[1];
                 $collection         = $this->getValue();

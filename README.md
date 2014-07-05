@@ -12,42 +12,45 @@ It's quite simple. I just wrote what I needed to have. Lightweight, easy to unde
 ## Toxic
 Features:
 
- - `if/else` branching (with optional `!`)
+ - `if/else` branching
  - `foreach` loop
  - `region`s of code
- - `{var_name.property.method()}` style of variables
+ - `{variable|modifier}`
 
 ### Example
 
-##### Template (sample.tmp):
+##### Template (list_posts.tmp):
 
 ```html
-<h1>{post.title}</h1>
 
-<div>
-    {post.content}
+[foreach post in 10|Posts::recent]
+    <h1>{post.title}</h1>
 
-    [if post.favorited]
-        This page has been favorited.
-    [end]
+    <div class="content">
+        {post.content}
 
-    [if !hasComments]
-        This page doesn't have any comments.
-    [else]
-        This page has {numComments} comments.
-
-        <ul>
-        [foreach comm in post.comments]
-            <li>{comm.getAuthor()} said: {comm.body_text}</li>
+        [if post.favorited]
+            This page has been favorited.
         [end]
-        </ul>
-    [end]
-</div>
 
-<footer>
-    Author: [region author]Dragan Okanovic[end]
-    Date: [region post.date]1/1/1980[end]
-</footer>
+        [if post.comments|empty]
+            This page doesn't have any comments.
+        [else]
+            This page has {post.comments|count} comments.
+
+            <ul>
+            [foreach comment in post.comments]
+                <li>{comment.author} said: {comment.text}</li>
+            [end]
+            </ul>
+        [end]
+    </div>
+
+    <div class="about">
+        Author: [region post.author]Dragan Okanovic[end]
+        Date: {post.formatDate('nice')}
+    </div>
+[end]
 ```
 
 ##### Controller code:
@@ -57,44 +60,13 @@ class SampleController extends Controller {
 
     public function run()
     {
-        # code logic ...
-        $post = Post::getByName('sample');
-
         # load template
-        Template::load('sample')
-
-        # fill-in data
-        ->post( $post )
-        ->hasComments( count($post->comments)>0 )
+        Template::load('list_posts')
 
         # generate html
         ->render();
     }
 }
-```
-
-##### Result:
-
-```html
-<h1>Sample post</h1>
-
-<div>
-    Lorem ipsum dolor sit amet.
-
-        This page has been favorited.
-
-        This page has 2 comments.
-
-        <ul>
-            <li>The God said: This is very good!</li>
-            <li>The Programmer said: Naah, it's just 'okay'.</li>
-        </ul> 
-</div>
-
-<footer>
-    Author: Dragan Okanovic
-    Date: Friday, July 4th, 2014
-</footer>
 ```
 
 ### Usage
@@ -107,24 +79,47 @@ You can access simple variables, class variables or arrays.
 
  - array key: `myArray.key`
  - property: `myClassVar.property_name`
- - method: `myClassVar.method()`
-
-Methods don't support arguments currently.
+ - method: `myClassVar.method([args])`
+ - modifiers: static or global functions, separated by comma
 
 Example:
 
 ```php
 class Post
 {
-    public $title = 'Title';
-    public $config = array( 'table' => 'post' );
+    public $title;
+    public $datetime;
+    public $comments;
+
+    public static $config = array( 'table' => 'post' );
+    public static $className = 'Post';
+
     public function getTime() { ... }    
+    public function formatTime($format) { ... }
+
+    public static function getRecent($num) { ... }
 }
 ```
 
-```html
-<h1>{myPost.title}</h1>
-<small>Date created: {myPost.getTime()} | Category: {myPost.config.table}</small>
+```php
+{post.title}                            # access property
+{Post::$config.table}                   # access static property
+
+{post.getTime()}                        # call method
+{post.formatTime('nice')}               # call method with parameters
+
+# modifiers
+{post.title|strtolower,ucfirst}         # ucfirst( strtolower( $post->title ) )
+
+[foreach post in 10|Post::getRecent]    # use of modifier to call static method
+...                                     # with parameter (it's a trick :D)
+[end]
+
+[if !post.comments|empty]               # same as it would be post.hasComments()
+Post has {post.comments|count} comms.   # but much prettier
+[end]
+
+There's total of {Post::all()|count} posts.
 
 ```
 
@@ -144,6 +139,10 @@ Well, pretty self-explainatory.
 [foreach post in post.getRecent()]
     {post.show()}
 [end]
+
+[foreach post in 5|Post::recent]
+...
+[end]
 ```
 
 ##### Regions
@@ -156,10 +155,12 @@ If the variable named like the region is set, then that value is used, otherwise
 [end]
 ```
 
-There's no template-wise inheritance. Regions will be replaced soon with something like:
+There's no template-wise inheritance. Regions can be replaced with something like:
 
 ```html
-[if !content]
-    ...
+[if content]
+    {content}
+[else]
+    Default html.
 [end]
 ```

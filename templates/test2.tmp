@@ -1,22 +1,32 @@
-
-
 <h1>Postovi</h1>
 
 [foreach post in postovi]
 
     <h3>{post.naslov}</h3>
 
+    <p>{post.tekst}</p>
 
-
-    [if !post.komentari|Blogpost::emmpty]
-        Ovaj tekst ima {post.komentari|count} komentara.
+    [if !post.komentari|empty]
+        <p>Ovaj tekst ima {post.komentari|count} komentara.</p>
         <ul>
             [foreach kom in post.komentari]
-            <li>{kom}</li>
+                <li>{kom}</li>
             [end]
         </ul>
     [else]
-        Ovaj tekst nema komentara.
+        <p>Ovaj tekst nema komentara.</p>
     [end]
-
 [end]
+<br><br>
+{televizor.0}<br>
+{televizor.1}<br><br>
+
+
+[foreach bre in 2|Blogpost::recent]
+{bre}
+[end]
+
+<br><br>
+{Blogpost::$ime|strtolower}
+{Blogpost::$config.table}
+{Blogpost::all()|count}

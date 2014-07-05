@@ -18,11 +18,17 @@ class Blogpost
     public $tekst;
     public $naslov;
     public $komentari;
+
+    public static $posts = array();
+    public static $ime = 'Blogpost';
+    public static $config = array( 'table' => 'post', 'rel'=>'boom');
+
     public function __construct($na, $te)
     {
         $this->naslov = $na;
         $this->tekst = $te;
         $this->komentari = array();
+        self::$posts[] = $this;
     }
 
     public function addComm($co)
@@ -30,21 +36,19 @@ class Blogpost
         $this->komentari[] = $co;
     }
 
-    public function hasComms()
+    public static function recent($num)
     {
-        if(count($this->komentari)>0)
-            return true;
-        return false;
-
+        $res = array();
+        $n = count(self::$posts);
+        for($i=0; $i<$num && $i<$n; $i++)
+            $res[] = self::$posts[$n-1-$i]->naslov;
+        return $res;
     }
 
-    public static function emmpty($a)
+    public static function all()
     {
-        if(count($a)==0)
-            return true;
-        return false;
+        return self::$posts;
     }
-
 }
 
 class IndexController extends Controller {
@@ -88,6 +92,10 @@ class IndexController extends Controller {
         $blogpostovi[] = $post2;
         $blogpostovi[] = $post3;
 
+        $proba = array();
+        $proba[0] = 'prvi';
+        $proba[1] = 'drugi';
+
         Template::load('basic')
 
         ->title("Blog")
@@ -99,6 +107,8 @@ class IndexController extends Controller {
             ->tekstic('superman')
 
             ->postovi($blogpostovi)
+
+            ->televizor($proba)
 
             ->get()
         )
