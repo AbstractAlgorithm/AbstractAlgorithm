@@ -16,4 +16,4 @@ Ovo je {CONFIG_WEBSITE|strtoupper} sajt.
 <br><br>
 "{nekitekst|IndexController::kapitalizuj}"
 <br><br>
-"{mojtekst.deo(4,'JEBEMATER!!!',true)}"
+"{mojtekst.deo(4,'JEBEMATER!!!',true)|strtolower}"

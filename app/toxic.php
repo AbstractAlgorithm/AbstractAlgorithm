@@ -338,10 +338,9 @@ final class ASTNode
             break;
 
             case 'IF':                                                          // IF NODE
-                if ($this->getValue())
-                    $text_result    = $this->children[0]->exe();
-                else
-                    $text_result    = $this->children[1]->exe();
+                $text_result        = $this->getValue()
+                                    ? $this->children[0]->exe()                 // 'true' branch
+                                    : $this->children[1]->exe();                // 'false' branch
             break;
 
             case 'FOR':                                                         // FOREACH NODE
@@ -353,18 +352,14 @@ final class ASTNode
                 foreach ($collection as $item)
                 {
                     $this->locals[$item_name] = $item;
-                    $text_result .= $this->exeChildren();
+                    $text_result    .= $this->exeChildren();
                 }
             break;
 
             case 'REGION':                                                      // REGION NODE
-                if (isset($this->locals[$this->expression]))
-                {
-                    $text_result    = $this->getValue();
-                    $exe_children   = false;
-                }
-                else
-                    $text_result    = $this->exeChildren();
+                $text_result        = isset($this->locals[$this->expression])
+                                    ? $this->getValue()                         // there's a replacement
+                                    : $this->exeChildren();                     // default value
             break;
         }
 
