@@ -281,18 +281,18 @@ final class ASTNode
             if( strpos($fields[$i], '(') !== false )                            // so it's a method
             {
                 $split_method       = explode('(', $fields[$i]);
-                $method_name        = $split_method[0];                         // got method name
-                $method_args_str    = str_replace(')', '', $split_method[1]);   // got parameters
+                $method_name        = $split_method[0];                         // got method name as a string
+                $method_args_str    = str_replace(')', '', $split_method[1]);   // got parameters list as a string
 
                 $method_args_str = explode(',', $method_args_str);              // get parameters in their real form
-                $method_args = array();
-                foreach ($method_args_str as $arg_str)
-                {
-                    eval("\$val = $arg_str;");
-                    $method_args[] = $val;
-                }
+                $method_args = array();                                         // ..
+                foreach ($method_args_str as $arg_str)                          // ..
+                {                                                               // ..
+                    eval("\$val = $arg_str;");                                  // ..   !!  EVAL()  !!  DANGER  !!
+                    $method_args[] = $val;                                      // ..
+                }                                                               // ..
 
-                $result = call_user_func_array
+                $result = call_user_func_array                                  // call method with parameters
                         (
                             array($result, $method_name),
                             $method_args
