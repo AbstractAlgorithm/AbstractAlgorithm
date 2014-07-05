@@ -55,28 +55,6 @@ class IndexController extends Controller {
 
     public function run()
     {
-        // $ttt = new Tekst("123456789");
-
-        // $proba = array(1,2,4,8,16,32);
-
-        // Template::load('test')
-
-        // ->pita('pie')
-
-        // ->dojaja(false)
-
-        // ->king(true)
-
-        // ->brojevi($proba)
-
-        // ->nekitekst('mwahaHaHha')
-
-        // ->malohtml('<p>jebe mater</p>')
-
-        // ->mojtekst($ttt)
-
-        // ->render();
-
         $post1 = new Blogpost("Prvi", "Ovo je prvi post.");
         $post1->addComm("Kul prvi post.");
         $post1->addComm("Stvarno do jaja.");
@@ -93,8 +71,8 @@ class IndexController extends Controller {
         $blogpostovi[] = $post3;
 
         $proba = array();
-        $proba[0] = 'prvi';
-        $proba[1] = 'drugi';
+        $proba[] = 'prvi';
+        $proba[] = 'drugi';
 
         Template::load('basic')
 

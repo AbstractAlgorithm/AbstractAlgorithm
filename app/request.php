@@ -75,15 +75,24 @@ final class Request
         $classname  = $name.'Controller';                                       // generate class name
         $filename   = CTRL_DIR.'/'.$name .'.php';                             	// generate filename to open
 
-        @require $filename;
-        if (Session::HasAccess($uri))
+        
+        if (file_exists($filename))
         {
-            @(new $classname())->Run();                                         // execute controller
+            require $filename;
+            if (Session::HasAccess($uri))
+            {
+                (new $classname())->Run();                                      // execute controller
+            }
+            else
+            {
+                (new $classname())->Denied();
+            }
         }
-        else
+        else                                                                    // TODO : redirect to 404 page
         {
-            @(new $classname())->Denied();
+            self::GotoAddress('/');
         }
+        
     }
 
     /**

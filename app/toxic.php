@@ -85,7 +85,7 @@ final class ASTNode
     private static function parseExp($exp)
     {
 
-        if ($exp[0] == '{')                                                     // VAR NODE
+        if (substr($exp,0,1) == '{')                                            // VAR NODE
         {
             $exp    = preg_replace('/\s*/', '', $exp);                          // remove all white spaces
             $exp    = str_replace('{', '', $exp);                               // strip front curly bracket
@@ -95,7 +95,7 @@ final class ASTNode
             $new_node->type = 'VAR';
             self::$current->add($new_node);
         }
-        else if ($exp[0] == '[')                                                // COMMAND NODE
+        else if (substr($exp,0,1) == '[')                                       // COMMAND NODE
         {
             $exp = str_replace('[', '', $exp);                                  // strup angle brackets
             $exp = str_replace(']', '', $exp);
@@ -267,7 +267,7 @@ final class ASTNode
 
         $modif_exp          = isset($fields_n_modif[1])                         // calc modifiers
                             ? $fields_n_modif[1]
-                            : array();
+                            : '';
         $modifs             = explode(',', $modif_exp);
 
         $first_field = $fields[0];
@@ -308,12 +308,12 @@ final class ASTNode
         }
 
         foreach ($modifs as $modifier)                                          // apply modifiers...................(2)
-            $result = $modifier!='empty'
-                    ? call_user_func($modifier, $result)
+            $result = ($modifier!='empty')
+                    ? ($modifier!=''?call_user_func($modifier,$result):$result)
                     : (count($result)==0);
 
         if (gettype($result)=='boolean')                                        // invert results....................(3)
-                $result ^= $negate;
+            $result ^= $negate;
 
         return $result;
     } 

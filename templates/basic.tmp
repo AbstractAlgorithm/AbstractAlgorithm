@@ -12,8 +12,8 @@
 
 		<title>{title} | Abstract Algorithm</title>
 
-		<link rel="shortcut icon" href="../media/favicon.png" type="image/x-icon">
-		<link rel="icon" href="../media/favicon.png" type="image/x-icon">
+		<link rel="shortcut icon" href="{CONFIG_CSS_DIR}/images/favicon.png" type="image/x-icon">
+		<link rel="icon" href="{CONFIG_CSS_DIR}/images/favicon.png" type="image/x-icon">
 		<link rel="stylesheet" href="{CONFIG_CSS_DIR}/[region css]style.css[end]">
 	</head>
 	
