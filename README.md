@@ -102,24 +102,26 @@ class Post
 ```
 
 ```php
-{post.title}                            # access property
-{Post::$config.table}                   # access static property
+{post.title}                      # access property
+{Post::$config.table}             # access static property
 
-{post.getTime()}                        # call method
-{post.formatTime('nice')}               # call method with parameters
+{post.getTime()}                  # call method
+{post.formatTime('nice')}         # call method with parameters
 
 # modifiers
-{post.title|strtolower,ucfirst}         # ucfirst( strtolower( $post->title ) )
+{post.title|strtolower,ucfirst}   # ucfirst( strtolower( $post->title ) )
 
-[foreach post in 10|Post::getRecent]    # use of modifier to call static method with parameter (it's a trick :D)
+[foreach p in 10|Post::recent]    # use of modifier to call static method with parameter (it's a trick :D)
 ...
 [end]
 
-[if !post.comments|empty]               # same as it would be post.hasComments() but much prettier
+[if !post.comments|empty]         # same as it would be post.hasComments() but much prettier
 Post has {post.comments|count} comms.
 [end]
 
 There's total of {Post::all()|count} posts.
+
+{post|var_dump}                   # good for debugging :D
 
 ```
 
