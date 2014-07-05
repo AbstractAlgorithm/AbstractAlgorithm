@@ -111,7 +111,7 @@ class Post
 # modifiers
 {post.title|strtolower,ucfirst}   # ucfirst( strtolower( $post->title ) )
 
-[foreach p in 10|Post::recent]    # use of modifier to call static method with param(it's a trick :D)
+[foreach p in 10|Post::recent]    # use of modifier to call static method with param - a trick! :D
 ...
 [end]
 
