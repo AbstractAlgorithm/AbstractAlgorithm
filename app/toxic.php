@@ -324,9 +324,8 @@ final class ASTNode
     public function exe()
     {
         $text_result = '';
-        $exe_children = true;
 
-        switch($this->type)
+        switch ($this->type)
         {
             case 'TEXT':                                                        // TEXT NODE
                 $text_result        .= $this->expression;
