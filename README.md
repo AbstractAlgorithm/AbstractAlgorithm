@@ -75,12 +75,17 @@ Instructions are written inside the `[]` and variables are inside the `{}`.
 
 ##### Variables
 
-You can access simple variables, class variables or arrays.
+You can access simple variables, class variables and their properties or arrays. You can also put modifiers.
 
- - array key: `myArray.key`
- - property: `myClassVar.property_name`
- - method: `myClassVar.method([args])`
- - modifiers: static or global functions, separated by comma
+```php
+{var.prop}              # $var->prop
+{var.key}               # $var['key']
+{var.method()}          # $var->method()
+{var|modif1,modif2}     # modif1( modif2($var) )
+```
+
+Modifiers are global or static functions.<br>
+Method calls can take arguments.<br>
 
 Example:
 
