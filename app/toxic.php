@@ -43,7 +43,7 @@ final class ASTNode
     *   <li>children    - ast nodes in hierarchy</li>
     *   <li>parent      - parent of the node</li>
     *   <li>locals      - variables in "scope"</li>
-    *   <li>type        - node's type (TEXT, VAR, IF, FOR, REGION)</li>
+    *   <li>type        - node's type (TEXT, VAR, IF, FOR, BLOCK)</li>
     * </ul>
     */
     private function __construct($e)
@@ -101,12 +101,12 @@ final class ASTNode
             $exp = str_replace('[', '', $exp);                                  // strup angle brackets
             $exp = str_replace(']', '', $exp);
 
-            if ( preg_match('/\s*region/i', $exp) )                             // -- region ?
+            if ( preg_match('/\s*block/i', $exp) )                              // -- block ?
             {
-                $exp = preg_replace('/\s+|region/i', '', $exp);                 // leave just region name
+                $exp = preg_replace('/\s+|block/i', '', $exp);                  // leave just block name
 
                 $new_node       = new ASTNode($exp);                            // create node
-                $new_node->type = 'REGION';
+                $new_node->type = 'BLOCK';
                 self::$current  ->add($new_node);
 
                 self::$current = $new_node;                                     // add children
@@ -199,7 +199,7 @@ final class ASTNode
     * <ul>
     *     <li>if / ifelse</li>
     *     <li>foreach</li>
-    *     <li>region</li>
+    *     <li>block</li>
     * </ul>
     *
     * @param text   text to parse
@@ -357,7 +357,7 @@ final class ASTNode
                 }
             break;
 
-            case 'REGION':                                                      // REGION NODE
+            case 'BLOCK':                                                       // BLOCK NODE
                 $text_result        = isset($this->locals[$this->expression])
                                     ? $this->getValue()                         // there's a replacement
                                     : $this->exeChildren();                     // default value

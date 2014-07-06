@@ -30,3 +30,4 @@
 {Blogpost::$ime|strtolower}
 {Blogpost::$config.table}
 {Blogpost::all()|count}
+pudlica

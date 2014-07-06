@@ -14,7 +14,7 @@ Features:
 
  - `if/else` branching
  - `foreach` loop
- - `region`s of code
+ - `block` of code
  - `{variable|modifier}`
 
 ### Example
@@ -47,7 +47,7 @@ Features:
     </div>
 
     <div class="about">
-        Author: [region post.author]Dragan Okanovic[end]
+        Author: [block post.author]Dragan Okanovic[end]
         Date: {post.formatDate('nice')}
     </div>
 [end]
@@ -152,17 +152,17 @@ Well, pretty self-explainatory.
 [end]
 ```
 
-##### Regions
+##### Blocks
 
-If the variable named like the region is set, then that value is used, otherwise default stays.
+If the variable named like the block's name is set, then that value is used, otherwise default stays.
 
 ```html
-[region content]
+[block content]
     This text will remain as is, if not overwritten by a variable named 'content'.
 [end]
 ```
 
-There's no template-wise inheritance. Regions can be replaced with something like:
+There's no template-wise inheritance. Blocks can be replaced with something like:
 
 ```html
 [if content]
