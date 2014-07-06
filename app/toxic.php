@@ -85,90 +85,32 @@ final class ASTNode
     */
     private static function parseExp($exp)
     {
-        $first_char = substr($exp,0,1);
-        if ($first_char == '{')                                                 // VAR NODE
+        if ($exp!='')
         {
-            $exp            = preg_replace('/\s+/', '', $exp);                  // remove all white spaces
-            $exp            = str_replace('{', '', $exp);                       // strip front curly bracket
-            $exp            = str_replace('}', '', $exp);                       // strip back curly bracket
-            
-            $new_node       = new ASTNode($exp);                                // create node
-            $new_node->type = 'VAR';
-            self::$current  ->add($new_node);
-        }
-        else if ($first_char == '[')                                            // COMMAND NODE
-        {
-            $exp = str_replace('[', '', $exp);                                  // strup angle brackets
-            $exp = str_replace(']', '', $exp);
-
-            if ( preg_match('/\s*block/i', $exp) )                              // -- block ?
+            if ($exp[0] == '{')                                                 // VAR NODE
             {
-                $exp = preg_replace('/\s+|block/i', '', $exp);                  // leave just block name
-
+                $exp            = preg_replace('/\s+/', '', $exp);              // remove all white spaces
+                $exp            = str_replace('{', '', $exp);                   // strip front curly bracket
+                $exp            = str_replace('}', '', $exp);                   // strip back curly bracket
+                
                 $new_node       = new ASTNode($exp);                            // create node
-                $new_node->type = 'BLOCK';
+                $new_node->type = 'VAR';
                 self::$current  ->add($new_node);
-
-                self::$current = $new_node;                                     // add children
-                self::$node_idx++;
-                $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\bend\b/i', $exp))
-                {
-                    self::parseExp( $exp );                                     // parse children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                }
-                self::$current =  $new_node->parent;
-
             }
-
-            else if ( preg_match('/\s*foreach/i', $exp) )                       // -- foreach ?
+            else if ($exp[0] == '[')                                            // COMMAND NODE
             {
-                $exp = preg_replace('/\s+in\s+/i', '^', $exp);                  // converts "foreach bla in blas"
-                $exp = preg_replace('/\s+|foreach/i', '', $exp);                // to "bla|blas"
+                $exp = str_replace('[', '', $exp);                              // strup angle brackets
+                $exp = str_replace(']', '', $exp);
 
-                $new_node       = new ASTNode($exp);                            // create node
-                $new_node->type = 'FOR';
-                self::$current  ->add($new_node);
-
-                self::$current  = $new_node;                                    // add children
-                self::$node_idx++;
-                $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\bend\b/i', $exp))
+                if ( preg_match('/\s*block/i', $exp) )                          // -- block ?
                 {
-                    self::parseExp( $exp );                                     // parse children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                }
-                self::$current =  $new_node->parent;                            // return to original parent
-            }
+                    $exp = preg_replace('/\s+|block/i', '', $exp);              // leave just block name
 
-            else if ( preg_match('/\s*if/i', $exp) )                            // -- if ?
-            {
-                $exp = preg_replace('/\s+|if/i', '', $exp);                     // strip everything
+                    $new_node       = new ASTNode($exp);                        // create node
+                    $new_node->type = 'BLOCK';
+                    self::$current  ->add($new_node);
 
-                $new_node       = new ASTNode($exp);                                  // create node
-                $if_branch      = new ASTNode('');                              // 'true' branch
-                $else_branch    = new ASTNode('');                              // 'false' branch
-                $new_node       ->add($if_branch);
-                $new_node       ->add($else_branch);
-                $new_node->type = 'IF';
-                self::$current->add($new_node);
-
-                self::$current = $if_branch;
-
-                self::$node_idx++;
-                $exp = self::$data[ self::$node_idx ];
-                while ( !preg_match('/\bend\b|\belse\b/i', $exp))               // parse 'true' branch
-                {
-                    self::parseExp( $exp );                                     // parse children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                }
-
-                if (preg_match('/\belse\b/i', $exp))                            // parse 'false' branch
-                {
-                    self::$current = $else_branch;
+                    self::$current = $new_node;                                 // add children
                     self::$node_idx++;
                     $exp = self::$data[ self::$node_idx ];
                     while ( !preg_match('/\bend\b/i', $exp))
@@ -177,16 +119,76 @@ final class ASTNode
                         self::$node_idx++;
                         $exp = self::$data[ self::$node_idx ];
                     }
+                    self::$current =  $new_node->parent;
+
                 }
 
-                self::$current = $new_node->parent;                             // revert
+                else if ( preg_match('/\s*foreach/i', $exp) )                   // -- foreach ?
+                {
+                    $exp = preg_replace('/\s+in\s+/i', '^', $exp);              // converts "foreach bla in blas"
+                    $exp = preg_replace('/\s+|foreach/i', '', $exp);            // to "bla|blas"
+
+                    $new_node       = new ASTNode($exp);                        // create node
+                    $new_node->type = 'FOR';
+                    self::$current  ->add($new_node);
+
+                    self::$current  = $new_node;                                // add children
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                    while ( !preg_match('/\bend\b/i', $exp))
+                    {
+                        self::parseExp( $exp );                                 // parse children
+                        self::$node_idx++;
+                        $exp = self::$data[ self::$node_idx ];
+                    }
+                    self::$current =  $new_node->parent;                        // return to original parent
+                }
+
+                else if ( preg_match('/\s*if/i', $exp) )                        // -- if ?
+                {
+                    $exp = preg_replace('/\s+|if/i', '', $exp);                 // strip everything
+
+                    $new_node       = new ASTNode($exp);                        // create node
+                    $if_branch      = new ASTNode('');                          // 'true' branch
+                    $else_branch    = new ASTNode('');                          // 'false' branch
+                    $new_node       ->add($if_branch);
+                    $new_node       ->add($else_branch);
+                    $new_node->type = 'IF';
+                    self::$current->add($new_node);
+
+                    self::$current = $if_branch;
+
+                    self::$node_idx++;
+                    $exp = self::$data[ self::$node_idx ];
+                    while ( !preg_match('/\bend\b|\belse\b/i', $exp))           // parse 'true' branch
+                    {
+                        self::parseExp( $exp );                                 // parse children
+                        self::$node_idx++;
+                        $exp = self::$data[ self::$node_idx ];
+                    }
+
+                    if (preg_match('/\belse\b/i', $exp))                        // parse 'false' branch
+                    {
+                        self::$current = $else_branch;
+                        self::$node_idx++;
+                        $exp = self::$data[ self::$node_idx ];
+                        while ( !preg_match('/\bend\b/i', $exp))
+                        {
+                            self::parseExp( $exp );                             // parse children
+                            self::$node_idx++;
+                            $exp = self::$data[ self::$node_idx ];
+                        }
+                    }
+
+                    self::$current = $new_node->parent;                         // revert
+                }
             }
-        }
-        else                                                                    // TEXT NODE
-        {
-            $new_node       = new ASTNode($exp);                                      // create node
-            $new_node->type = 'TEXT';
-            self::$current  ->add($new_node);
+            else                                                                // TEXT NODE
+            {
+                $new_node       = new ASTNode($exp);                            // create node
+                $new_node->type = 'TEXT';
+                self::$current  ->add($new_node);
+            }
         }
     }
 
@@ -279,7 +281,7 @@ final class ASTNode
 
         for ($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
         {
-            if (strpos($fields[$i], '(')===false)                            // so it's a property/key
+            if (strpos($fields[$i], '(')===false)                               // so it's a property/key
                 $result             = isset( $result->{$fields[$i]})
                                     ? $result->{$fields[$i]}                    // property
                                     : $result[$fields[$i]];                     // array key
