@@ -84,6 +84,7 @@ final class ASTNode
     */
     private static function parseChildren($end)
     {
+        $end = str_replace('|', '\b|\b', $end);
         $exp = self::$data[ ++self::$node_idx ];
         while ( !preg_match('/\b'.$end.'\b/i', $exp))
         {
@@ -157,7 +158,7 @@ final class ASTNode
                     self::$current->add($new_node);
 
                     self::$current = $if_branch;                                // parse 'true' branch
-                    self::parseChildren('end\b|\belse');
+                    self::parseChildren('end|else');
 
                     if (preg_match('/\belse\b/i', $exp))                        // parse 'false' branch
                     {

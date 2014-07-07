@@ -87,6 +87,8 @@ class IndexController extends Controller {
 
             ->postovi($blogpostovi)
 
+            ->uslov(true)
+
             ->televizor($proba)
 
             ->get()
