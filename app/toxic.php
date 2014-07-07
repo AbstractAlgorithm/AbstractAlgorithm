@@ -77,6 +77,23 @@ final class ASTNode
     }
 
     /**
+    * Function that parses all the nodes that will be the children of the current<br>
+    * Children are parsed until '$end'-ing criteria is met.
+    *
+    * @param $end part of expression that stops parsing in the branch
+    */
+    private static function parseChildren($end)
+    {
+        $exp = self::$data[ ++self::$node_idx ];
+        while ( !preg_match('/\b'.$end.'\b/i', $exp))
+        {
+            self::parseExp( $exp );
+            self::$node_idx++;
+            $exp = self::$data[ self::$node_idx ];
+        }
+    }
+
+    /**
     * Parses the expression and determines what type is it.<br>
     * It builds dependacy tree.<br>
     * This is main parsing function.
@@ -89,9 +106,7 @@ final class ASTNode
         {
             if ($exp[0] == '{')                                                 // VAR NODE
             {
-                $exp            = preg_replace('/\s+/', '', $exp);              // remove all white spaces
-                $exp            = str_replace('{', '', $exp);                   // strip front curly bracket
-                $exp            = str_replace('}', '', $exp);                   // strip back curly bracket
+                $exp            = preg_replace('/\{|\}/', '', trim($exp));      // strip curly braces
                 
                 $new_node       = new ASTNode($exp);                            // create node
                 $new_node->type = 'VAR';
@@ -99,8 +114,7 @@ final class ASTNode
             }
             else if ($exp[0] == '[')                                            // COMMAND NODE
             {
-                $exp = str_replace('[', '', $exp);                              // strup angle brackets
-                $exp = str_replace(']', '', $exp);
+                $exp = preg_replace('/\[|\]/', '', $exp);                       // strip angle brackets
 
                 if ( preg_match('/\s*block/i', $exp) )                          // -- block ?
                 {
@@ -111,16 +125,8 @@ final class ASTNode
                     self::$current  ->add($new_node);
 
                     self::$current = $new_node;                                 // add children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                    while ( !preg_match('/\bend\b/i', $exp))
-                    {
-                        self::parseExp( $exp );                                 // parse children
-                        self::$node_idx++;
-                        $exp = self::$data[ self::$node_idx ];
-                    }
+                    self::parseChildren('end');
                     self::$current =  $new_node->parent;
-
                 }
 
                 else if ( preg_match('/\s*foreach/i', $exp) )                   // -- foreach ?
@@ -133,14 +139,8 @@ final class ASTNode
                     self::$current  ->add($new_node);
 
                     self::$current  = $new_node;                                // add children
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                    while ( !preg_match('/\bend\b/i', $exp))
-                    {
-                        self::parseExp( $exp );                                 // parse children
-                        self::$node_idx++;
-                        $exp = self::$data[ self::$node_idx ];
-                    }
+                    self::parseChildren('end');
+
                     self::$current =  $new_node->parent;                        // return to original parent
                 }
 
@@ -156,28 +156,13 @@ final class ASTNode
                     $new_node->type = 'IF';
                     self::$current->add($new_node);
 
-                    self::$current = $if_branch;
-
-                    self::$node_idx++;
-                    $exp = self::$data[ self::$node_idx ];
-                    while ( !preg_match('/\bend\b|\belse\b/i', $exp))           // parse 'true' branch
-                    {
-                        self::parseExp( $exp );                                 // parse children
-                        self::$node_idx++;
-                        $exp = self::$data[ self::$node_idx ];
-                    }
+                    self::$current = $if_branch;                                // parse 'true' branch
+                    self::parseChildren('end\b|\belse');
 
                     if (preg_match('/\belse\b/i', $exp))                        // parse 'false' branch
                     {
                         self::$current = $else_branch;
-                        self::$node_idx++;
-                        $exp = self::$data[ self::$node_idx ];
-                        while ( !preg_match('/\bend\b/i', $exp))
-                        {
-                            self::parseExp( $exp );                             // parse children
-                            self::$node_idx++;
-                            $exp = self::$data[ self::$node_idx ];
-                        }
+                        self::parseChildren('end');
                     }
 
                     self::$current = $new_node->parent;                         // revert

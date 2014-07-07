@@ -16,7 +16,7 @@ Ovo je {CONFIG_WEBSITE|strtoupper} sajt.
 <br><br>
 "{nekitekst|IndexController::kapitalizuj}"
 <br><br>
-"{mojtekst.deo(4,'JEBEMATER!!!',true)|strtolower}"
+"{mojtekst.deo(4,' JEBEMATER!!!',true)|strtolower}"
 <br><br><br>
 
 &#91; post as &#93;<br>

@@ -34,6 +34,7 @@ class Blogpost
     public function addComm($co)
     {
         $this->komentari[] = $co;
+        return $this;
     }
 
     public static function recent($num)
