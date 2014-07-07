@@ -19,6 +19,7 @@
 body,
 .helvetica_font
 {
+    color: #555;
     font-family: "Helvetica Light";
 }
 
@@ -28,12 +29,64 @@ h1, h2, h3, h4, h5, h6
     font-family: "Play";
 }
 
+.blue_text,
+h1, h2, h3, h4, h5, h6
+{
+    color: #0089AF;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+    font-weight: 100;
+    text-transform: uppercase;
+}
+
+ul, ol
+{
+    margin: 14px 0;
+}
+
+ul
+{
+    list-style: none;
+}
+
+ol li, ul li
+{
+    margin: 0;
+    padding: 0;
+}
+
+p, ul li, ol li
+{
+    font-size: 14px;
+    line-height: 22px;
+    color: #888;
+}
+
+ul li:before
+{
+    content: "+ ";
+}
+
+hr
+{
+    background-color: #ddd;
+    height: 1px;
+    border-width: 0;
+    width: 90%;
+    margin: 40px auto;
+}
+
 /*----------------------------------------------------------------------------*/
 
 #wrapper
 {
-    width: 960px;
+    width: 100%;
+    max-width: 960px;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 30px;
 }
 
 .post_block
@@ -42,6 +95,8 @@ h1, h2, h3, h4, h5, h6
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 3px;
+    overflow-x: hidden;
+    padding-bottom: 30px;
 }
 
 .post_block *
@@ -49,8 +104,73 @@ h1, h2, h3, h4, h5, h6
     padding: 0 20px;
 }
 
+.post_block h1
+{
+    font-size: 14px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #E6F1F6;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .post_block h2
 {
+    color: #888;
+    text-transform: none;
+    font-family: "Helvetica Light";
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
     background-color: #f7f7f7;
     width: 100%;
+    margin: 15px 0;
+}
+
+.post_block p
+{
+    /*text-align: justify;*/
+}
+
+.post_block h1 .post_info
+{
+    height: 100%;
+    width: 30%;
+    min-width: 230px;
+    float: right;
+    color: #888;
+}
+
+.post_info *
+{
+    font-family: "Helvetica Light";
+    text-transform: none;
+    float: right;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    line-height: 16px;
+    font-size: 12px;
+    padding-right: 10px;
+}
+
+.post_info_comm
+{
+    width: 20px;
+    background-image: url('images/mini/comment.gif');
+}
+
+.post_info_date
+{
+    width: 100px;
+    background-image: url('images/mini/calendar.gif');
+}
+
+.post_info_votes
+{
+    width: 20px;
+    background-image: url('images/mini/expand_vertical.gif');
 }

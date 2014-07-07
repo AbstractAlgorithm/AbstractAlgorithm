@@ -1,1 +1,14 @@
-[foreach post in postovi]<div class="post_block"><h2>{post.naslov}</h2><p>{post.tekst}</p>[if !post.komentari|empty]<p>Ovaj tekst ima {post.komentari|count} komentara.</p><ul>[foreach kom in post.komentari]<li>{kom}</li>[end]</ul>[else]<p>Ovaj tekst nema komentara.</p>[end]</div>[end]
+[foreach post in postovi]<div class="post_block">
+    <h1>{post.naslov}<div class="post_info helvetica">
+        <div class="post_info_date" title="date">{post.datum}</div>
+        <div class="post_info_votes" title="votes">{post.glasovi}</div>
+        <div class="post_info_comm" title="comments">{post.komentari|count}</div>
+    </div></h1>
+    <p>{post.tekst}</p>
+    [if !post.komentari|empty]
+    <h2>Ovaj tekst ima {post.komentari|count} komentara.</h2>
+    <ul>[foreach kom in post.komentari]
+        <li>{kom}</li>
+    [end]</ul>
+    [else]<h2>Ovaj tekst nema komentara.</h2>[end]
+</div>[end]
