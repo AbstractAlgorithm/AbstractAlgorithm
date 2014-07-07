@@ -5,10 +5,6 @@ RewriteBase /
 #RewriteCond %{REQUEST_FILENAME} !-f
 #RewriteRule ^.*$ index.php [L]
 
+RewriteRule ([^\.]+).(css|png|jpg|png|gif|otf|ttf|swf)$ $1.$2 [L]
 RewriteRule .* index.php [L]
 RewriteRule ^$ index.php [L]
-
-#RewriteRule ^[\w_\-]+/\?(.+) index.php?$1 [L]
-#RewriteRule ^[\w_\-]+/$ index.php [L]
-#RewriteRule ^[\w_\-]+$ index.php [L]
-#RewriteRule ^([^/]+)/$ $1.php [L]

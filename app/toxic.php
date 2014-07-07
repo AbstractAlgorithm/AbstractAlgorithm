@@ -82,7 +82,7 @@ final class ASTNode
     *
     * @param $end part of expression that stops parsing in the branch
     */
-    private static function parseChildren($end)
+    private static function parseChildren($end, &$exp)
     {
         $end = str_replace('|', '\b|\b', $end);
         $exp = self::$data[ ++self::$node_idx ];
@@ -126,7 +126,7 @@ final class ASTNode
                     self::$current  ->add($new_node);
 
                     self::$current = $new_node;                                 // add children
-                    self::parseChildren('end');
+                    self::parseChildren('end', $exp);
                     self::$current =  $new_node->parent;
                 }
 
@@ -140,7 +140,7 @@ final class ASTNode
                     self::$current  ->add($new_node);
 
                     self::$current  = $new_node;                                // add children
-                    self::parseChildren('end');
+                    self::parseChildren('end', $exp);
 
                     self::$current =  $new_node->parent;                        // return to original parent
                 }
@@ -158,12 +158,12 @@ final class ASTNode
                     self::$current->add($new_node);
 
                     self::$current = $if_branch;                                // parse 'true' branch
-                    self::parseChildren('end|else');
+                    self::parseChildren('end|else', $exp);
 
                     if (preg_match('/\belse\b/i', $exp))                        // parse 'false' branch
                     {
                         self::$current = $else_branch;
-                        self::parseChildren('end');
+                        self::parseChildren('end', $exp);
                     }
 
                     self::$current = $new_node->parent;                         // revert
@@ -327,7 +327,7 @@ final class ASTNode
             case 'IF':                                                          // IF NODE
                 $branch             = $this->getValue() ? 0 : 1;
                 $this->children[$branch]->locals = $this->locals;
-                $text_result        = $this->children[$branch]->exe();                         
+                $text_result        = $this->children[$branch]->exeChildren();                         
             break;
 
             case 'FOR':                                                         // FOREACH NODE

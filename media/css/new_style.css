@@ -1,0 +1,56 @@
+@font-face
+{
+    font-family: "Helvetica Light";
+    src:url('fonts/Helvetica-Light.ttf');
+}
+
+@font-face
+{
+    font-family: "Play";
+    src:url('fonts/Play.ttf');
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body,
+.helvetica_font
+{
+    font-family: "Helvetica Light";
+}
+
+.play_font,
+h1, h2, h3, h4, h5, h6
+{
+    font-family: "Play";
+}
+
+/*----------------------------------------------------------------------------*/
+
+#wrapper
+{
+    width: 960px;
+    margin: 0 auto;
+}
+
+.post_block
+{
+    margin: 20px 0;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.post_block *
+{
+    padding: 0 20px;
+}
+
+.post_block h2
+{
+    background-color: #f7f7f7;
+    width: 100%;
+}

@@ -18,6 +18,7 @@
 	</head>
 	
 	<body>
+		[block header][end]
 		<div id="wrapper">
 			[block content][end]
 		</div>

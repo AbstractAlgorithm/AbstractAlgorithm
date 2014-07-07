@@ -79,6 +79,8 @@ class IndexController extends Controller {
 
         ->title("Blog")
 
+        ->css('new_style.css')
+
         ->content
         (
             Template::load('test2')

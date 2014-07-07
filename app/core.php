@@ -33,7 +33,7 @@ final class Core
 
             define($key, $expanded);                                            // define to be globally accessible
 
-            if (preg_match('/^LVL_|^NO_ACCESS_/i', $key))                                   // add to Session::levels config
+            if (preg_match('/^LVL_|^NO_ACCESS_/i', $key))                       // add to Session::levels config
                 Session::AddLevel($key, $expanded);
             else                                                                // add to Core::config data
                 self::$config[$key] = $expanded;
@@ -49,9 +49,7 @@ final class Core
         DB::Start();                                                            // init database
         Session::Start();                                                       // init session
 
-
         Request::Route();                                                       // handle request
-
         
         DB::End();                                                              // close database
         // Session::End();                                                      // close session
