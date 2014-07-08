@@ -46,7 +46,7 @@ class Blogpost
         $res = array();
         $n = count(self::$posts);
         for($i=0; $i<$num && $i<$n; $i++)
-            $res[] = self::$posts[$n-1-$i]->naslov;
+            $res[] = self::$posts[$n-1-$i];
         return $res;
     }
 
@@ -60,7 +60,7 @@ class IndexController extends Controller {
 
     public function run()
     {
-        $post1 = new Blogpost("Prvi", "
+        $post1 = new Blogpost("High dynamic range rendering HDR(R)", "
             <p>
             There are few effects that play major roles in turning a plastic and non-realistic scene into a lifelike, dynamic and visually appealing. All these effects mimic some of the physical phenomenons from the nature, therefore bringing realism into the games. HDR imagery is a vital part of a realistic representation of the scene. It provides much better and color-dynamic scenes, and combined with tone mapping it can bring certain atmosphere into the environment.
             </p>
