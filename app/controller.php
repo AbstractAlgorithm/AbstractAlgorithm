@@ -1,6 +1,6 @@
 <?php
 
-require 'orm.php';
+require 'model.php';
 
 /**
 * Controller class, it has some wrapper functions and leaves the logit to the developer.

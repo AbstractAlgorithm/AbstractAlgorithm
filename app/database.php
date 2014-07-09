@@ -7,7 +7,17 @@
 final class DB
 {
 
-    private static $connection = null;                                          // instance
+    private static $connection  = null;                                          // instance
+    private static $config      = array();
+    private static $db_name     = '';
+    private static $db_user     = '';
+    private static $db_pass     = '';
+    private static $db_host     = '';
+
+    public static function Assign($key, $value)
+    {
+        self::$config[$key] = $value;
+    }
 
     /**
     * Connects to a database and holds that connection.
@@ -16,7 +26,13 @@ final class DB
     {
         if (self::$connection==null)
         {
-            self::$connection = @mysqli_connect('localhost','root','','test');  // connects
+            self::$connection = @mysqli_connect
+                                (
+                                    self::$config['DB_HOST'],
+                                    self::$config['DB_USER'],
+                                    self::$config['DB_PASS'],
+                                    self::$config['DB_NAME']
+                                );
 
             if (mysqli_connect_errno())                                         // connection failed?
             {

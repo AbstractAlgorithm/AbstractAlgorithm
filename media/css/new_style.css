@@ -21,6 +21,7 @@ body,
 {
     color: #555;
     font-family: "Helvetica Light";
+    background-color: #f7f7f7;
 }
 
 .play_font,
@@ -61,7 +62,7 @@ p, ul li, ol li
 {
     font-size: 14px;
     line-height: 22px;
-    color: #888;
+    color: #333;
 }
 
 ul li:before
@@ -109,6 +110,7 @@ hr
     position: relative;
     float: right;
     overflow: hidden;
+    background-color: white;
 }
 
 #sidebar>*
@@ -118,6 +120,7 @@ hr
 
 .post_block
 {
+    background-color: white;
     margin: 20px 0;
     width: 100%;
     border: 1px solid #ddd;

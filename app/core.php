@@ -35,6 +35,8 @@ final class Core
 
             if (preg_match('/^LVL_|^NO_ACCESS_/i', $key))                       // add to Session::levels config
                 Session::AddLevel($key, $expanded);
+            else if (preg_match('/^DB_/', $key))
+                DB::Assign($key, $expanded);
             else                                                                // add to Core::config data
                 self::$config[$key] = $expanded;
         }

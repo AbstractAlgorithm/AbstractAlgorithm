@@ -141,6 +141,10 @@ Tone mapping can also be combined with some additional color effect, so putting 
         $blogpostovi[] = $post2;
         $blogpostovi[] = $post3;
 
+        // DB::Query("INSERT INTO aa_post VALUES (null, 'Hello world', 'hello-world', 'Coa svete. Ovo je mnogo kul.', null)");
+
+        Model::Load('Post');
+
         $proba = array();
         $proba[] = 'prvi';
         $proba[] = 'drugi';

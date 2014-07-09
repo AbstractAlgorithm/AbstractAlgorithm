@@ -4,6 +4,11 @@
     "AUTHOR":               "Dragan Okanovic",
     "ADMIN_MAIL":           "dragan.okan [at] gmail.com",
 
+    "DB_NAME":              "absalg34_wpdb",
+    "DB_USER":              "absalg34_G4meDEV",
+    "DB_PASS":              "b1z4rn4p3curk4_=",
+    "DB_HOST":              "abstract-algorithm.com",
+
     "MODEL_DIR":            "models",
     "VIEW_DIR":             "templates",
     "CTRL_DIR":             "controllers",
