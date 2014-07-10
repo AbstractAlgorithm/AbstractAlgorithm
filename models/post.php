@@ -2,8 +2,8 @@
 
 class Post extends Model
 {
-    private static $table = 'aa_post';
-    private static $map =   array
+    protected static $table = 'aa_post';
+    protected static $map = array
                             (
                                 'id'    => 'id',
                                 'title' => 'title',
