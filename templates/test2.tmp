@@ -5,7 +5,7 @@
         <div class="post_info_votes" title="votes">{post.glasovi}</div>
         <div class="post_info_comm" title="comments">{post.komentari|count}</div>
     </div></h1>
-    <p>{post.tekst}</p>
+    {post.tekst}
     [if !post.komentari|empty]
     [foreach kom in post.komentari]
         <div class="comm_block">{kom}</div>
