@@ -1,10 +1,10 @@
 <div id="content">
 [foreach post in postovi]<div class="post_block">
-    <h1>{post.naslov}<div class="post_info helvetica">
+    <h1>{post.naslov}<!--<div class="post_info helvetica">
         <div class="post_info_date" title="date">{post.datum}</div>
         <div class="post_info_votes" title="votes">{post.glasovi}</div>
         <div class="post_info_comm" title="comments">{post.komentari|count}</div>
-    </div></h1>
+    </div>--></h1>
     {post.tekst}
     [if !post.komentari|empty]
     [foreach kom in post.komentari]
@@ -13,10 +13,11 @@
     [else]<div class="comm_block">Ovaj tekst nema komentara.</div>[end]
 </div>[end]
 </div>
-
+<!--
 <div id="sidebar">
     <h1>Recent posts</h1>
     [foreach post in 2|Blogpost::recent|]<ul>
         <li><a href="/{post.naslov}">{post.naslov}</a></li>
     </ul>[end]
 </div>
+-->

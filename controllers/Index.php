@@ -60,15 +60,15 @@ class IndexController extends Controller {
 
     public function run()
     {
-        $post1 = new Blogpost("High dynamic range rendering HDR(R)", "
+        $post1 = new Blogpost("High Dynamic Range Rendering", "
             <p>
             There are few effects that play major roles in turning a plastic and non-realistic scene into a lifelike, dynamic and visually appealing. All these effects mimic some of the physical phenomenons from the nature, therefore bringing realism into the games. HDR imagery is a vital part of a realistic representation of the scene. It provides much better and color-dynamic scenes, and combined with tone mapping it can bring certain atmosphere into the environment.
             </p>
 
-            <h2>Physics:</h2>
+            <h2>Physics</h2>
             <p>The nature itself provides much greater range of colors than [0,255] supported by our screens. Although the human eye is capable of distinguishing around 10M colors, which is significantly smaller than 255<sup>3</sup> = 16.5M, our eye has the ability to adjust itself based on the light present in the nearby area. Longer exposure in the dark rooms reveals new details because eye started adjusting itself and picking as many light as it possibly can trying to recognize certain shapes that might help us coordinate ourselves and get out of that situation.</p>
             
-            <h2>Solution:</h2>
+            <h2>Solution</h2>
             <p>To achieve the effect of wide range of colors, artists use something known as HDR images. Photographers take shots of the same image under different contrast and exposure level which, when combined together, represent a single HDR (high-dynamic range) image. There are different formats of HDR image, but they usually end up using floats for representation of the certain color channel. So instead of limiting one channel to a 0-255 integer range, devs use HDR images that store channels as float values that have much greater range of values. However, in order to show the image on the screen, those float values must be scaled somehow to the 0-255 range. That's the part that <strong>tone mapping</strong> does.</p>
             
             <p>
@@ -81,12 +81,12 @@ class IndexController extends Controller {
                 <li>output color</li>
             </ul>
 
-<h2>1. Finding lowest and highest value</h2>
+<h3>1. Finding lowest<br>and highest value</h3>
 <p>
 There are quite a few approaches how to do this step. No matter how you do it, the point is to sample scene's colorbuffer image at every pixel (if not every, than big percent of them) and to find minimum and maximum values. Probably the best way to do it - use compute shaders. They're built for things exactly like this, so you'll get best performance and you can use counter which may be beneficial. [For versions of API that do not support compute shaders, you might render some very simple primitive (point perhaps) on a 2x1 framebuffer and just use its fragment shader to sample colorbuffer of the scene]
 </p>
 
-<h2>2. Apply tone mapping formula</h2>
+<h3>2. Apply tone<br>mapping formula</h3>
 
 <p>There are also plenty of formulas to try for tone mapping:</p>
 <ul>
@@ -103,9 +103,21 @@ For example, linear tone mapping would look like this:
 </p>
 
 <p>
-    <code>
-    var outputColor = (inputColor - L)/(H - L) * 255;
-    </code>
+    <pre>
+var outputColor = (inputColor - L)/(H - L) * 255;
+
+var klasa = function(ime) {
+    if(broj===undefined)
+        broj = 0;
+
+    this.id = broj++;
+    this.ime = ime;
+};
+
+klasa.prototype.kazi = function() {
+    console.log(\"[\"+this.id+\"] \"+this.ime);
+};
+    </pre>
 </p>
 
 <p>
@@ -116,7 +128,7 @@ Tone mapping really helps bringing the sense of reality into the scene, so choos
 Tone mapping can also be combined with some additional color effect, so putting more blue color into the final output could represent a more metal, industrial, cold and modern feel, while adding more orange could lead to more artistic, more fantasy/fairytale look, something that assembles greater Sun presence and warmth. Of course, tone mapping can be separated with color FX, and is probably better that way so you could dynamically change any additional per-pixel adjustments to represent different environmental feels and have greater control over the process.
 </p>
 
-<h2>3. Output color</h2>
+<h3>3. Output color</h3>
 
 <p>Well, do your final magic.</p>
 
@@ -152,6 +164,11 @@ Tone mapping can also be combined with some additional color effect, so putting 
         Template::load('basic')
 
         ->title("Blog")
+
+        ->header
+        (
+            Template::Load('header')->get()
+        )
 
         ->css('new_style.css')
 
