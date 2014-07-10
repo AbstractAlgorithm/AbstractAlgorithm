@@ -19,7 +19,7 @@
 	
 	<body>
 		[block header][end]
-		<div id="wrapper">
+		<div class="wrapper">
 			[block content][end]
 		</div>
 

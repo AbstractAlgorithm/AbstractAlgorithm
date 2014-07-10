@@ -1,3 +1,11 @@
-<header>
-	<h1 class="logo">Abstract<br>Algorithm</h1>
+<header id="header">
+    <div class="wrapper">
+    	<h1 class="logo">Abstract<br>Algorithm</h1>
+    	<nav>
+    	    <a href="#">Blog</a>
+    	    <a href="#">Projects</a>
+    	    <a href="#">Random</a>
+    	    <a href="#">About</a>
+    	</nav>
+    </div>
 </header>

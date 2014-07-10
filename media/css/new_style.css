@@ -81,19 +81,18 @@ hr
 
 /*----------------------------------------------------------------------------*/
 
-#wrapper
+.wrapper
 {
     width: 100%;
     max-width: 960px;
     margin: 0 auto;
     padding: 0;
-    padding-top: 30px;
 }
 
 #content
 {
     width: 800px;
-    margin: 0;
+    margin: 80px 0 0 0;
 }
 
 #sidebar
@@ -113,29 +112,72 @@ hr
 
 header
 {
-    width: 160px;
-    height: 600px;
+    background-color: white;
+    width: 100%;
+    height: 48px;
     /*background-color: rgba(0,0,0,0.05);*/
     position: fixed;
-    top: 50%;
+    /*top: 50%;
     left: 50%;
     margin-top: -300px;
-    margin-left: 400px;
+    margin-left: 400px;*/
+    top: 0;
+    vertical-align: center;
+    padding-bottom: 10px;
+    
 }
 
-header h1
+header .wrapper *
+{
+    height: 100%;
+    box-sizing: border-box;
+    vertical-align: center;
+    padding: 0;
+    margin: 0;
+    display: inline;
+    float: left;
+    /*background-color: rgba(242,108,79,0.3);*/
+}
+
+header h1.logo
 {
     background-repeat: no-repeat;
     background-image: url('images/logo.png');
     background-size: 32px 32px;
-    padding: 0 0 0 42px;
+    background-position: 12px 8px;
+    padding: 8px 0 8px 54px;
     text-transform: none;
     font-size: 16px;
     line-height: 16px;
     color: #888;
     font-family: "Play";
     -webkit-font-smoothing: subpixel-antialiased;
-    margin-bottom: 20px;
+    width: 140px;
+    height: 100%;
+    margin-right: 20px;
+}
+
+header nav
+{
+    font-family: "Helvetica Light";
+    color: #0089AF;
+}
+
+header nav a
+{
+    width: 160px;
+    text-decoration: none;
+    line-height: 48px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #0089AF;
+    font-size: 14px;
+}
+
+header nav a:hover
+{
+    background-color: #f0f0f0;
+    /*display: block;*/
 }
 
 #sidebar>*
