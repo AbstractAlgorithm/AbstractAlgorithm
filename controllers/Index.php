@@ -150,7 +150,7 @@ Tone mapping can also be combined with some additional color effect, so putting 
 
 <p>Well, do your final magic.</p>
 
-<hr>
+<div class=\"hr\"><span class=\"hrleft\"></span><span class=\"hrright\"></span></div>
 
 <p>That is, in short, an algorithm used for tone mapping. For now, you should have the knowledge to tell what is HDR, what is tone mapping, why and how it can be used.</p>
 
@@ -205,28 +205,32 @@ Tone mapping can also be combined with some additional color effect, so putting 
             ->get()
         )
 
-        // ->script
-        // (
-        //     '<script type="text/javascript">
-        //     window.onload = function() {
-        //         var header = document.getElementById("header"),
-        //             cont   = document.getElementById("content");
-        //         // for(var key in window)
-        //         //     if(key.indexOf("scroll")>=0 && !(window[key] instanceof Function))
-        //         //         console.log(key+": "+window[key]);
-        //         window.onscroll = function() {
-        //             var sy = window.scrollY;
-        //             var minY = 40.0, maxY = 200.0;
-        //             var coeff   = sy<minY
-        //                         ? 0.0
-        //                         : sy < maxY
-        //                         ? (sy-minY)/(maxY-minY)
-        //                         : 1.0;
-        //             header.style.boxShadow = "0 0 15px rgba(0,0,0,"+coeff.toFixed(2)*0.4+")";
-        //         };
-        //     };
-        //     </script>'
-        // )
+        ->script
+        (
+            '<script type="text/javascript">
+            window.onload = function() {
+                var header = document.getElementById("header"),
+                    cont   = document.getElementById("content");
+                // for(var key in window)
+                //     if(key.indexOf("scroll")>=0 && !(window[key] instanceof Function))
+                //         console.log(key+": "+window[key]);
+                window.onscroll = function() {
+                    // var sy = window.scrollY;
+                    // var minY = 40.0, maxY = 200.0;
+                    // var coeff   = sy<minY
+                    //             ? 0.0
+                    //             : sy < maxY
+                    //             ? (sy-minY)/(maxY-minY)
+                    //             : 1.0;
+                    // header.style.boxShadow = "0 0 15px rgba(0,0,0,"+coeff.toFixed(2)*0.4+")";
+                    var offset = 20;
+                    header.style.top   = window.scrollY<=82-offset
+                                            ? (82-window.scrollY)+"px"
+                                            : offset+"px";
+                };
+            };
+            </script>'
+        )
 
         ->render();
 
