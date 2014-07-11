@@ -17,6 +17,7 @@
     "CSS_DIR":              "MEDIA_DIR/css",
     "IMG_DIR":              "MEDIA_DIR/images",
     "FONT_DIR":             "MEDIA_DIR/fonts",
+    "JS_DIR":               "MEDIA_DIR/js",
 
     "NO_ACCESS_ADMIN":      [],
     "NO_ACCESS_USER":       ["dashboard", "posts", "edit", "users", "list"],

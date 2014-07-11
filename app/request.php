@@ -8,6 +8,7 @@ require 'controller.php';
 */
 final class Request
 {
+    private static $uri;
     /**
     * Stylizes the requested URI to the uniform format.
     * 
@@ -100,8 +101,9 @@ final class Request
     */
     public static function Route()
     {    
-        $uri = self::getURI();                                                  // get path
-        $uri = self::parseGET($uri);                                            // fill $_GET with params and strip them
+        $uri        = self::getURI();                                           // get path
+        $uri        = self::parseGET($uri);                                     // fill $_GET with params and strip them
+        self::$uri  = $uri;
 
         self::activateController($uri);
     }
@@ -117,4 +119,18 @@ final class Request
         die();
     }
 
+    public static function URI()
+    {
+        return self::$uri;
+    }
+
+    public static function GET($key)
+    {
+        return $_GET[$key];
+    }
+
+    public static function POST($key)
+    {
+        return $_POST[$key];
+    }
 }

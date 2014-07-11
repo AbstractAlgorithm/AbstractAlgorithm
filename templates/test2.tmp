@@ -1,11 +1,14 @@
 <div id="content">
-[foreach post in postovi]<div class="post_block">
+[foreach post in 5|Blogpost::recent]<div class="post_block">
     <h1 class="blue_text">{post.naslov}</h1>
     <div class="post_info">
         <span class="triangle"></span>
-        <div class="post_info_votes" title="votes">{post.glasovi}</div>
-        <div class="post_info_comm" title="comments">{post.komentari|count}</div>
-        <div class="post_info_date" title="date">{post.datum}</div>
+        <span class="hright"></span>
+
+            <div class="post_info_votes" title="votes">{post.glasovi}</div>
+            <div class="post_info_comm" title="comments">{post.komentari|count}</div>
+            <div class="post_info_date" title="date">{post.datum}</div>
+            <div class="post_info_tags" title="tags">programming, webgl, 3d</div>
 
     </div>
 

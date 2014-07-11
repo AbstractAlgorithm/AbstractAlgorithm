@@ -14,9 +14,10 @@
             <li>
                 <a href="#"><span class="stripe"></span>About</a>
             </li>
+            [if postPage]
             <br><br>
             <li>
-                <a href="#"><span class="stripe"></span>Vote</a>
+                <a href="#" id="vote"><span class="stripe"></span>Vote</a>
             </li>
             <li>
                 <a href="#"><span class="stripe"></span>Comments</a>
@@ -24,6 +25,7 @@
             <li>
                 <a href="#"><span class="stripe"></span>Share</a>
             </li>
+            [end]
         </ul>
     </nav>
 </header>

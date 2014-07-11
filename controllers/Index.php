@@ -1,83 +1,15 @@
 <?php
 
-class Tekst
-{
-    public $tekst;
-    public function __construct($str)
-    {
-        $this->tekst = $str;
-    }
-    public function deo($broj, $dodatak, $extra)
-    {
-        return substr($this->tekst, 0, $broj).$dodatak.($extra?'eksta':'<==3');
-    }
-}
-
-class Blogpost
-{
-    public $tekst;
-    public $naslov;
-    public $datum;
-    public $komentari;
-    public $glasovi;
-    public $tagovi;
-
-    public static $posts = array();
-    public static $ime = 'Blogpost';
-    public static $config = array( 'table' => 'post', 'rel'=>'boom');
-
-    public function __construct($na, $te, $da, $ta)
-    {
-        $this->naslov = $na;
-        $this->tekst = $te;
-        $this->datum = $da;
-        $this->glasovi = rand(0, 5);
-        $this->komentari = array();
-        $this->tagovi = $ta;
-        self::$posts[] = $this;
-    }
-
-    public function addComm($co)
-    {
-        $this->komentari[] = $co;
-        return $this;
-    }
-
-    public static function recent($num)
-    {
-        $res = array();
-        $n = count(self::$posts);
-        for($i=0; $i<$num && $i<$n; $i++)
-            $res[] = self::$posts[$n-1-$i];
-        return $res;
-    }
-
-    public static function all()
-    {
-        return self::$posts;
-    }
-
-    public function excerpt()
-    {
-        // $args   = func_get_args();
-        // $num    = count($args)>0
-        //         ? $args[0]
-        //         : 5;
-
-        $hehe = preg_match('/([^\s]+\s+){100}/', $this->tekst);
-        var_dump($hehe);
-    }
-
-    public function getTags()
-    {
-        return join(', ', $this->tagovi);
-    }
-}
-
 class IndexController extends Controller {
 
     public function run()
     {
+        Model::Load('Post');
+
+        // ----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
+
         $post1 = new Blogpost("High Dynamic Range Rendering", "
             <p>
             There are few effects that play major roles in turning a plastic and non-realistic scene into a lifelike, dynamic and visually appealing. All these effects mimic some of the physical phenomenons from the nature, therefore bringing realism into the games. HDR imagery is a vital part of a realistic representation of the scene. It provides much better and color-dynamic scenes, and combined with tone mapping it can bring certain atmosphere into the environment.
@@ -171,69 +103,32 @@ Tone mapping can also be combined with some additional color effect, so putting 
         $blogpostovi[] = $post2;
         $blogpostovi[] = $post3;
 
-        // DB::Query("INSERT INTO aa_post VALUES (null, 'Hello world', 'hello-world', 'Coa svete. Ovo je mnogo kul.', null)");
+        // ----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
+        // ----------------------------------------------------------------------
 
-        Model::Load('Post');
-
-        $proba = array();
-        $proba[] = 'prvi';
-        $proba[] = 'drugi';
 
         Template::load('basic')
-
-        ->title("Blog")
-
-        ->header
-        (
-            Template::Load('header')->get()
-        )
-
-        ->css('new_style.css')
-
-        ->content
-        (
-            Template::load('test2')
-
-            ->tekstic('superman')
-
-            ->postovi($blogpostovi)
-
-            ->uslov(true)
-
-            ->televizor($proba)
-
-            ->get()
-        )
-
-        ->script
-        (
-            '<script type="text/javascript">
-            window.onload = function() {
-                var header = document.getElementById("header"),
-                    cont   = document.getElementById("content");
-                // for(var key in window)
-                //     if(key.indexOf("scroll")>=0 && !(window[key] instanceof Function))
-                //         console.log(key+": "+window[key]);
-                window.onscroll = function() {
-                    // var sy = window.scrollY;
-                    // var minY = 40.0, maxY = 200.0;
-                    // var coeff   = sy<minY
-                    //             ? 0.0
-                    //             : sy < maxY
-                    //             ? (sy-minY)/(maxY-minY)
-                    //             : 1.0;
-                    // header.style.boxShadow = "0 0 15px rgba(0,0,0,"+coeff.toFixed(2)*0.4+")";
-                    var offset = 20;
-                    header.style.top   = window.scrollY<=82-offset
-                                            ? (82-window.scrollY)+"px"
-                                            : offset+"px";
-                };
-            };
-            </script>'
-        )
-
-        ->render();
-
+            ->title("Blog")
+            ->css('new_style.css')
+            ->header
+            (
+                Template::Load('header')
+                    ->postPage(false)
+                    ->get()
+            )
+            ->content
+            (
+                Template::load('list_posts')
+                    ->get()
+            )
+            ->script
+            (
+                '<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>'
+                ."\n".
+                '<script type="text/javascript" src="'.JS_DIR.'/myCode.js"></script>'
+            )
+            ->render();
     }
 
     public static function kapitalizuj($str)

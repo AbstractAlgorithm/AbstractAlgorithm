@@ -202,6 +202,7 @@ header nav ul li a
     text-decoration: none;
     line-height: 32px;
     text-align: left;
+    color: #888;
     /*text-transform: uppercase;*/
     font-size: 14px;
     border-top: 1px solid #ddd;
@@ -249,6 +250,7 @@ header nav a:hover
 .post_block
 {
     margin: 20px 0;
+
     /*width: 100%;*/
     overflow-x: hidden;
     padding-left: 160px;
@@ -282,6 +284,7 @@ header nav a:hover
     height: 32px;
     display: block;
     width: 100%;
+    padding: 0;
     color: #888;
     font-size: 12px;
     font-family: "Helvetica Light";
@@ -289,48 +292,81 @@ header nav a:hover
     line-height: 32px;
     margin-bottom: 20px;
     border-top: 1px solid #ddd;
+    left:50%;
+    text-align: center;
     /*background-color: red;*/
 }
 
 span.triangle
 {
     /*background-color: #0089af;*/
-    width: 0;
+    width: 40px;
     height: 0;
     padding: 0;
     border-style: solid;
-    border-width: 16px 16px 0 0;
+    border-width: 4px 4px 0 0;
     margin-right: 20px;
     border-color: #dddddd transparent transparent transparent;
     display: inline-block;
+    float: left;
+
+}
+
+span.hright
+{
+    width: 45px;
+    height: 0;
+    padding: 0;
+    border-style: solid;
+    border-width: 4px 0 0 4px;
+    border-color: #ddd transparent;
+    vertical-align: top;
+    display: block;
+    float: right;
 }
 
 .post_info *
 {
-    float: left;
+    text-align: left;
     background-position: left center;
     background-repeat: no-repeat;
-    padding: 0 10px 0 20px;
-    /*border: 1px solid red;
-    box-sizing: border-box;*/
+    display: inline-block;
+    box-sizing: border-box;
+
+    /*border: 1px solid red;*/
+    box-sizing: border-box; 
 }
 
 .post_info_comm
 {
     width: 40px;
+    padding: 0 0 0 20px;
+    margin-right: 20px;
     background-image: url('images/mini/comment.gif');
-}
-
-.post_info_date
-{
-    width: 140px;
-    background-image: url('images/mini/calendar.gif');
 }
 
 .post_info_votes
 {
     width: 40px;
+    padding: 0 0 0 20px;
+    margin-right: 20px;
     background-image: url('images/mini/expand_vertical.gif');
+}
+
+.post_info_date
+{
+    width: 120px;
+    padding: 0 0 0 20px;
+    margin-right: 20px;
+    background-image: url('images/mini/calendar.gif');
+}
+
+.post_info_tags
+{
+    width: 200px;
+    padding: 0 0 0 20px;
+    
+    background-image: url('images/mini/tag.gif');
 }
 
 .post_block h2

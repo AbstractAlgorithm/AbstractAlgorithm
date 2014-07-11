@@ -1,10 +1,23 @@
-<h1>{post.title}</h1>
-<small>{post.formatTime()}</small>
+<div id="content">
+    <div class="post_block">
+        <h1 class="blue_text">{post.title}</h1>
+        <div class="post_info">
+            <span class="triangle"></span>
+            <span class="hright"></span>
 
-<div class="content">
-	{post.getText()}
-</div>
+            <div class="post_info_votes" title="votes">{post.votes}</div>
+            <div class="post_info_comm" title="comments">{post.comments|count}</div>
+            <div class="post_info_date" title="date">{post.date}</div>
+            <div class="post_info_tags" title="tags">programming, webgl, 3d</div>
+        </div>
 
-<div class="comments">
-	It has {post.getCommentsNum()} comments.
+        {post.text}
+    <!--
+        [if !post.komentari|empty]
+        [foreach kom in post.komentari]
+            <div class="comm_block">{kom}</div>
+        [end]
+        [else]<div class="comm_block">Ovaj tekst nema komentara.</div>[end]
+    -->
+    </div>
 </div>

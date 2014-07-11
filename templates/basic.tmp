@@ -23,6 +23,6 @@
 			[block content][end]
 		</div>
 
-		[block script][end]
+[block script][end]
 	</body>
 </html>

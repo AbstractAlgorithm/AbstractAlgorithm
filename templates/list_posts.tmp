@@ -1,22 +1,16 @@
-<h1>List of all posts</h1>
+<div id="content">
+[foreach post in 5|Blogpost::recent]<div class="post_block">
+    <h1 class="blue_text">{post.naslov}</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
 
-			<table id="listofall">
-				<tr>
-					<th>ID</th>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Summary</th>
-					<th>Comments</th>
-				</tr>
-			# foreach post in posts #
-				<tr>
-					<td>{post.id}</td>
-					<td><a href="../edit/?name={post.link_title}">{post.title}</a></td>
-					<td>{post.formatTime()}</td>
-					<td>{post.getSummary()}</td>
-					<td>{post.getCommentsNum()}</td>
-				</tr>
-			# endforeach #
-			</table>
+        <div class="post_info_votes" title="votes">{post.glasovi}</div>
+        <div class="post_info_comm" title="comments">{post.komentari|count}</div>
+        <div class="post_info_date" title="date">{post.datum}</div>
+        <div class="post_info_tags" title="tags">programming, webgl, 3d</div>
+    </div>
 
-			<hr>
+    {post.tekst}
+</div>[end]
+</div>
