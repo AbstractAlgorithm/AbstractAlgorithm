@@ -20,18 +20,20 @@ class Blogpost
     public $datum;
     public $komentari;
     public $glasovi;
+    public $tagovi;
 
     public static $posts = array();
     public static $ime = 'Blogpost';
     public static $config = array( 'table' => 'post', 'rel'=>'boom');
 
-    public function __construct($na, $te, $da)
+    public function __construct($na, $te, $da, $ta)
     {
         $this->naslov = $na;
         $this->tekst = $te;
         $this->datum = $da;
         $this->glasovi = rand(0, 5);
         $this->komentari = array();
+        $this->tagovi = $ta;
         self::$posts[] = $this;
     }
 
@@ -53,6 +55,22 @@ class Blogpost
     public static function all()
     {
         return self::$posts;
+    }
+
+    public function excerpt()
+    {
+        // $args   = func_get_args();
+        // $num    = count($args)>0
+        //         ? $args[0]
+        //         : 5;
+
+        $hehe = preg_match('/([^\s]+\s+){100}/', $this->tekst);
+        var_dump($hehe);
+    }
+
+    public function getTags()
+    {
+        return join(', ', $this->tagovi);
     }
 }
 
@@ -138,16 +156,16 @@ Tone mapping can also be combined with some additional color effect, so putting 
 
 <p>There is also a line on Wikipedia, on the HDR article, that really confused me when I first read it: bright things can be really bright, dark things can be really dark, and details can be seen in both.</p>
 
-<p>By now, you should understand what previous sentence meant. When you enter the area that is quite dark, the tone mapping would do it's job and scale the values to the 0-255 range, so you retrieve the details that were perhaps lost in the full image which has both very dark and very bright areas. Similarly, when entering very bright area, tone mapping would also scale colors on that part, yet again revealing you all the details.</p>", "11. jun, 2014");
+<p>By now, you should understand what previous sentence meant. When you enter the area that is quite dark, the tone mapping would do it's job and scale the values to the 0-255 range, so you retrieve the details that were perhaps lost in the full image which has both very dark and very bright areas. Similarly, when entering very bright area, tone mapping would also scale colors on that part, yet again revealing you all the details.</p>", "11. jun, 2014", array('hdrr', 'vfx', 'photography'));
         $post1->addComm("Kul prvi post.");
         $post1->addComm("Stvarno do jaja.");
 
-        $post2 = new Blogpost("2nd post", "Ovo je drugi post.", '8. oktobar, 2013');
+        $post2 = new Blogpost("How to profit from selling pictures", "<p>At the end of 2012, I was talking with a good friend of mine who runs a small custom woodworking company. We were discussing business over the last year and a few things we learned. While his business did about double the revenue that mine did in 2012, I made considerably more profit.</p><p>That’s when it sank in how unusual my business really is: Instead of having a 10 to 20% profit margin like many businesses, I had an 85% profit margin in 2012. That actually could have been much higher, except that I spent some money on equipment (I needed that 27-inch display) and hiring freelancers. After creating each product, I have only 5% in hard costs for each sale. And the product can be sold an unlimited number of times.</p>", '8. oktobar, 2013', array('smashingmagazine', 'sell', 'profit'));
         $post2->addComm("Losiji tekst");
         $post2->addComm("slabo");
         $post2->addComm("bedno");
 
-        $post3 = new Blogpost("Treca sreca", "Lorem ipusm dolor sit amet.", '7. jul, 2014');
+        $post3 = new Blogpost("Breakpoints and the future of websites", "<p>When the iPhone came out in 2007, the demonstration of its web browser by the late great Steve Jobs gave the not-so-subtle impression that Apple wasn’t too perturbed about its users pinching to zoom and swiping to scroll as part of the browsing experience. Responsive web design aimed to solve this problem by smartly applying flexible grids, fluid layouts and, of course, media queries.</p><p>However, responsive web design has turned out to be somewhat of a case study in the law of unintended consequences, with one of the perverse unanticipated effects being breakpoint paranoia. But even without the undue influence that media queries exerts on your selection of these breakpoints, it dawns on you after much introspection that these might not be the droids we’re looking for.</p>", '7. jul, 2014', array('websites', 'design', 'future'));
         $blogpostovi = array();
         $blogpostovi[] = $post1;
         $blogpostovi[] = $post2;
@@ -198,12 +216,13 @@ Tone mapping can also be combined with some additional color effect, so putting 
                 //         console.log(key+": "+window[key]);
                 window.onscroll = function() {
                     var sy = window.scrollY;
-                    var coeff   = sy<50
+                    var minY = 40.0, maxY = 200.0;
+                    var coeff   = sy<minY
                                 ? 0.0
-                                : sy < 100
-                                ? (sy-50.0)/50.0
+                                : sy < maxY
+                                ? (sy-minY)/(maxY-minY)
                                 : 1.0;
-                    header.style.boxShadow = "0 0 10px rgba(0,0,0,"+coeff.toFixed(2)*0.4+")";
+                    header.style.boxShadow = "0 0 15px rgba(0,0,0,"+coeff.toFixed(2)*0.4+")";
                 };
             };
             </script>'
