@@ -1,11 +1,31 @@
-<!-- <header id="header">
+<header id="header">
     <div class="wrapper">
-    	<h1 class="logo">Abstract<br>Algorithm</h1>
+    	<h1 class="logo"></h1>
     	<nav>
-    	    <a href="#">Blog</a>
-    	    <a href="#">Projects</a>
-    	    <a href="#">Random</a>
-    	    <a href="#">About</a>
+    	    <ul>
+    	    	<li>
+    	    		<a href="#" class="orange"><span class="stripe"></span>Blog</a>
+    	    	</li>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>Projects</a>
+    	    	</li>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>Random</a>
+    	    	</li>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>About</a>
+    	    	</li>
+    	    	<br><br>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>Vote</a>
+    	    	</li>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>Comments</a>
+    	    	</li>
+    	    	<li>
+    	    		<a href="#"><span class="stripe"></span>Share</a>
+    	    	</li>
+    	    </ul>
     	</nav>
     </div>
-</header> -->
+</header>
