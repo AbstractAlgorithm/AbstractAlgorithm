@@ -55,14 +55,14 @@ ul
 ol li, ul li
 {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 20px;
 }
 
 p, ul li, ol li
 {
     font-size: 14px;
     line-height: 22px;
-    color: #333;
+    color: #888;
 }
 
 ul li:before
