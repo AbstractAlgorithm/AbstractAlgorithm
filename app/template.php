@@ -40,8 +40,8 @@ class Template
     public function set($field, $val)
     {
         $this->vars[$field] = is_callable($val)
-                                ? (string)($val())
-                                : $val;
+                            ? (string)($val())
+                            : $val;
 
         return $this;
     }

@@ -260,12 +260,18 @@ final class ASTNode
         $modifs                     = explode(',', $modif_exp);
 
         $first_field = $fields[0];
+        if($first_field=='hehe')
+        {
+            // echo $first_field.'<br>'.gettype($first_field).'<br>';
+            // var_dump($this->locals[$first_field]);
+            var_dump($this->locals);
+        }
         if (!isset($this->locals[$first_field]))
             eval("\$result = $first_field;");
         else
             $result         = $this->locals[ $first_field ];                    // starting object
 
-        for ($i=1, $n=count($fields); $i<$n; $i++)                               // calculating the result............(1)
+        for ($i=1, $n=count($fields); $i<$n; $i++)                              // calculating the result............(1)
         {
             if (strpos($fields[$i], '(')===false)                               // so it's a property/key
                 $result             = isset( $result->{$fields[$i]})

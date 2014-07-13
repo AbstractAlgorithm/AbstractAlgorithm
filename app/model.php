@@ -16,6 +16,23 @@ class Model
         }
     }
 
+    public static function Query($q)
+    {
+        $mysql_res = DB::Query($q);
+        $res = array();
+        $className = get_called_class();
+        if(gettype($mysql_res)=='array')
+            foreach($mysql_res as $item)
+            {
+                $new_instance = new $className();
+                foreach ($className::$map as $inClass => $inDB)
+                    $new_instance->{$inClass} = $item[$inDB];
+                $res[] = $new_instance;
+            }
+            
+        return $res;
+    }
+
     public function update()
     {
         # depending on the argument count

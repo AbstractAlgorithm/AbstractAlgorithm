@@ -1,16 +1,32 @@
 <div id="content">
-[foreach post in 5|Blogpost::recent]<div class="post_block">
-    <h1 class="blue_text">{post.naslov}</h1>
+
+<div class="post_block">
+    <h1 class="blue_text">Example</h1>
     <div class="post_info">
         <span class="triangle"></span>
         <span class="hright"></span>
 
-        <div class="post_info_votes" title="votes">{post.glasovi}</div>
-        <div class="post_info_comm" title="comments">{post.komentari|count}</div>
-        <div class="post_info_date" title="date">{post.datum}</div>
-        <div class="post_info_tags" title="tags">{post.getTags()}</div>
+        <div class="post_info_votes" title="votes">0</div>
+        <div class="post_info_comm" title="comments">0</div>
+        <div class="post_info_date" title="date">0</div>
+        <div class="post_info_tags" title="tags">0</div>
     </div>
 
-    {post.tekst}
+    {hehe|Post::transform}
+</div>
+
+[foreach post in 5|Post::Recent]<div class="post_block">
+    <h1 class="blue_text">{post.title}</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+
+        <div class="post_info_votes" title="votes">{post.votes}</div>
+        <div class="post_info_comm" title="comments">{post.comments}</div>
+        <div class="post_info_date" title="date">{post.GetDate()}</div>
+        <div class="post_info_tags" title="tags">{post.tags}</div>
+    </div>
+
+    {post.text}
 </div>[end]
 </div>
