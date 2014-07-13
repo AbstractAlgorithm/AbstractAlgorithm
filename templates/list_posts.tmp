@@ -16,6 +16,7 @@
 </div>
 
 [foreach post in 5|Post::Recent]<div class="post_block">
+
     <h1 class="blue_text">{post.title}</h1>
     <div class="post_info">
         <span class="triangle"></span>

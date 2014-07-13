@@ -260,14 +260,8 @@ final class ASTNode
         $modifs                     = explode(',', $modif_exp);
 
         $first_field = $fields[0];
-        if($first_field=='hehe')
-        {
-            // echo $first_field.'<br>'.gettype($first_field).'<br>';
-            // var_dump($this->locals[$first_field]);
-            var_dump($this->locals);
-        }
         if (!isset($this->locals[$first_field]))
-            eval("\$result = $first_field;");
+            @eval("\$result = $first_field;");
         else
             $result         = $this->locals[ $first_field ];                    // starting object
 
@@ -289,7 +283,7 @@ final class ASTNode
                     $method_args_str = explode(',', $method_args_str);          // get parameters in their real form
                     foreach ($method_args_str as $arg_str)                      // ..
                     {                                                           // ..
-                        eval("\$val = $arg_str;");                              // ..   !!  EVAL()  !!  DANGER  !!
+                        @eval("\$val = $arg_str;");                             // ..   !!  EVAL()  !!  DANGER  !!
                         $method_args[] = $val;                                  // ..
                     }                                                           // ..
                 }
@@ -374,8 +368,8 @@ final class ASTNode
         $res = '';
         foreach ($this->children as $kid)                                       // execute children
         {
-            $kid->locals = $this->locals;
-            $res .= $kid->exe();
+            $kid->locals    = $this->locals;
+            $res            .= $kid->exe();
         }
         return $res;
     }

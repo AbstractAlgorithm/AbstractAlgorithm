@@ -43,14 +43,16 @@ class Post extends Model
 
     public static function transform($text)
     {
-        $text = preg_replace('/(\n|^)([^\n]+)(\n\n|$)/g','/\n<p>$2</p>\n/',$text);
-        $text = preg_replace('/######\s*([^\n]+)/g', '<h6>$1</h6>', $text);
-        $text = preg_replace('/#####\s*([^\n]+)/g', '<h5>$1</h5>', $text);
-        $text = preg_replace('/####\s*([^\n]+)/g', '<h4>$1</h4>', $text);
-        $text = preg_replace('/###\s*([^\n]+)/g', '<h3>$1</h3>', $text);
-        $text = preg_replace('/##\s*([^\n]+)/g', '<h2>$1</h2>', $text);
-        $text = preg_replace('/#\s*([^\n]+)/g', '<h1>$1</h1>', $text);
-        $text = preg_replace('/---/g', '<div class="hr"><span class="hrleft"></span><span class="hrright"></span></div>', $text);
+        $text = preg_replace("/######\s*([^\n]+)/", "<h6>$1</h6>\n", $text);
+        $text = preg_replace("/#####\s*([^\n]+)/", "<h5>$1</h5>\n", $text);
+        $text = preg_replace("/####\s*([^\n]+)/", "<h4>$1</h4>\n", $text);
+        $text = preg_replace("/###\s*([^\n]+)/", "<h3>$1</h3>\n", $text);
+        $text = preg_replace("/##\s*([^\n]+)/", "<h2>$1</h2>\n", $text);
+        $text = preg_replace("/#\s*([^\n]+)/", "<h1>$1</h1>\n", $text);
+        $text = preg_replace("/(\n|^)([^\n]+)(\n\n|$)/","\n<p>$2</p>\n",$text);
+        
+        $text = preg_replace("/\-{3}/", '<div class="hr"><span class="hrleft"></span><span class="hrright"></span></div>', $text);
+        // $text = preg_replace("/\n/", '<br>', $text);
 
         return $text;
     }

@@ -26,10 +26,21 @@ class IndexController extends Controller {
                     ->postPage(false)
                     ->get()
             )
-            ->hehe('SUCK\nThis is nasty shit.\n\n')
             ->content
             (
                 Template::load('list_posts')
+                    ->hehe("## SUCK\n
+                            This is nasty shit.\n\n
+
+                            ---\n\n
+
+                            ### HIV\n
+                            AIDS\n\n
+
+                            ---\n\n
+
+                            ## Consclusion\n
+                            It's been a fun ride while it last. But now, we must say goodbye and hope for the best.<br>Ta-da!")
                     ->get()
             )
             ->script
