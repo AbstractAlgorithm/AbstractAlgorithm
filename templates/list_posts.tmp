@@ -8,7 +8,7 @@
         <div class="post_info_votes" title="votes">{post.glasovi}</div>
         <div class="post_info_comm" title="comments">{post.komentari|count}</div>
         <div class="post_info_date" title="date">{post.datum}</div>
-        <div class="post_info_tags" title="tags">programming, webgl, 3d</div>
+        <div class="post_info_tags" title="tags">{post.getTags()}</div>
     </div>
 
     {post.tekst}

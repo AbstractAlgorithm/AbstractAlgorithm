@@ -85,6 +85,6 @@ class Post extends Model
 
     public static function GetByTitle($title)
     {
-        return null;
+        return self::Get();
     }
 }
