@@ -6,7 +6,7 @@
             <span class="hright"></span>
         </div>
 
-        <p>Hello, my name is Dragan Okanovic. I am real-time graphics and front-end programmer from Serbia. And this is my blog website.</p>
+        <p>Hello, my name is Dragan Okanovic. I am real-time graphics and front-end programmer from Serbia. And this is my blog website. You can <a href="{CONFIG_WEBSITE}/about">contact</a> me if you want to.</p>
 
         <h1>Latest entries</h1>
         <div class="post_info">
@@ -17,5 +17,7 @@
         <ul>[foreach post in 5|Post::recent]
             <li><a href="post/title/{post.link}">{post.title}</a></li>
         [end]</ul>
+
+        <p>You can view entire <a href="{CONFIG_WEBSITE}/archive">archive</a> of posts or search through them.</p>
     </div>
 </div>
