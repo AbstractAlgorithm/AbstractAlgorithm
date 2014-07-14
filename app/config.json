@@ -1,5 +1,5 @@
 {
-    "WEBSITE":              "http://abstract-algorithm.com",
+    "WEBSITE":              "http://localhost",
     "TITLE":                "Abstract Algorithm",
     "AUTHOR":               "Dragan Okanovic",
     "ADMIN_MAIL":           "dragan.okan [at] gmail.com",
@@ -20,7 +20,7 @@
     "JS_DIR":               "MEDIA_DIR/js",
 
     "NO_ACCESS_ADMIN":      [],
-    "NO_ACCESS_USER":       ["dashboard", "posts", "edit", "users", "list"],
+    "NO_ACCESS_USER":       ["dashboard"],
     "NO_ACCESS_VISITOR":    ["profile"],
 
     "LVL_ADMIN":            [],

@@ -1,5 +1,28 @@
 <?php
 
+class Tag extends Model
+{
+    protected static $table = 'aa_tags';
+    protected static $map = array
+                            (
+                                'post_id'   => 'post_id',
+                                'tag'       => 'tag',
+                            );
+    public $post_id;
+    public $tag;
+
+    public static function GetFor($id)
+    {
+        $res = self::Query("SELECT * FROM ".self::$table." WHERE post_id=".$id);
+        $result = array();
+        foreach($res as $item)
+        {
+            $result[] = $item->tag;
+        }
+        return $result;
+    }
+}
+
 class Post extends Model
 {
     protected static $table = 'aa_post';
@@ -31,14 +54,20 @@ class Post extends Model
         $this->comments     = 0;
     }
 
-    public static function GetByTitle($title)
-    {
-        return self::Get();
-    }
-
     public static function Recent($num)
     {
         return self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC");
+    }
+
+    public static function GetByTitle($title)
+    {
+        return self::Query("SELECT * FROM ".self::$table . " WHERE link_title='".$title."'")[0];
+    }
+
+    public static function Page($pg)
+    {
+        $perage = 2;
+        return self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC LIMIT ". ($pg*$perage).', '.$perage);
     }
 
     public static function transform($text)
@@ -61,6 +90,11 @@ class Post extends Model
     {
         $date = new DateTime($this->date);
         return $date->format('d M, Y');
+    }
+
+    public function GetTags()
+    {
+        return join(', ', Tag::GetFor($this->id));
     }
 
     public function __toString()

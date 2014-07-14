@@ -74,4 +74,9 @@ final class DB
 
         return $res_array;
     }
+
+    public static function Conn()
+    {
+        return self::$connection;
+    }
 }

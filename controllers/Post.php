@@ -10,8 +10,7 @@ class PostController extends Controller {
         $myPost = Post::GetByTitle($title);
 
 		Template::load('basic')
-            ->title("Blog")
-            ->css('new_style.css')
+            ->title($myPost->title)
             ->header
             (
                 Template::Load('header')

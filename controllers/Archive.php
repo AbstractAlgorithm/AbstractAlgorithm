@@ -1,6 +1,8 @@
 <?php
 
-class IndexController extends Controller {
+class ArchiveController extends Controller {
+
+    private static $perPage = 5;
 
     public function run()
     {
@@ -10,7 +12,7 @@ class IndexController extends Controller {
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
 
-        // Post::Recent(5);
+        $page = (int)Request::GET('page')-1;
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -18,7 +20,7 @@ class IndexController extends Controller {
 
 
         Template::load('basic')
-            ->title("Home")
+            ->title("Archive")
             ->header
             (
                 Template::Load('header')
@@ -27,7 +29,8 @@ class IndexController extends Controller {
             )
             ->content
             (
-                Template::load('home')
+                Template::load('list_posts')
+                    ->pagenum($page)
                     ->get()
             )
             ->script
@@ -37,5 +40,10 @@ class IndexController extends Controller {
                 '<script type="text/javascript" src="'.JS_DIR.'/myCode.js"></script>'
             )
             ->render();
+    }
+
+    public static function kapitalizuj($str)
+    {
+        return ucfirst($str).'*^&%*$';
     }
 }

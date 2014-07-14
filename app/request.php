@@ -75,7 +75,6 @@ final class Request
         $name       = self::toCamelCase($uri);
         $classname  = $name.'Controller';                                       // generate class name
         $filename   = CTRL_DIR.'/'.$name .'.php';                             	// generate filename to open
-
         
         if (file_exists($filename))
         {
