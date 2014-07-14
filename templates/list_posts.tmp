@@ -1,3 +1,14 @@
+[if posts|empty]
+<div class="post_block">
+    <h1>No results</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+    </div>
+
+    <p>No posts to show.</p>
+</div>
+[else]
 [foreach post in posts]<div class="post_block">
 
     <h1>{post.title}</h1>
@@ -13,3 +24,4 @@
 
     {post.text}
 </div>[end]
+[end]
