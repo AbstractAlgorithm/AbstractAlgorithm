@@ -1,16 +1,18 @@
-window.onload = function() {
-    var header = document.getElementById("header"),
-        cont   = document.getElementById("content");
+$(document).ready(function() {
+    var header = $("#header"),
+        offset = 20;
 
-
-    window.onscroll = function() {
-        var offset = 20;
-        header.style.top   = window.scrollY<=82-offset
-                                ? (82-window.scrollY)+"px"
-                                : offset+"px";
-    };
-
-    $('#vote').click(function() {
-
+    $(window).scroll(function() {
+        header.css
+                (
+                    'top',
+                    ($(window).scrollTop() <= 82-offset
+                    ? (82-$(window).scrollTop())
+                    : offset) +"px"
+                );
     });
-};
+
+    // $('#vote').click(function() {
+
+    // });
+});

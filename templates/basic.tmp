@@ -18,14 +18,63 @@
 	</head>
 	
 	<body>
-		[block header][end]
+		[block header]
+		<header id="header">
+		    <nav>
+		        <ul>
+		            <li>
+		                <a href="{CONFIG_WEBSITE}" [if headerMenu.0]class="orange"[end]><span class="stripe"></span>Blog</a>
+		            </li>
+		            <li>
+		                <a href="{CONFIG_WEBSITE}/category/tag/project" [if headerMenu.1]class="orange"[end]><span class="stripe"></span>Projects</a>
+		            </li>
+		            <li>
+		                <a href="{CONFIG_WEBSITE}/category/tag/random" [if headerMenu.2]class="orange"[end]><span class="stripe"></span>Random</a>
+		            </li>
+		            <li>
+		                <a href="{CONFIG_WEBSITE}/about" [if headerMenu.3]class="orange"[end]><span class="stripe"></span>About</a>
+		            </li>
+		            [if postPage]
+		            <br><br>
+		            <li>
+		                <a href="#" id="vote"><span class="stripe"></span>Vote</a>
+		            </li>
+		            <li>
+		                <a href="#"><span class="stripe"></span>Comments</a>
+		            </li>
+		            <li>
+		                <a href="#"><span class="stripe"></span>Share</a>
+		            </li>
+		            [end]
+		        </ul>
+		    </nav>
+		</header>
+		[end]
+
 		<div class="wrapper">
-			[block content][end]
+
+			<div id="content">
+				[block content][end]
+
+				[block footer]
+				<div class="post_block">
+			        <h1 class="blue_text">f.f o.o 73r</h1>
+			        <div class="post_info">
+			            <span class="triangle"></span>
+			            <span class="hright"></span>
+			        </div>
+
+			        <ul>[foreach post in 5|Post::recent]
+				        <li><a href="post/title/{post.link}">{post.title}</a></li>
+				    [end]</ul>
+			    </div>
+				[end]
+			</div>
 		</div>
 
 [block script]
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript" src="'.JS_DIR.'/myCode.js"></script>
+<script type="text/javascript" src="{CONFIG_JS_DIR}/myCode.js"></script>
 [end]
 	</body>
 </html>

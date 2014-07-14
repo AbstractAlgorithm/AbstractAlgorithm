@@ -1,4 +1,3 @@
-<div id="content">
 [foreach post in posts]<div class="post_block">
 
     <h1>{post.title}</h1>
@@ -14,4 +13,3 @@
 
     {post.text}
 </div>[end]
-</div>

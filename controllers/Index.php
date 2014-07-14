@@ -19,12 +19,16 @@ class IndexController extends Controller {
 
         Template::load('basic')
             ->title("Home")
-            ->header
-            (
-                Template::Load('header')
-                    ->postPage(false)
-                    ->get()
+            ->headerMenu
+            ( 
+                array   ( 
+                            true,
+                            false,
+                            false,
+                            false,
+                        )
             )
+            ->postPage(false)
             ->content
             (
                 Template::load('home')

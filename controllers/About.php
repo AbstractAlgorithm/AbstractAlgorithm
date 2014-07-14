@@ -4,7 +4,7 @@ class AboutController extends Controller {
 
     public function run()
     {
-        // Model::Load('Post');
+        Model::Load('Post');
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -19,12 +19,16 @@ class AboutController extends Controller {
 
         Template::load('basic')
             ->title("About")
-            ->header
-            (
-                Template::Load('header')
-                    ->postPage(false)
-                    ->get()
+            ->headerMenu
+            ( 
+                array   ( 
+                            false,
+                            false,
+                            false,
+                            true,
+                        )
             )
+            ->postPage(false)
             ->content
             (
                 Template::load('about')

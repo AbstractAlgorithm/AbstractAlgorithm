@@ -11,12 +11,7 @@ class PostController extends Controller {
 
 		Template::load('basic')
             ->title($myPost->title)
-            ->header
-            (
-                Template::Load('header')
-                    ->postPage(true)
-                    ->get()
-            )
+            ->postPage(true)
             ->content
             (
                 Template::load('post')

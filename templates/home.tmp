@@ -1,23 +1,17 @@
-<div id="content">
-    <div class="post_block">
-        <h1>Abstract Algorithm</h1>
-        <div class="post_info">
-            <span class="triangle"></span>
-            <span class="hright"></span>
-        </div>
-
-        <p>Hello, my name is Dragan Okanovic. I am real-time graphics and front-end programmer from Serbia. And this is my blog website. You can <a href="{CONFIG_WEBSITE}/about">contact</a> me if you want to.</p>
-
-        <h1>Latest entries</h1>
-        <div class="post_info">
-            <span class="triangle"></span>
-            <span class="hright"></span>
-        </div>
-
-        <ul>[foreach post in 5|Post::recent]
-            <li><a href="post/title/{post.link}">{post.title}</a></li>
-        [end]</ul>
-
-        <p>You can view entire <a href="{CONFIG_WEBSITE}/archive">archive</a> of posts or search through them.</p>
+<div class="post_block">
+    <h1>Abstract Algorithm</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
     </div>
+
+    <p>Hello, my name is Dragan Okanovic. I am a student, real-time graphics programmer and front-end developer from Belgrade, Serbia. And this is my blog.</p>
+
+    <p>I find real-time graphics extremely exciting and challenging, yet amazing bacuse of the light phenomena that occur in the nature. Light is beautiful and programming its effects is creative.</p>
+
+    <p>I also enjoy working on <a href="#">genetic algorithms</a>, neural networks and other nature-based stuff. If you wondereded what's an 'Abstract Algorithm', read <a href="#">this</a>.</p>
+
+    <p>I like to play with: JavaScript, GLSL, python</p>
+
+    <p>You can <a href="{CONFIG_WEBSITE}/about">contact</a> me and say hi.</p>
 </div>

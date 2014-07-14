@@ -24,11 +24,15 @@ class ArchiveController extends Controller {
 
         Template::load('basic')
             ->title("Archive")
-            ->header
-            (
-                Template::Load('header')
-                    ->postPage(false)
-                    ->get()
+            ->postPage(false)
+            ->headerMenu
+            ( 
+                array   ( 
+                            true,
+                            false,
+                            false,
+                            false,
+                        )
             )
             ->content
             (

@@ -1,19 +1,46 @@
-<div id="content">
-    <div class="post_block">
-        <h1>About</h1>
-        <div class="post_info">
-            <span class="triangle"></span>
-            <span class="hright"></span>
-        </div>
-
-        <p>Hello, my name is Dragan Okanovic. I am real-time graphics and front-end programmer from Serbia. And this is my blog website.</p>
-
-        <h1>Contact</h1>
-        <div class="post_info">
-            <span class="triangle"></span>
-            <span class="hright"></span>
-        </div>
-
-        <p>Twitter, Facebook, Gmail, Skype, LinkedIn</p>
+<div class="post_block">
+    <h1>About</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
     </div>
+
+    <p>Hello, my name is Dragan Okanovic. I am from Belgrade, Serbia. I study School of Electrical Engineering.</p>
+
+    <p>I am passionate about natural computing. That includes (but is not limited to) computer graphics, evolutionary programming and artificial intelligence.</p>
+
+    <p>I spent quite some time learning about computer graphics. It's probably the most beautiful (visually) and the most interesting field of programming. Mimicing light phenomena, trying to fake the effects for better performance, it's just fun.</p>
+
+    <p>Recently, I started learning about genetic algorithms and neural networks. That area of programming have the ability to, literally, change the world as we know it. Amazing possibilities might open up.</p>
+
+    <p>I am also a web developer. I very much enjoy coding in JavaScript, but I don't lack back-end knowledge either. Actually, this site runs on the <a href="">framework I've written</a>.</p>
+
+    <p>When I am not coding, I like to spend time listening to the <a href="">music</a>, riding a bicycle, <a href="">juggling</a>, practicing card tricks or solving Rubik's cube blindfolded.</p>
+
+    <p>I <a href="">draw</a> sometimes.</p>
+
+    <p>
+        <img src="{CONFIG_IMG_DIR}/logo_big.png" alt="Logo" width="64" height="64">
+        <img src="{CONFIG_IMG_DIR}/mushroom.png" alt="shroom" width="64" height="64">
+    </p>
+
+    <h1>Contact</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+    </div>
+
+    <ul>
+        <li>E-mail: <a href="mailto:dragan.okan@gmail.com">dragan.okan (at) gmail.com</a></li>
+        <li><a href="http://linkedin.com/in/abstractalgorithm/">LinkedIn</a></li>
+        <li><a href="https://twitter.com/abstractalgo">Twitter</a></li>
+        <li><a href="http://stackoverflow.com/users/1895436/abstract-algorithm">Stackoverflow</a></li>
+        <li>Skype: dragan.okan</li>
+    </ul><ul>
+        <li><a href="{CONFIG_WEBSITE}/cv/">Curriculum Vitae</a> (<a href="{CONFIG_WEBSITE}/cv.pdf">pdf</a>)</li>
+    </ul>
+
+    <p>Please do not send me spam letters. Any kind piece of advice, proposal how to improve blog or similar, is very welcome. I might take some time before I reply to emails, but I'll try and be responsive as much as my time allows me to.</p>
+
+    <p>If you are a company or an employer - I am interested in internship and job offers.</p>
 </div>

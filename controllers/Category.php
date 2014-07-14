@@ -22,13 +22,17 @@ class CategoryController extends Controller {
 
 
         Template::load('basic')
-            ->title("Archive")
-            ->header
-            (
-                Template::Load('header')
-                    ->postPage(false)
-                    ->get()
+            ->title('Tag: '.$tagName)
+            ->headerMenu
+            ( 
+                array   ( 
+                            false,
+                            $tagName=='project'?true:false,
+                            $tagName=='random'?true:false,
+                            false,
+                        )
             )
+            ->postPage(false)
             ->content
             (
                 Template::load('list_posts')

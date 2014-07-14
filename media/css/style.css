@@ -246,13 +246,17 @@ span.stripe
 a.orange,
 a.orange>span
 {
-    border-top-color: #F26C4F;
+    /*border-top-color: #F26C4F;*/
     border-top-color: #0089af;
-    /*display: block;*/
 }
 
-header nav a:hover span.stripe,
-header nav a:hover
+nav a:visited
+{
+    color: #888;
+}
+
+nav a:hover span.stripe,
+nav a:hover
 {
     border-top-color: #F26C4F;
     color: #f26c4f;
@@ -291,7 +295,7 @@ header nav a:hover
     text-align: left;
     padding-left: -20px;
     font-family: "Play";
-    margin-left: -2px;
+    /*margin-left: -2px;*/
     -webkit-font-smoothing: subpixel-antialiased;
 }
 
