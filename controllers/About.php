@@ -1,21 +1,16 @@
 <?php
 
-class ArchiveController extends Controller {
-
-    private static $perPage = 5;
+class AboutController extends Controller {
 
     public function run()
     {
-        Model::Load('Post');
+        // Model::Load('Post');
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
 
-        $page = isset(Request::GET()['page'])
-                ? (int)Request::GET('page')-1
-                : 0;
-        $posts = Post::Page($page);
+        // Post::Recent(5);
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -23,7 +18,7 @@ class ArchiveController extends Controller {
 
 
         Template::load('basic')
-            ->title("Archive")
+            ->title("About")
             ->header
             (
                 Template::Load('header')
@@ -32,15 +27,9 @@ class ArchiveController extends Controller {
             )
             ->content
             (
-                Template::load('list_posts')
-                    ->posts($posts)
+                Template::load('about')
                     ->get()
             )
             ->render();
-    }
-
-    public static function kapitalizuj($str)
-    {
-        return ucfirst($str).'*^&%*$';
     }
 }

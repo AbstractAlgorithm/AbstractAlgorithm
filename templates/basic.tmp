@@ -23,6 +23,9 @@
 			[block content][end]
 		</div>
 
-[block script][end]
+[block script]
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="'.JS_DIR.'/myCode.js"></script>
+[end]
 	</body>
 </html>

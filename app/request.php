@@ -123,13 +123,17 @@ final class Request
         return self::$uri;
     }
 
-    public static function GET($key)
+    public static function GET()
     {
-        return $_GET[$key];
+        if(func_num_args()==1)
+            return $_GET[func_get_arg(0)];
+        return $_GET;
     }
 
-    public static function POST($key)
+    public static function POST()
     {
-        return $_POST[$key];
+        if(func_num_args()==1)
+            return $_POST[func_get_arg(0)];
+        return $_POST;
     }
 }

@@ -3,16 +3,16 @@
     <nav>
         <ul>
             <li>
-                <a href="#" class="orange"><span class="stripe"></span>Blog</a>
+                <a href="{CONFIG_WEBSITE}" class="orange"><span class="stripe"></span>Blog</a>
             </li>
             <li>
-                <a href="#"><span class="stripe"></span>Projects</a>
+                <a href="{CONFIG_WEBSITE}/category/tag/project"><span class="stripe"></span>Projects</a>
             </li>
             <li>
-                <a href="#"><span class="stripe"></span>Random</a>
+                <a href="{CONFIG_WEBSITE}/category/tag/random"><span class="stripe"></span>Random</a>
             </li>
             <li>
-                <a href="#"><span class="stripe"></span>About</a>
+                <a href="{CONFIG_WEBSITE}/about"><span class="stripe"></span>About</a>
             </li>
             [if postPage]
             <br><br>

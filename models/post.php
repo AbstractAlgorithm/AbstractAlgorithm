@@ -97,6 +97,12 @@ class Post extends Model
         return join(', ', Tag::GetFor($this->id));
     }
 
+    public static function GetWithTag($tag, $pg)
+    {
+        $perage = 2;
+        return self::Query("SELECT * FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."' ORDER BY aa_post.timestamp DESC LIMIT ". ($pg*$perage).', '.$perage);
+    }
+
     public function __toString()
     {
         return '['.$this->id.'] '.$this->title.' was written on '.$this->date;

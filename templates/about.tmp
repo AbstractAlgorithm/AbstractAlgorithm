@@ -1,0 +1,19 @@
+<div id="content">
+    <div class="post_block">
+        <h1>About</h1>
+        <div class="post_info">
+            <span class="triangle"></span>
+            <span class="hright"></span>
+        </div>
+
+        <p>Hello, my name is Dragan Okanovic. I am real-time graphics and front-end programmer from Serbia. And this is my blog website.</p>
+
+        <h1>Latest entries</h1>
+        <div class="post_info">
+            <span class="triangle"></span>
+            <span class="hright"></span>
+        </div>
+
+        <p>Twitter, Facebook, Gmail, Skype, LinkedIn</p>
+    </div>
+</div>

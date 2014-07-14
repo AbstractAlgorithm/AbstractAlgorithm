@@ -1,8 +1,6 @@
 <?php
 
-class ArchiveController extends Controller {
-
-    private static $perPage = 5;
+class CategoryController extends Controller {
 
     public function run()
     {
@@ -12,10 +10,11 @@ class ArchiveController extends Controller {
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
 
-        $page = isset(Request::GET()['page'])
-                ? (int)Request::GET('page')-1
-                : 0;
-        $posts = Post::Page($page);
+        $tagName    = Request::GET('tag');
+        $page       = isset(Request::GET()['page'])
+                    ? (int)Request::GET('page')-1
+                    : 0;
+        $posts      = Post::GetWithTag($tagName, $page);
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------

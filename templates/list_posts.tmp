@@ -1,5 +1,5 @@
 <div id="content">
-[foreach post in pagenum|Post::Page]<div class="post_block">
+[foreach post in posts]<div class="post_block">
 
     <h1>{post.title}</h1>
     <div class="post_info">
