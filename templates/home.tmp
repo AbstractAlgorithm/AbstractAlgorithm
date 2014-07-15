@@ -1,17 +1,42 @@
 <div class="post_block">
-    <h1>Abstract Algorithm</h1>
+    <h1 style="text-align: center;">Abstract Algorithm</h1>
     <div class="post_info">
         <span class="triangle"></span>
         <span class="hright"></span>
+
+        <p>create possibilities</p>
     </div>
 
-    <p>Hello, my name is Dragan Okanovic. I am a student, real-time graphics programmer and front-end developer from Belgrade, Serbia. And this is my blog.</p>
+    <p>Hello, I am Dragan Okanovic. I'm a student, vfx programmer and front-end dev. And this is my blog.</p>
 
-    <p>I find real-time graphics extremely exciting and challenging, yet amazing bacuse of the light phenomena that occur in the nature. Light is beautiful and programming its effects is creative.</p>
+    <p>You will find here my experience while working on the projects, thoughts about industry, tutorials, complains about life and some very irrelevant and random stuff as well.</p>
 
-    <p>I also enjoy working on <a href="#">genetic algorithms</a>, neural networks and other nature-based stuff. If you wondereded what's an 'Abstract Algorithm', read <a href="#">this</a>.</p>
+</div>
 
-    <p>I like to play with: JavaScript, GLSL, python</p>
+<div class="post_block half">
+    <h1 style="text-align: center;">Recent posts</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+        <!-- <p>fresh out of the oven</p> -->
+    </div>
+    <ul>
+        [foreach post in 5|Post::recent]
+        <li><a href="{CONFIG_WEBSITE}/post/title/{post.link}">{post.title}</a></li>
+        [end]
+    </ul>
+    <p>Search for posts or view the  entire <a href="{CONFIG_WEBSITE}/archive">archive</a>.</p>
+</div>
 
-    <p>You can <a href="{CONFIG_WEBSITE}/about">contact</a> me and say hi.</p>
+<div class="post_block half">
+    <h1 style="text-align: center;">Contact</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+        <!-- <p>close encounter of the 5th kind</p> -->
+    </div>
+    
+     <p>You can <a href="{CONFIG_WEBSITE}/about#contact">contact</a> me and say hi.<br>Follow me on <a href="https://twitter.com/abstractalgo">Twitter</a>.</p>
+     <br>
+     <p>Learn more <a href="{CONFIG_WEBSITE}/about">about me</a> or view my <a href="{CONFIG_WEBSITE}/cv">CV</a>.</p>
 </div>

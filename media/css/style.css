@@ -276,6 +276,18 @@ nav a:hover
     padding-left: 160px;
 }
 
+.half
+{
+    float: left;
+    width: 310px;
+    padding-left: 20px;
+}
+
+.half:nth-child(2n+0)
+{
+    padding-left: 160px;
+}
+
 .post_block:first-child
 {
     margin-top:0;
@@ -325,7 +337,7 @@ span.triangle
     padding: 0;
     border-style: solid;
     border-width: 4px 4px 0 0;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     border-color: #dddddd transparent transparent transparent;
     display: inline-block;
     float: left;

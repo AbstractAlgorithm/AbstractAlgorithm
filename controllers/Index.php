@@ -34,6 +34,7 @@ class IndexController extends Controller {
                 Template::load('home')
                     ->get()
             )
+            ->footer('')
             ->render();
     }
 }

@@ -5,30 +5,41 @@
         <span class="hright"></span>
     </div>
 
-    <p>Hello, my name is Dragan Okanovic. I am from Belgrade, Serbia. I study School of Electrical Engineering.</p>
+    <p>
+        <!-- <img src="{CONFIG_IMG_DIR}/logo_big.png"    alt="Logo"     width="128" height="18"> -->
+        <!-- <img src="{CONFIG_IMG_DIR}/black_me.png"    alt="shroom"   width="128" height="128"> -->
+        <!-- <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg"  alt="shroom"   width="128" height="128"> -->
+        <!-- <img src="{CONFIG_IMG_DIR}/segway_me.jpg"   alt="shroom"   width="128" height="128"> -->
+        <!-- <img src="{CONFIG_IMG_DIR}/mushroom.png"    alt="shroom"   width="128" height="128"> -->
+    </p>
 
-    <p>I am passionate about natural computing. That includes (but is not limited to) computer graphics, evolutionary programming and artificial intelligence.</p>
+    <h3>Who am I</h3>
 
-    <p>I spent quite some time learning about computer graphics. It's probably the most beautiful (visually) and the most interesting field of programming. Mimicing light phenomena, trying to fake the effects for better performance, it's just fun.</p>
+    <p>Hello, I am Dragan Okanovic. I am from Belgrade, Serbia. I study School of Electrical Engineering.</p>
 
-    <p>Recently, I started learning about genetic algorithms and neural networks. That area of programming have the ability to, literally, change the world as we know it. Amazing possibilities might open up.</p>
+    <h3>What I do</h3>
+
+    <p>I am a programmer passionate about natural computing. That includes (but is not limited to) computer graphics, evolutionary programming and artificial intelligence.</p>
+
+    <p>I spent quite some time learning about computer graphics. It's probably the most beautiful (visually) and the most interesting field of programming. Mimicing light phenomena and trying to fake the effects for better performance requires one special combination of creativity and previous knowledge that is both very fun and challenging.</p>
+
+    <p>Recently, I started taking interest into genetic algorithms and neural networks. Those branches of programming have the ability to, literally, change the world as we know it. Thought about creating intelligence greater than our own sounds like sci-fi, but it catches your imagination allowing you to dream big. But it also leaves you scared to the bone, thinking about what might happen if things perhaps took a wrong turn.</p>
 
     <p>I am also a web developer. I very much enjoy coding in JavaScript, but I don't lack back-end knowledge either. Actually, this site runs on the <a href="">framework I've written</a>.</p>
+
+    <h3>Hedonism</h3>
 
     <p>When I am not coding, I like to spend time listening to the <a href="">music</a>, riding a bicycle, <a href="">juggling</a>, practicing card tricks or solving Rubik's cube blindfolded.</p>
 
     <p>I <a href="">draw</a> sometimes.</p>
 
-    <p>
-        <img src="{CONFIG_IMG_DIR}/logo_big.png" alt="Logo" width="64" height="64">
-        <img src="{CONFIG_IMG_DIR}/mushroom.png" alt="shroom" width="64" height="64">
-    </p>
-
-    <h1>Contact</h1>
+    <h1 id="contact">Contact</h1>
     <div class="post_info">
         <span class="triangle"></span>
         <span class="hright"></span>
     </div>
+
+    <p>You may reach me in one of the following ways:</p>
 
     <ul>
         <li>E-mail: <a href="mailto:dragan.okan@gmail.com">dragan.okan (at) gmail.com</a></li>
@@ -40,7 +51,25 @@
         <li><a href="{CONFIG_WEBSITE}/cv/">Curriculum Vitae</a> (<a href="{CONFIG_WEBSITE}/cv.pdf">pdf</a>)</li>
     </ul>
 
-    <p>Please do not send me spam letters. Any kind piece of advice, proposal how to improve blog or similar, is very welcome. I might take some time before I reply to emails, but I'll try and be responsive as much as my time allows me to.</p>
+    <p>Any piece of advice, proposal how to improve blog, correction or thank note, is very welcome. Please do not send me spam letters or letters asking 'how to xyz?'. I might take some time before I reply to emails, but I'll try and be responsive as much as my time allows me to.</p>
 
     <p>If you are a company or an employer - I am interested in internship and job offers.</p>
+
+    <h1>F.A.Q.</h1>
+    <div class="post_info">
+        <span class="triangle"></span>
+        <span class="hright"></span>
+    </div>
+
+    <h3>Why mushroom</h3>
+    <p>I just like it. It kind of reminds me of the good ol' days when I was a kid. Things were different then.</p>
+
+    <h3>What's on the logo</h3>
+    <p>Very stylized version of an 'A' letter. 'A' as in 'Abstract Algorithm'. Read <a href="#">this</a>.</p>
+
+    <h3>Abstract what...?</h3>
+    <p>Read <a href="#">this</a>.</p>
+
+    <h3>The glass is...</h3>
+    <p>...half-full.</p>
 </div>

@@ -12,4 +12,9 @@
 
     {post.text}
 
+    <div>
+        
+    [block comms][end]
+    </div>
+
 </div>
