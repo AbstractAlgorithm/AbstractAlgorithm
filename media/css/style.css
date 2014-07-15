@@ -17,6 +17,11 @@
     /*background-color: rgba(127,127,127,0.05);*/
 }
 
+html
+{
+    overflow-y: scroll;
+}
+
 body,
 .helvetica_font
 {
@@ -33,7 +38,7 @@ h1, h2, h3, h4, h5, h6
 .blue_text,
 h1, h2, h3, h4, h5, h6
 {
-    color: #0089AF !important;
+    color: #1D8AB0 !important;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -73,7 +78,7 @@ ul li:before
 a,
 a:visited
 {
-    color: #0089af;
+    color: #1D8AB0;
     text-decoration: none;
 }
 a:hover
@@ -152,7 +157,7 @@ header
     width: 140px;
     /*background-color: rgba(0,0,0,0.05);*/
     position: fixed;
-    top: 82px;
+    top: 30px;
     left: 50%;
     margin-left: 360px;
     vertical-align: center;
@@ -171,22 +176,31 @@ header *
     width: 100%;
 }
 
-header h1.logo
+header a.logo
 {
     background-repeat: no-repeat;
-    /*background-image: url('images/logo.png');*/
+    background-image: url('images/l.png');
     background-size: 32px 32px;
-    background-position: 12px 8px;
-    padding: 8px 0 8px 54px;
+    background-position: 6px 8px;
+    padding: 8px 0 8px 64px;
     text-transform: none;
     font-size: 16px;
     line-height: 16px;
-    color: #888;
+    color: #888 !important;
     font-family: "Play";
     -webkit-font-smoothing: subpixel-antialiased;
     width: 140px;
+    margin: 0;
     height: 52px;
-    margin-right: 20px;
+    box-sizing: border-box;
+}
+
+a.logo,
+a.logo:hover,
+a.logo:visited,
+a.logo:active
+{
+    color: #888;
 }
 
 header ul
@@ -247,7 +261,7 @@ a.orange,
 a.orange>span
 {
     /*border-top-color: #F26C4F;*/
-    border-top-color: #0089af;
+    border-top-color: #1D8AB0;
 }
 
 nav a:visited
@@ -331,7 +345,7 @@ nav a:hover
 
 span.triangle
 {
-    /*background-color: #0089af;*/
+    /*background-color: #1D8AB0;*/
     width: 44px;
     height: 0;
     padding: 0;
@@ -406,7 +420,7 @@ span.hright
     padding: 0;
     font-size: 14px;
     line-height: 22px;
-    color: #0089AF;
+    color: #1D8AB0;
     font-family: "Play";
     -webkit-font-smoothing: antialiased;
     text-transform: uppercase;

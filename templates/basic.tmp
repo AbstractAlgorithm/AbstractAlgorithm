@@ -20,10 +20,11 @@
 	<body>
 		[block header]
 		<header id="header">
+			<a class="logo" href="{CONFIG_WEBSITE}">Abstract<br>Algorithm</a>
 		    <nav>
 		        <ul>
 		            <li>
-		                <a href="{CONFIG_WEBSITE}" [if headerMenu.0]class="orange"[end]><span class="stripe"></span>Blog</a>
+		                <a href="{CONFIG_WEBSITE}/blog" [if headerMenu.0]class="orange"[end]><span class="stripe"></span>Blog</a>
 		            </li>
 		            <li>
 		                <a href="{CONFIG_WEBSITE}/category/tag/project" [if headerMenu.1]class="orange"[end]><span class="stripe"></span>Projects</a>
@@ -57,17 +58,15 @@
 				[block content][end]
 
 				[block footer]
-				<div class="post_block">
+				<!-- <div class="post_block">
 			        <h1 class="blue_text">f.f o.o 73r</h1>
 			        <div class="post_info">
 			            <span class="triangle"></span>
 			            <span class="hright"></span>
 			        </div>
 
-			        <ul>[foreach post in 5|Post::recent]
-				        <li><a href="post/title/{post.link}">{post.title}</a></li>
-				    [end]</ul>
-			    </div>
+			        <ul></ul>
+			    </div> -->
 				[end]
 			</div>
 		</div>

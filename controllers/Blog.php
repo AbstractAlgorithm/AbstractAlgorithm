@@ -1,6 +1,6 @@
 <?php
 
-class ArchiveController extends Controller {
+class BlogController extends Controller {
 
     private static $perPage = 5;
 
@@ -23,7 +23,7 @@ class ArchiveController extends Controller {
 
 
         Template::load('basic')
-            ->title("Archive")
+            ->title("Blog")
             ->postPage(false)
             ->headerMenu
             ( 
