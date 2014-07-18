@@ -15,6 +15,9 @@ class CategoryController extends Controller {
                     ? (int)Request::GET('page')-1
                     : 0;
         $posts      = Post::GetWithTag($tagName, $page);
+        $num        = $posts['total'];
+        $numPgs     = ceil($num / Post::$perPage);
+        unset($posts['total']);
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -37,6 +40,15 @@ class CategoryController extends Controller {
             (
                 Template::load('list_posts')
                     ->posts($posts)
+                    ->get()
+                .
+                Template::Load('paginator')
+                    ->onePage($numPgs<2)
+                    ->currentPage($page+1)
+                    ->hasPrev( $page+1>1 )
+                    ->prev(Core::$config['WEBSITE'].'/category/tag/'.$tagName.'/page/'.$page)
+                    ->hasNext( $page+1<$numPgs)
+                    ->next(Core::$config['WEBSITE'].'/category/tag/'.$tagName.'/page/'.($page+2))
                     ->get()
             )
             ->render();

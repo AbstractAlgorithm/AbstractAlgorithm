@@ -12,10 +12,13 @@ class BlogController extends Controller {
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
 
-        $page = isset(Request::GET()['page'])
+        $page   = isset(Request::GET()['page'])
                 ? (int)Request::GET('page')-1
                 : 0;
-        $posts = Post::Page($page);
+        $posts  = Post::Page($page);
+        $num    = $posts['total'];
+        $numPgs = ceil($num / Post::$perPage);
+        unset($posts['total']);
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -40,7 +43,14 @@ class BlogController extends Controller {
                     ->posts($posts)
                     ->get()
                 .
-                '<h1>Pusi kurac</h1>'
+                Template::Load('paginator')
+                    ->onePage($numPgs<2)
+                    ->currentPage($page+1)
+                    ->hasPrev( $page+1>1 )
+                    ->prev(Core::$config['WEBSITE'].'/blog/page/'.$page)
+                    ->hasNext( $page+1<$numPgs)
+                    ->next(Core::$config['WEBSITE'].'/blog/page/'.($page+2))
+                    ->get()
             )
             ->render();
     }

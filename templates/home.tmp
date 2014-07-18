@@ -1,8 +1,8 @@
 <div class="post_block">
     <h1 style="text-align: center;">Abstract Algorithm</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
 
         <p>create possibilities</p>
     </div>
@@ -16,8 +16,8 @@
 <div class="post_block half">
     <h1 style="text-align: center;">Recent posts</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
         <!-- <p>fresh out of the oven</p> -->
     </div>
     <ul>
@@ -31,8 +31,8 @@
 <div class="post_block half">
     <h1 style="text-align: center;">Contact</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
         <!-- <p>close encounter of the 5th kind</p> -->
     </div>
     

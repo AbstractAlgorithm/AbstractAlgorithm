@@ -46,7 +46,7 @@ class Post extends Model
     public $votes;
     public $comments;
 
-    private static $perPage = 2;
+    public static $perPage = 1;
 
     public function __construct()
     {
@@ -68,7 +68,9 @@ class Post extends Model
 
     public static function Page($pg)
     {
-        return self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
+        $res = self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
+        $res['total'] = DB::Query("SELECT COUNT(*) FROM ".self::$table)[0][0];
+        return $res;
     }
 
     public static function transform($text)
@@ -100,7 +102,9 @@ class Post extends Model
 
     public static function GetWithTag($tag, $pg)
     {
-        return self::Query("SELECT * FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."' ORDER BY aa_post.timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
+        $res = self::Query("SELECT * FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."' ORDER BY aa_post.timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
+        $res['total'] = DB::Query("SELECT COUNT(*) FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."'")[0][0];
+        return $res;
     }
 
     public function __toString()
