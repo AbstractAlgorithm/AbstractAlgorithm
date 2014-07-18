@@ -31,6 +31,7 @@ class BlogController extends Controller {
             ->headerMenu
             ( 
                 array   ( 
+                            false,
                             true,
                             false,
                             false,

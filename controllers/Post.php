@@ -15,6 +15,7 @@ class PostController extends Controller {
             ->headerMenu
             ( 
                 array   ( 
+                            false,
                             true,
                             false,
                             false,

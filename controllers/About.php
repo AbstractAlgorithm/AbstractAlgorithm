@@ -25,6 +25,7 @@ class AboutController extends Controller {
                             false,
                             false,
                             false,
+                            false,
                             true,
                         )
             )

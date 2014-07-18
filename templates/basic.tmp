@@ -23,17 +23,20 @@
 			<!-- <a class="logo" href="{CONFIG_WEBSITE}">Abstract<br>Algorithm</a> -->
 		    <nav>
 		        <ul>
-		            <li>
-		                <a href="{CONFIG_WEBSITE}/blog" [if headerMenu.0]class="orange"[end]><span class="stripe"></span>Blog</a>
+		        	<li>
+		                <a href="{CONFIG_WEBSITE}/" [if headerMenu.0]class="orange"[end]><span class="stripe"></span>Home</a>
 		            </li>
 		            <li>
-		                <a href="{CONFIG_WEBSITE}/category/tag/project" [if headerMenu.1]class="orange"[end]><span class="stripe"></span>Projects</a>
+		                <a href="{CONFIG_WEBSITE}/blog" [if headerMenu.1]class="orange"[end]><span class="stripe"></span>Blog</a>
 		            </li>
 		            <li>
-		                <a href="{CONFIG_WEBSITE}/category/tag/random" [if headerMenu.2]class="orange"[end]><span class="stripe"></span>Random</a>
+		                <a href="{CONFIG_WEBSITE}/category/tag/project" [if headerMenu.2]class="orange"[end]><span class="stripe"></span>Projects</a>
 		            </li>
 		            <li>
-		                <a href="{CONFIG_WEBSITE}/about" [if headerMenu.3]class="orange"[end]><span class="stripe"></span>About</a>
+		                <a href="{CONFIG_WEBSITE}/category/tag/random" [if headerMenu.3]class="orange"[end]><span class="stripe"></span>Random</a>
+		            </li>
+		            <li>
+		                <a href="{CONFIG_WEBSITE}/about" [if headerMenu.4]class="orange"[end]><span class="stripe"></span>About</a>
 		            </li>
 		            [if postPage]
 		            <br><br>

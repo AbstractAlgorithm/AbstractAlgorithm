@@ -1,0 +1,7 @@
+[if !onePage]
+<div class="post_block">
+        <div class="pageNavBar">
+            <a href="{prev}" class="pageNav[if !hasPrev] empty[end]"><span class="prevPage"></span></a><span class="pageNum">{currentPage}</span><a href="{next}" class="pageNav[if !hasNext] empty[end]"><span class="nextPage"></span></a>
+        </div>
+</div>
+[end]

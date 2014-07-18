@@ -30,6 +30,7 @@ class CategoryController extends Controller {
             ( 
                 array   ( 
                             false,
+                            false,
                             $tagName=='project'?true:false,
                             $tagName=='random'?true:false,
                             false,
