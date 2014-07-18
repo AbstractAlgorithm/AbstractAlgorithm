@@ -25,7 +25,7 @@ class CategoryController extends Controller {
 
 
         Template::load('basic')
-            ->title('Tag: '.$tagName)
+            ->title($tagName=='project'?'Projects':($tagName=='random'?'Random and the purpose':'Tag: '.$tagName))
             ->headerMenu
             ( 
                 array   ( 
