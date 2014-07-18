@@ -1,8 +1,8 @@
 <div class="post_block">
     <h1>About</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
     </div>
 
     <p>
@@ -35,14 +35,14 @@
 
     <h1 id="contact">Contact</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
     </div>
 
     <p>You may reach me in one of the following ways:</p>
 
     <ul>
-        <li>E-mail: <a href="mailto:dragan.okan@gmail.com">dragan.okan (at) gmail.com</a></li>
+        <li><a href="mailto:dragan.okan@gmail.com">dragan.okan (at) gmail.com</a></li>
         <li><a href="http://linkedin.com/in/abstractalgorithm/">LinkedIn</a></li>
         <li><a href="https://twitter.com/abstractalgo">Twitter</a></li>
         <li><a href="http://stackoverflow.com/users/1895436/abstract-algorithm">Stackoverflow</a></li>
@@ -57,8 +57,8 @@
 
     <h1>F.A.Q.</h1>
     <div class="post_info">
-        <span class="triangle"></span>
-        <span class="hright"></span>
+        <!-- <span class="triangle"></span>
+        <span class="hright"></span> -->
     </div>
 
     <h3>Why mushroom</h3>

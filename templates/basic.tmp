@@ -20,7 +20,7 @@
 	<body>
 		[block header]
 		<header id="header">
-			<a class="logo" href="{CONFIG_WEBSITE}">Abstract<br>Algorithm</a>
+			<!-- <a class="logo" href="{CONFIG_WEBSITE}">Abstract<br>Algorithm</a> -->
 		    <nav>
 		        <ul>
 		            <li>

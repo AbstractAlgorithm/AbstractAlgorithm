@@ -6,8 +6,8 @@ $(document).ready(function() {
         header.css
                 (
                     'top',
-                    ($(window).scrollTop() <= 30-offset
-                    ? (30-$(window).scrollTop())
+                    ($(window).scrollTop() <= 82-offset
+                    ? (82-$(window).scrollTop())
                     : offset) +"px"
                 );
     });
