@@ -39,6 +39,8 @@ class BlogController extends Controller {
                 Template::load('list_posts')
                     ->posts($posts)
                     ->get()
+                .
+                '<h1>Pusi kurac</h1>'
             )
             ->render();
     }

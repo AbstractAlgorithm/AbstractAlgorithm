@@ -46,6 +46,8 @@ class Post extends Model
     public $votes;
     public $comments;
 
+    private static $perPage = 2;
+
     public function __construct()
     {
         $this->tags         = "none tag";
@@ -66,8 +68,7 @@ class Post extends Model
 
     public static function Page($pg)
     {
-        $perage = 2;
-        return self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC LIMIT ". ($pg*$perage).', '.$perage);
+        return self::Query("SELECT * FROM ".self::$table . " ORDER BY timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
     }
 
     public static function transform($text)
@@ -99,8 +100,7 @@ class Post extends Model
 
     public static function GetWithTag($tag, $pg)
     {
-        $perage = 2;
-        return self::Query("SELECT * FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."' ORDER BY aa_post.timestamp DESC LIMIT ". ($pg*$perage).', '.$perage);
+        return self::Query("SELECT * FROM aa_post LEFT JOIN aa_tags ON aa_post.id=aa_tags.post_id WHERE aa_tags.tag='".$tag."' ORDER BY aa_post.timestamp DESC LIMIT ". ($pg*self::$perPage).', '.self::$perPage);
     }
 
     public function __toString()
