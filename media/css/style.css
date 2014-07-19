@@ -276,7 +276,7 @@ nav a:hover
     margin: 20px 0;
 
     overflow-x: hidden;
-    padding-left: 160px !important;
+    padding-left: 160px;
 }
 
 .half
@@ -289,7 +289,7 @@ nav a:hover
     margin-bottom: 40px;
 }
 
-.half:nth-child(2n+0)
+.half:nth-child(even)
 {
     padding-left: 0;
     margin-left: 340px;
@@ -540,7 +540,7 @@ img.wide
 
 img.long
 {
-    padding-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 div.pageNavBar

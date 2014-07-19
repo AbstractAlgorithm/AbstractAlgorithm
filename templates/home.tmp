@@ -11,22 +11,23 @@
 
     <p>You will here find my ideas from experience gained from working on different projects, thoughts about industry, tutorials, complains about life and some very irrelevant and random stuff as well.</p>
 
-</div>
 
-<div class="half post_block">
-    <h2 class="low">Recent posts</h2>
-    <ul>
-        [foreach post in 5|Post::recent]
-        <li><a href="{CONFIG_WEBSITE}/post/title/{post.link}">{post.title}</a></li>
-        [end]
-    </ul>
-    <p>Search for posts or view the  entire <a href="{CONFIG_WEBSITE}/archive">archive</a>.</p>
-</div>
+    <div class="half post_block">
+        <h2 class="low">Recent posts</h2>
+        <ul>
+            [foreach post in 5|Post::recent]
+            <li><a href="{CONFIG_WEBSITE}/post/title/{post.link}">{post.title}</a></li>
+            [end]
+        </ul>
+        <p>Search for posts or view the  entire <a href="{CONFIG_WEBSITE}/archive">archive</a>.</p>
+    </div>
 
-<div class="half post_block">
-    <h2 class="low">Contact</h2>
-    
-     <p>You can <a href="{CONFIG_WEBSITE}/about#contact">contact</a> me and say hi.<br>Follow me on <a href="https://twitter.com/abstractalgo">Twitter</a>.</p>
-     <br>
-     <p>Learn more <a href="{CONFIG_WEBSITE}/about">about me</a> or view my <a href="{CONFIG_WEBSITE}/cv">CV</a>.</p>
+    <div class="half post_block">
+        <h2 class="low">Contact</h2>
+        
+         <p>You can <a href="{CONFIG_WEBSITE}/about#contact">contact</a> me and say hi.<br>Follow me on <a href="https://twitter.com/abstractalgo">Twitter</a>.</p>
+         <br>
+         <p>Learn more <a href="{CONFIG_WEBSITE}/about">about me</a> or view my <a href="{CONFIG_WEBSITE}/cv">CV</a>.</p>
+    </div>
+
 </div>
