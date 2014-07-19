@@ -30,13 +30,11 @@ class BlogController extends Controller {
             ->postPage(false)
             ->headerMenu
             ( 
-                array   ( 
-                            false,
-                            true,
-                            false,
-                            false,
-                            false,
-                        )
+                false,
+                true,
+                false,
+                false,
+                false
             )
             ->content
             (

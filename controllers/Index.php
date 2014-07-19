@@ -21,13 +21,11 @@ class IndexController extends Controller {
             ->title("Home")
             ->headerMenu
             ( 
-                array   ( 
-                            true,
-                            false,
-                            false,
-                            false,
-                            false,
-                        )
+                true,
+                false,
+                false,
+                false,
+                false
             )
             ->postPage(false)
             ->content

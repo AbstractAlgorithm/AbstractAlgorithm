@@ -14,13 +14,11 @@ class PostController extends Controller {
             ->postPage(true)
             ->headerMenu
             ( 
-                array   ( 
-                            false,
-                            true,
-                            false,
-                            false,
-                            false,
-                        )
+                false,
+                true,
+                false,
+                false,
+                false,
             )
             ->content
             (

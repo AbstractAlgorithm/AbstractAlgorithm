@@ -37,7 +37,7 @@ class Template
     * @param val    value to be inserted
     * @return       template
     */
-    public function set($field, $val)
+    private function set($field, $val)
     {
         $this->vars[$field] = is_callable($val)
                             ? (string)($val())
@@ -81,10 +81,10 @@ class Template
     */
     public function __call($name, $arguments)
     {        
-        if(substr($name, 0,3)=='set')                                           // SET<field>
-            $this->set(strtolower( substr($name,3) ), $arguments[0]);
-        else                                                                    // <field>
+        if(count($arguments)==1)
             $this->set($name, $arguments[0]);
+        else
+            $this->set($name, $arguments);
 
         return $this;
     }

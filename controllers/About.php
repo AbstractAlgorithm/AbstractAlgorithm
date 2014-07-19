@@ -21,13 +21,11 @@ class AboutController extends Controller {
             ->title("About")
             ->headerMenu
             ( 
-                array   ( 
-                            false,
-                            false,
-                            false,
-                            false,
-                            true,
-                        )
+                false,
+                false,
+                false,
+                false,
+                true
             )
             ->postPage(false)
             ->content

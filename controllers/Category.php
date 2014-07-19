@@ -28,13 +28,11 @@ class CategoryController extends Controller {
             ->title($tagName=='project'?'Projects':($tagName=='random'?'Random and the purpose':'Tag: '.$tagName))
             ->headerMenu
             ( 
-                array   ( 
-                            false,
-                            false,
-                            $tagName=='project'?true:false,
-                            $tagName=='random'?true:false,
-                            false,
-                        )
+                false,
+                false,
+                $tagName=='project'?true:false,
+                $tagName=='random'?true:false,
+                false
             )
             ->postPage(false)
             ->content
