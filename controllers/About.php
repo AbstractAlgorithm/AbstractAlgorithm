@@ -10,7 +10,7 @@ class AboutController extends Controller {
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
 
-        // Post::Recent(5);
+        
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
@@ -32,9 +32,9 @@ class AboutController extends Controller {
             (
                 Template::load('about')
                 ->comms
-                    (
-                        "<div id=\"disqus_thread\"></div>
-                        <script type=\"text/javascript\">
+                (
+                    "<div id=\"disqus_thread\"></div>
+                    <script type=\"text/javascript\">
                         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
                         var disqus_shortname = 'abstractalgorithm'; // required: replace example with your forum shortname
 
@@ -47,8 +47,8 @@ class AboutController extends Controller {
                     </script>
                     <noscript>Please enable JavaScript to view the <a href=\"http://disqus.com/?ref_noscript\">comments powered by Disqus.</a></noscript>
                     <a href=\"http://disqus.com\" class=\"dsq-brlink\">comments powered by <span class=\"logo-disqus\">Disqus</span></a>"
-                    )
-                    ->get()
+                )
+                ->get()
             )
             ->render();
     }

@@ -2,16 +2,11 @@
     <h1 class="line">About</h1>
 
     <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
-
     <h3>Hello</h3>
-
     <p>I'm Dragan Okanovic, a 21-year old student of School of Electrical Engineering from Belgrade, Serbia.</p>
     <br>
 
-    <!-- <img src="{CONFIG_IMG_DIR}/black_me.png" alt="" class="small"> -->
-
     <h3>What I do</h3>
-
     <p>I am a programmer passionate about natural computing. That includes (but is not limited to) computer graphics, evolutionary programming and artificial intelligence.</p>
 
     <p>I spent quite some time learning about computer graphics. It's probably the most beautiful (visually) and the most interesting field of programming. Mimicing light phenomena and trying to fake the effects for better performance requires one special combination of creativity and previous knowledge that is both very fun and challenging.</p>
@@ -20,16 +15,11 @@
 
     <p>I am also a web developer. I very much enjoy coding in JavaScript, but I don't lack back-end knowledge either. Actually, this site runs on the <a href="">framework I've written</a>.</p>
 
-    <!-- <img src="{CONFIG_IMG_DIR}/segway_me.jpg" alt="" class="small"> -->
-
     <h3>Hedonism</h3>
-
     <p>When I am not coding, I like to spend time listening to the <a href="">music</a>, riding a bicycle, <a href="">juggling</a>, practicing card tricks or solving Rubik's cube blindfolded.</p>
-
     <p>I <a href="">draw</a> sometimes.</p>
 
     <h2 id="contact">Contact</h2>
-
     <p>You may reach me in one of the following ways:</p>
 
     <ul>
@@ -38,18 +28,17 @@
         <li><a href="https://twitter.com/abstractalgo">Twitter</a></li>
         <li><a href="http://stackoverflow.com/users/1895436/abstract-algorithm">Stackoverflow</a></li>
         <li>Skype: dragan.okan</li>
-    </ul><ul>
+    </ul>
+    <ul>
         <li><a href="{CONFIG_WEBSITE}/cv/">Curriculum Vitae</a> (<a href="{CONFIG_WEBSITE}/cv.pdf">pdf</a>)</li>
     </ul>
 
     <p>Any piece of advice, proposal how to improve blog, correction or thank note, is very welcome. Please do not send me spam letters or letters asking 'how to xyz?'. I might take some time before I reply to emails, but I'll try and be responsive as much as my time allows me to.</p>
-
     <p>If you are a company or an employer - I am interested in internship and job offers.</p>
 
     <h2>F.A.Q.</h2>
     
     <div class="half">
-
         <img src="{CONFIG_IMG_DIR}/mushroom.png" alt="" class="small no_shadow long">
         <h3>Why mushroom</h3>
         <p>I just like it. It kind of reminds me of the good ol' days when I was a kid. Things were different then.</p>

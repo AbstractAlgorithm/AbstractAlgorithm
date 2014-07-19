@@ -9,9 +9,6 @@
 
     <h1><a href="{CONFIG_WEBSITE}/post/title/{post.link}">{post.title}</a></h1>
     <div class="post_info">
-        <!-- <span class="triangle"></span>
-        <span class="hright"></span> -->
-
         <div class="post_info_votes" title="votes">{post.votes}</div>
         <div class="post_info_comm" title="comments">{post.comments}</div>
         <div class="post_info_date" title="date">{post.GetDate()}</div>
