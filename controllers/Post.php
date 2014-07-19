@@ -18,7 +18,7 @@ class PostController extends Controller {
                 true,
                 false,
                 false,
-                false,
+                false
             )
             ->content
             (

@@ -1,11 +1,11 @@
 <div class="post_block">
     <h1 class="line">About</h1>
 
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
 
-    <!-- <h4>Who am I</h4> -->
+    <h3>Hello</h3>
 
-    <p>Hello, I'm Dragan Okanovic, a 21-year old student of School of Electrical Engineering from Belgrade, Serbia.</p>
+    <p>I'm Dragan Okanovic, a 21-year old student of School of Electrical Engineering from Belgrade, Serbia.</p>
     <br>
 
     <!-- <img src="{CONFIG_IMG_DIR}/black_me.png" alt="" class="small"> -->
@@ -47,16 +47,23 @@
     <p>If you are a company or an employer - I am interested in internship and job offers.</p>
 
     <h2>F.A.Q.</h2>
+    
+    <div class="half">
 
-    <h3>Why mushroom</h3>
-    <p>I just like it. It kind of reminds me of the good ol' days when I was a kid. Things were different then.</p>
+        <img src="{CONFIG_IMG_DIR}/mushroom.png" alt="" class="small no_shadow long">
+        <h3>Why mushroom</h3>
+        <p>I just like it. It kind of reminds me of the good ol' days when I was a kid. Things were different then.</p>
 
-    <h3>What's on the logo</h3>
-    <p>Very stylized version of an 'A' letter. 'A' as in 'Abstract Algorithm'. Read <a href="#">this</a>.</p>
+         <!-- <h3>The glass is...</h3>
+        <p>...half-full.</p> -->
+    </div>
+    
+    <div class="half">
+        <img src="{CONFIG_IMG_DIR}/l.png" alt="" class="small no_shadow long">
+        <h3>What's on the logo</h3>
+        <p>Very stylized version of an 'A' letter. 'A' as in 'Abstract Algorithm'.<br>Read <a href="#">this</a>.</p>
 
-    <h3>Abstract what...?</h3>
-    <p>Read <a href="#">this</a>.</p>
-
-    <h3>The glass is...</h3>
-    <p>...half-full.</p>
+        <!-- <h3>Abstract what...?</h3>
+        <p>Read <a href="#">this</a>.</p> -->
+    </div>
 </div>

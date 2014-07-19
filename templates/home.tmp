@@ -13,7 +13,7 @@
 
 </div>
 
-<div class="post_block half">
+<div class="half post_block">
     <h2 class="low">Recent posts</h2>
     <ul>
         [foreach post in 5|Post::recent]
@@ -23,7 +23,7 @@
     <p>Search for posts or view the  entire <a href="{CONFIG_WEBSITE}/archive">archive</a>.</p>
 </div>
 
-<div class="post_block half">
+<div class="half post_block">
     <h2 class="low">Contact</h2>
     
      <p>You can <a href="{CONFIG_WEBSITE}/about#contact">contact</a> me and say hi.<br>Follow me on <a href="https://twitter.com/abstractalgo">Twitter</a>.</p>
