@@ -15,6 +15,21 @@
 
     <h3>Who am I</h3>
 
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
+    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
+
     <p>Hello, I am Dragan Okanovic. I am from Belgrade, Serbia. I study School of Electrical Engineering.</p>
 
     <h3>What I do</h3>
