@@ -46,7 +46,7 @@ class Post extends Model
     public $votes;
     public $comments;
 
-    public static $perPage = 1;
+    public static $perPage = 5;
 
     public function __construct()
     {

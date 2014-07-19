@@ -1,36 +1,14 @@
 <div class="post_block">
-    <h1>About</h1>
-    <div class="post_info">
-        <!-- <span class="triangle"></span>
-        <span class="hright"></span> -->
-    </div>
-
-    <p>
-        <!-- <img src="{CONFIG_IMG_DIR}/logo_big.png"    alt="Logo"     width="128" height="18"> -->
-        <!-- <img src="{CONFIG_IMG_DIR}/black_me.png"    alt="shroom"   width="128" height="128"> -->
-        <!-- <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg"  alt="shroom"   width="128" height="128"> -->
-        <!-- <img src="{CONFIG_IMG_DIR}/segway_me.jpg"   alt="shroom"   width="128" height="128"> -->
-        <!-- <img src="{CONFIG_IMG_DIR}/mushroom.png"    alt="shroom"   width="128" height="128"> -->
-    </p>
-
-    <h3>Who am I</h3>
+    <h1 class="line">About</h1>
 
     <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="small">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
-    <img src="{CONFIG_IMG_DIR}/nordeus_me.jpg" alt="" class="big">
 
-    <p>Hello, I am Dragan Okanovic. I am from Belgrade, Serbia. I study School of Electrical Engineering.</p>
+    <!-- <h4>Who am I</h4> -->
+
+    <p>Hello, I'm Dragan Okanovic, a 21-year old student of School of Electrical Engineering from Belgrade, Serbia.</p>
+    <br>
+
+    <!-- <img src="{CONFIG_IMG_DIR}/black_me.png" alt="" class="small"> -->
 
     <h3>What I do</h3>
 
@@ -42,17 +20,15 @@
 
     <p>I am also a web developer. I very much enjoy coding in JavaScript, but I don't lack back-end knowledge either. Actually, this site runs on the <a href="">framework I've written</a>.</p>
 
+    <!-- <img src="{CONFIG_IMG_DIR}/segway_me.jpg" alt="" class="small"> -->
+
     <h3>Hedonism</h3>
 
     <p>When I am not coding, I like to spend time listening to the <a href="">music</a>, riding a bicycle, <a href="">juggling</a>, practicing card tricks or solving Rubik's cube blindfolded.</p>
 
     <p>I <a href="">draw</a> sometimes.</p>
 
-    <h1 id="contact">Contact</h1>
-    <div class="post_info">
-        <!-- <span class="triangle"></span>
-        <span class="hright"></span> -->
-    </div>
+    <h2 id="contact">Contact</h2>
 
     <p>You may reach me in one of the following ways:</p>
 
@@ -70,11 +46,7 @@
 
     <p>If you are a company or an employer - I am interested in internship and job offers.</p>
 
-    <h1>F.A.Q.</h1>
-    <div class="post_info">
-        <!-- <span class="triangle"></span>
-        <span class="hright"></span> -->
-    </div>
+    <h2>F.A.Q.</h2>
 
     <h3>Why mushroom</h3>
     <p>I just like it. It kind of reminds me of the good ol' days when I was a kid. Things were different then.</p>
