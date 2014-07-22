@@ -14,7 +14,7 @@
 
 		<link rel="shortcut icon" href="{CONFIG_WEBSITE}/{CONFIG_IMG_DIR}/favicon.png" type="image/x-icon">
 		<link rel="icon" href="{CONFIG_WEBSITE}/{CONFIG_IMG_DIR}/favicon.png" type="image/x-icon">
-		<link rel="stylesheet" href="{CONFIG_WEBSITE}/{CONFIG_CSS_DIR}/[block css]style_min.css[end]">
+		<link rel="stylesheet" href="{CONFIG_WEBSITE}/{CONFIG_CSS_DIR}/[block css]style.css[end]">
 	</head>
 	
 	<body>

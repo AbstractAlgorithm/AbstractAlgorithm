@@ -21,12 +21,6 @@ html
     overflow-y: scroll;
 }
 
-body
-{
-    background: transparent url('images/back.png') no-repeat -150px 0;
-    background-attachment: fixed;
-}
-
 body,
 .helvetica_font
 {
@@ -525,6 +519,14 @@ img.wide
 img.long
 {
     margin-bottom: 40px;
+}
+
+img.logo
+{
+    width: 24px;
+    height: 24px;
+    margin: 0 -2px 0 0;
+    float: none;
 }
 
 div.pageNavBar
