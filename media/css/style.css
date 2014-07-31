@@ -299,8 +299,6 @@ nav a:hover
     line-height: 32px;
     margin-bottom: 20px;
     border-top: 1px solid #ddd;
-    left:50%;
-    text-align: center;
 }
 
 /*span.triangle
@@ -367,7 +365,7 @@ span.hright
 
 .post_info_tags
 {
-    width: 200px;
+    width: 350px;
     padding: 0 0 0 20px;
     
     background-image: url('images/mini/tag.gif');
@@ -519,14 +517,6 @@ img.wide
 img.long
 {
     margin-bottom: 40px;
-}
-
-img.logo
-{
-    width: 24px;
-    height: 24px;
-    margin: 0 -2px 0 0;
-    float: none;
 }
 
 div.pageNavBar

@@ -4,7 +4,7 @@ class PostController extends Controller {
 
 	public function run() {
 
-        Model::Load('Post');
+        Model::Load('post');
 
 		$title = Request::GET('title');
         $myPost = Post::GetByTitle($title);

@@ -1,10 +1,11 @@
-RewriteEngine on
+Options +FollowSymLinks
+Options -Indexes
+RewriteEngine On
 RewriteBase /
 
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteRule ^.*$ index.php [L]
+RewriteRule app/config\.json /index.php [L,NC]
+RewriteRule [^\.]*\.\.[\w\-_]* /index.php[L,NC]
 
-RewriteRule ([^\.]+).(js|css|png|jpg|png|gif|otf|ttf|swf|pdf)$ $1.$2 [L]
-RewriteRule .* index.php [L]
-RewriteRule ^$ index.php [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule !^public /index.php [L,NC]

@@ -4,7 +4,7 @@ class CategoryController extends Controller {
 
     public function run()
     {
-        Model::Load('Post');
+        Model::Load('post');
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------

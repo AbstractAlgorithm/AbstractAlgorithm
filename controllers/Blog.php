@@ -2,11 +2,9 @@
 
 class BlogController extends Controller {
 
-    private static $perPage = 5;
-
     public function run()
     {
-        Model::Load('Post');
+        Model::Load('post');
 
         // ----------------------------------------------------------------------
         // ----------------------------------------------------------------------
